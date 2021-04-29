@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /understanding-cnn/
+permalink: /kaldi/
 ---
 
 <a name='vis'></a>
