@@ -77,4 +77,3 @@ class Solution(object):
 `复杂度` 时间：遍历数组O(N)，空间：nums可以作为dp数组O(1)
 
 `易忽略的点` 以dp[i]为终点的连续字序列可以是dp[i]自己，当dp[i-1]小于0时，可以不加dp[i-1]。
-"a good example"
