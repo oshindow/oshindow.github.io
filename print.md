@@ -1,6 +1,6 @@
 ---
 layout: page
-title: print serie
+title: Print Series
 permalink: /print/
 ---
 
@@ -69,6 +69,3 @@ class Solution(object):
 `复杂度` 时间：遍历数组O(MN)，空间：打印O(1)
 
 `易忽略的点`从左到右打印后，top 要加1；记得判断break的条件。
-
-
-
