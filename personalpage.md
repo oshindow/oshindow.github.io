@@ -5,10 +5,7 @@ permalink: /personalpage/
 ---
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-Xintong Wang | <div class='fig figcenter fighighlight'>
-  <img src='/assets/cv.png'>
-</div>
-:----|----:
+
 
 <i class="fas fa-envelope"></i> xintongwang@bjfu.edu.cn ·
 <i class="fa fa-phone"></i> +86 185-1377-5531 ·
