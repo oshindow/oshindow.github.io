@@ -1,8 +1,9 @@
 ---
 layout: page
 title: wav2vec
-permalink: /wav2vec/
+permalink: /wav/
 ---
+
 ### Papers
 **Facebook AI Research**
 [wav2ve 2.0 A Framework for Self-Supervised Learning of Speech Representations (Baevski et al., 2020/10/22).](https://arxiv.org/pdf/2006.11477v3.pdf)
