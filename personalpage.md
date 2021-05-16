@@ -7,9 +7,9 @@ permalink: /personalpage/
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 
 
-<i class="fas fa-envelope"></i> xintongwang@bjfu.edu.cn ·
-<i class="fa fa-phone"></i> +86 185-1377-5531 ·
-<i class="fab fa-github"></i> oshindow ·
+<i class="fas fa-envelope"></i> xintongwang@bjfu.edu.cn -
+<i class="fa fa-phone"></i> +86 185-1377-5531 -
+<i class="fab fa-github"></i> oshindow -
 <i class="fab fa-weixin"></i> 874848612
 
 ### Education
