@@ -100,7 +100,7 @@ $$
 `log power spectrum`
 
 $$
-x_{logpowspec} = 10 * numpy.log10(x_{powspec})
+x_{logpowspec} = 10 * log10(x_{powspec})
 $$
 
 ### Log Mel Filer Banks
