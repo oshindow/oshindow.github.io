@@ -137,8 +137,17 @@ def get_filterbanks(nfilt=20,nfft=512,samplerate=16000,lowfreq=0,highfreq=None):
     return fbank
 ```
 We assume the dimension of FFT in one frame is 257 and the number of mel-filter is 40. Then the output dimension of mel-filter in one frame will be 40.
+
 - Convert the hz frequency to mel frequency.
 - Evenly set mel-filter + 2 mel-points from low mel-freq to high mel-freq.
 - Convert hz to fft bins.
 - Initial fbanks all zero.
 - Compute the mel-filter coefficient.(j is from 0 to 40, i is the int index at every fft bin. Bigger bin will get a smaller coefficient. A small bin will not make sense.)
+
+## Final Step
+```python
+feat = numpy.dot(pspec,fb.T) # compute the filterbank energies
+    feat = numpy.where(feat == 0,numpy.finfo(float).eps,feat) # if feat is zero, we get problems with log
+```
+
+As the final step, there is a matrix multiple between powspec and mel-filter coefficient.
