@@ -81,7 +81,7 @@ The framed signal data type is float.
 - Compute the log mel filer banks.
 
 ### Signal Amplitude, Magnitude and Power
-In engineering, amplitude and magnitude mean two different things. The amplitude of a variable is the measure of how far, and in what direction, while the magnitude is the measure of how far, regardless of direction. Thus, signal amplitudes can be either positive or negative and the magnitudes are always positive values. The power of a signal is proportional to its amplitude(magnitude) squared. And the proportionality can be assume to constant one.
+In engineering, amplitude and magnitude mean two different things. The amplitude of a variable is the measure of how far, and in what direction, while the magnitude is the measure of how far, regardless of direction. Thus, signal amplitudes can be either positive or negative and the magnitudes are always positive values. The power of a signal is proportional to its amplitude (magnitude) squared. And the proportionality can be assume to constant one.
 
 $$
 x_{mag}(n) = |x(n)|
@@ -91,4 +91,48 @@ $$
 x_{pow}(n) = x(n) ^ 2
 $$
 
+`power spectrum`
+
+$$
+x_powspec = \frac{1}{NFFT * x_{pow}
+$$
+
+`log power spectrum`
+
+$$
+x_log_powspec = 10 * numpy.log10(x_powspec)
+$$
+
 ### Log Mel Filer Banks
+```python
+jameslyons/python_speech_features/python_speech_features/base.py
+
+def get_filterbanks(nfilt=20,nfft=512,samplerate=16000,lowfreq=0,highfreq=None):
+    """Compute a Mel-filterbank. The filters are stored in the rows, the columns correspond
+    to fft bins. The filters are returned as an array of size nfilt * (nfft/2 + 1)
+    :param nfilt: the number of filters in the filterbank, default 20.
+    :param nfft: the FFT size. Default is 512.
+    :param samplerate: the sample rate of the signal we are working with, in Hz. Affects mel spacing.
+    :param lowfreq: lowest band edge of mel filters, default 0 Hz
+    :param highfreq: highest band edge of mel filters, default samplerate/2
+    :returns: A numpy array of size nfilt * (nfft/2 + 1) containing filterbank. Each row holds 1 filter.
+    """
+    highfreq= highfreq or samplerate/2
+    assert highfreq <= samplerate/2, "highfreq is greater than samplerate/2"
+
+    # compute points evenly spaced in mels
+    lowmel = hz2mel(lowfreq)
+    highmel = hz2mel(highfreq)
+    melpoints = numpy.linspace(lowmel,highmel,nfilt+2)
+    # our points are in Hz, but we use fft bins, so we have to convert
+    #  from Hz to fft bin number
+    bin = numpy.floor((nfft+1)*mel2hz(melpoints)/samplerate)
+
+    fbank = numpy.zeros([nfilt,nfft//2+1])
+    for j in range(0,nfilt):
+        for i in range(int(bin[j]), int(bin[j+1])):
+            fbank[j,i] = (i - bin[j]) / (bin[j+1]-bin[j])
+        for i in range(int(bin[j+1]), int(bin[j+2])):
+            fbank[j,i] = (bin[j+2]-i) / (bin[j+2]-bin[j+1])
+    return fbank
+```
