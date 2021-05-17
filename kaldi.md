@@ -78,7 +78,7 @@ void FbankComputer::Compute(BaseFloat signal_raw_log_energy,
 The framed signal data type is float. 
 - Compute FFT using split-radix algorithm
 - Convert the FFT into a power spectrum.
-- Compute the log mel banks.
+- Compute the log mel filer banks.
 
 ### Signal Amplitude, Magnitude and Power
 In engineering, amplitude and magnitude mean two different things. The amplitude of a variable is the measure of how far, and in what direction, while the magnitude is the measure of how far, regardless of direction. Thus, signal amplitudes can be either positive or negative and the magnitudes are always positive values. The power of a signal is proportional to its amplitude(magnitude) squared. And the proportionality can be assume to constant one.
@@ -89,3 +89,5 @@ $$
 $$
 x_{pow}(n) = x(n) ^ 2
 $$
+
+### Log Mel Filer Banks
