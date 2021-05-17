@@ -82,6 +82,7 @@ The framed signal data type is float.
 
 ### Signal Amplitude, Magnitude and Power
 In engineering, amplitude and magnitude mean two different things. The amplitude of a variable is the measure of how far, and in what direction, while the magnitude is the measure of how far, regardless of direction. Thus, signal amplitudes can be either positive or negative and the magnitudes are always positive values. The power of a signal is proportional to its amplitude(magnitude) squared. And the proportionality can be assume to constant one.
+
 $$
 x_{mag}(n) = |x(n)|
 $$
