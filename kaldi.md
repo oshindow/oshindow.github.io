@@ -94,13 +94,13 @@ $$
 `power spectrum`
 
 $$
-x_powspec = \frac{1}{NFFT * x_{pow}
+x_{powspec} = \frac{1}{NFFT * x_{pow}}
 $$
 
 `log power spectrum`
 
 $$
-x_log_powspec = 10 * numpy.log10(x_powspec)
+x_{logpowspec} = 10 * numpy.log10(x_{powspec})
 $$
 
 ### Log Mel Filer Banks
