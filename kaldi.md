@@ -159,7 +159,7 @@ mel-filter coefficient (e.g., nfft=7, nfilt=3)
 low ---------------------------------- high  
 ```
 ```python
-power spectrum
+power spectrum (e.g., t=4)
 [[a, b, c, d]  low
  [e, f, g, h]   |
  [i, j, k, l]   |
