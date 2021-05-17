@@ -10,6 +10,3 @@ permalink: /timit/
 
 timit 的 phone
 * **char**
-
-				
-
