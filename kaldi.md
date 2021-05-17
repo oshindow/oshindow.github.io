@@ -151,3 +151,22 @@ feat = numpy.dot(pspec,fb.T) # compute the filterbank energies
 ```
 
 As the final step, there is a matrix multiple between powspec and mel-filter coefficient.
+```python
+mel-filter coefficient (e.g., nfft=7, nfilt=3)
+[[1,  0,    0,   0,    0,     0,   0]  low
+ [0,  1,  0.5,   0,    0,     0,   0]   |
+ [0,  0,  0.5,   1, 0.67,   0.3,   0]]  |
+low ---------------------------------- high  
+```
+```python
+power spectrum
+[[a, b, c, d]  low
+ [e, f, g, h]   |
+ [i, j, k, l]   |
+ [m, n, o, p]   |
+ [q, r, s, t]   |
+ [u, v, w, x]   |
+ [y, z, a, b]]  |
+---- time ---- high
+```
+
