@@ -136,4 +136,7 @@ def get_filterbanks(nfilt=20,nfft=512,samplerate=16000,lowfreq=0,highfreq=None):
             fbank[j,i] = (bin[j+2]-i) / (bin[j+2]-bin[j+1])
     return fbank
 ```
-
+We assume the dimension of FFT in one frame is 257 and the number of mel-filter is 40. Then the output dimension of mel-filter in one frame will be 40.
+- Convert the hz frequency to mel frequency.
+- Evenly set mel-filter + 2 mel-points from low mel-freq to high mel-freq.
+- 
