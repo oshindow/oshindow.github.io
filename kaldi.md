@@ -2,7 +2,8 @@
 layout: page
 permalink: /kaldi/
 ---
-
+Self introduction:
+My name is Wang Xintong. I am studying mathematics at Beijing Forestry University. I am currently in the third year of university and I am expected to graduate in 2022. I spent some time in Japan before going to university and got the Japanese N2 certificate. Then, I started to study speech recognition with my tutor in 2019, and I have published 1 paper in EI journals. I am interested in end-to-end speech recognition.
 ```
 feat/feature-fbank.h
 FbankOptions(): mel_opts(23),
