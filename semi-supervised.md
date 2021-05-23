@@ -61,7 +61,7 @@ and go to 2.
 
 ### Required
 
-1. A large unlabeled dataset for pre-training:
+- A large unlabeled dataset for pre-training:
 [Libri-Light](https://github.com/facebookresearch/libri-light/blob/master/data_preparation/README.md)
 
 | Type     | Size |
@@ -70,23 +70,20 @@ and go to 2.
 | medium.tar   | 5193 hours, 321 GB |
 | large.tar    | 51934 hours, 3.05 TB |
 
-2. A labeled dataset for fine-tuning: 960 hours LibriSpeech
-3. A text data for building language models: LibriSpeech transcripts.
-4. A wav2vec 2.0 pre-trained model.
+- A labeled dataset for fine-tuning: 960 hours LibriSpeech
+- A text data for building language models: LibriSpeech transcripts.
+- A wav2vec 2.0 pre-trained model.
 
 ### Steps
-1. Get a pre-trained encoder from wav2vec 2.0 which trained by unlabeled 60k hours data from Libri-Light. 
-2. Fine-tune the pre-trained model use the labeled dataset LibriSpeech with SpecAugment.
-3. Shallow fused the fine-tuned model with LM to generate the label of Libri-Light, then mix it with LibriSpeech.
+1. Get a pre-trained encoder from wav2vec 2.0.
+2. Fine-tune the pre-trained encoder use the labeled dataset LibriSpeech with SpecAugment.
+3. Shallow fused the fine-tuned encoder with a LM to generate the label of Libri-Light, then mix them with LibriSpeech.
 4. repeat the step 2.
 
 ### Details
-- **wav2vec 2.0**
+<link rel="stylesheet" href="https://use.fontawesome.com/relases/v5.0.13/css/all/css">
 
+- **Facebook AI Research**
 [wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations (Alexei Baevski et.al., 2020/06/20)](
 https://arxiv.org/pdf/2006.11477.pdf)
-
-Different with the traditional supervised pre-training methods, we use an unsupervised learning approach to pre-train the conformer encoder.
-
-What is the wav2vec 2.0? 
-- pytorch/fairseq/examples/wav2vec
+- <i class="fab fa-github"> </i> pytorch/fairseq/examples/wav2vec
