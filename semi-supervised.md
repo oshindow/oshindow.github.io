@@ -64,15 +64,15 @@ and go to 2.
 1. A large unlabeled dataset for pre-training:
 [Libri-Light](https://github.com/facebookresearch/libri-light/blob/master/data_preparation/README.md)
 
-<div class="center">
 | Type     | Size |
 | :-----------: | :-----------: |
-| small.tar    | 577 hours, 35 GB      |
-| medium.tar   | 5193 hours, 321 GB        |
-| large.tar    | 51934 hours, 3.05 TB       |
-</div>
+| small.tar    | 577 hours, 35 GB |
+| medium.tar   | 5193 hours, 321 GB |
+| large.tar    | 51934 hours, 3.05 TB |
+
 2. A labeled dataset for fine-tuning: 960 hours LibriSpeech
-3. A text data for building language models: Word-embedding trained on the LibriSpeech transcripts.
+3. A text data for building language models: LibriSpeech transcripts.
+4. A wav2vec 2.0 pre-trained model.
 
 ### Steps
 1. Get a pre-trained encoder from wav2vec 2.0 which trained by unlabeled 60k hours data from Libri-Light. 
