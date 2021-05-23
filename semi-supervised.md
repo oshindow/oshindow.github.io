@@ -8,6 +8,8 @@ permalink: /semi-supervised/
 **Facebook AI Research** [wav2vec-U](
 https://ai.facebook.com/blog/wav2vec-unsupervised-speech-recognition-without-supervision)
 
+wav2vec Unsupervised (wav2vec-U) is a way to build speech recognition systems that require no transcribed data at all. It rivals the performance of the best supervised models from only a few years ago, which were trained on nearly 1,000 hours of transcribed speech.
+
 ### Papers
 **Facebook AI Research**
 [Self-training and Pre-training are Complementary for Speech Recognition (Xu et al., 2020/10/20).](https://arxiv.org/pdf/2010.11430.pdf)
@@ -58,16 +60,17 @@ LM trained on the LibriSpeech LM corpus, the following procedure is used to trai
 and go to 2.
 
 ### Required
-In semi-supervised learning, the pre-trained model helps a lot. We depend on it to generate the label for unlabeled dataset, then the unlabeled dataset could transfer to the labeled dataset which could used to fine-tuning the model with the small amount labeled dataset we have. 
-1. A large unlabeled dataset for pre-training:
-[Libri-Light](https://github.com/facebookresearch/libri-light/blob/master/data_preparation/README.md) dataset small.tar 577 hours, 35 GB.
 
+1. A large unlabeled dataset for pre-training:
+[Libri-Light](https://github.com/facebookresearch/libri-light/blob/master/data_preparation/README.md)
+
+<div class="center">
 | Type     | Size |
-| ----------- | ----------- |
+| :-----------: | :-----------: |
 | small.tar    | 577 hours, 35 GB      |
 | medium.tar   | 5193 hours, 321 GB        |
 | large.tar    | 51934 hours, 3.05 TB       |
-
+</div>
 2. A labeled dataset for fine-tuning: 960 hours LibriSpeech
 3. A text data for building language models: Word-embedding trained on the LibriSpeech transcripts.
 
