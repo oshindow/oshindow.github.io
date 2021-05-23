@@ -81,10 +81,7 @@ and go to 2.
 4. repeat the step 2.
 
 ### Details
-<link rel="stylesheet" href="https://use.fontawesome.com/relases/v5.0.13/css/all/css">
 
 - **Facebook AI Research**
 [wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations (Alexei Baevski et.al., 2020/06/20)](
 https://arxiv.org/pdf/2006.11477.pdf)
-
-<i class="fab fa-github">[pytorch/fairseq/examples/wav2vec](https://github.com/pytorch/fairseq/tree/master/examples/wav2vec)</i>
