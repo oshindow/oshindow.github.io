@@ -3,6 +3,11 @@ layout: page
 title: Semi-Supervised Learning For Automatic Speech Recognition
 permalink: /semi-supervised/
 ---
+
+### blog
+**Facebook AI Research** [wav2vec-U](
+https://ai.facebook.com/blog/wav2vec-unsupervised-speech-recognition-without-supervision)
+
 ### Papers
 **Facebook AI Research**
 [Self-training and Pre-training are Complementary for Speech Recognition (Xu et al., 2020/10/20).](https://arxiv.org/pdf/2010.11430.pdf)

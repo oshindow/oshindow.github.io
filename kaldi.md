@@ -148,7 +148,7 @@ We assume the dimension of FFT in one frame is 257 and the number of mel-filter 
 ## Final Step
 ```python
 feat = numpy.dot(pspec,fb.T) # compute the filterbank energies
-    feat = numpy.where(feat == 0,numpy.finfo(float).eps,feat) # if feat is zero, we get problems with log
+feat = numpy.where(feat == 0,numpy.finfo(float).eps,feat) # if feat is zero, we get problems with log
 ```
 
 As the final step, there is a matrix multiple between powspec and mel-filter coefficient.
@@ -170,4 +170,5 @@ power spectrum (e.g., t=4)
  [y, z, a, b]]  |
 ---- time ---- high
 ```
+
 
