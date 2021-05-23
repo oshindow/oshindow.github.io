@@ -86,4 +86,5 @@ and go to 2.
 - **Facebook AI Research**
 [wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations (Alexei Baevski et.al., 2020/06/20)](
 https://arxiv.org/pdf/2006.11477.pdf)
-- <i class="fab fa-github"> </i> pytorch/fairseq/examples/wav2vec
+
+<i class="fab fa-github"> </i> pytorch/fairseq/examples/wav2vec
