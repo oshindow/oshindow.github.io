@@ -90,12 +90,12 @@ https://arxiv.org/pdf/2006.11477.pdf)
 
 - **Shallow fusion**
 
-Given a set of acoustic observations \( \boldsymbol{x} = (x_1, \cdots, x_T) \), E2E models provide posterior probabilities for a set of label $\boldsymbol{y} = (y_1, \cdots, y_L)$ given these observations, that is, $P(y\|x)$. Shallow fusion interpolates the score from the E2E model with an external contextual LM during beam-search decoding
+Given a set of acoustic observations \( \boldsymbol{x} = (x_1, \cdots, x_T) \), E2E models provide posterior probabilities for a set of label $\boldsymbol{y} = (y_1, \cdots, y_L)$ given these observations, that is, $P(\boldsymbol{y}\|\boldsymbol{x})$. Shallow fusion interpolates the score from the E2E model with an external contextual LM during beam-search decoding
 
 $$
-\hat{y} = \arg\max_y \log P(y|x) + \lambda \log P(y)
+\hat{\boldsymbol{y}} = \arg\max_\boldsymbol{y} \log P(\boldsymbol{y}|\boldsymbol{x}) + \lambda \log P(\boldsymbol{y})
 $$
 
-Here, $P(y)$ is the score from the LM and $\lambda$ is
+Here, $P(\boldsymbol{y})$ is the score from the LM and $\lambda$ is
 a tunable hyperparameter controlling how much the contextual LM influences the overall model score during beam search.
 
