@@ -31,14 +31,25 @@
 <body>
 
 <div class="container">
-    <h1>Notebook Page Title</h1>
-    <p>This is a paragraph of text. You can write your notes, thoughts, or anything you want in this paragraph.</p>
-    <p>You can also add more paragraphs like this.</p>
+    <h1>ssh related </h1>
     <h2>Section Title</h2>
     <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
+        <li>Item 1</li> $ ssh-keygen -t dsa
+        <li>Item 2</li> output like
+        Generating public/private dsa key pair.
+        Enter file in which to save the key (/home/username/.ssh/id_dsa):  press ENTER
+        Enter passphrase (empty for no passphrase): ********
+        Enter same passphrase again: ********
+        Your identification has been saved in /home/username/.ssh/id_dsa.
+        Your public key has been saved in /home/username/.ssh/id_dsa.pub.
+        The key fingerprint is:
+        14:ba:06:98:a8:98:ad:27:b5:ce:55:85:ec:64:37:19 username@shell.isp.com
+    
+        <li> Item 4 </li> public key like
+        ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEAvpB4lUbAaEbh9u6HLig7amsfywD4fqSZq2ikACIUBn3GyRPfeF93l/
+        weQh702ofXbDydZAKMcDvBJqRhUotQUwqV6HJxqoqPDlPGUUyo8RDIkLUIPRyq
+        ypZxmK9aCXokFiHoGCXfQ9imUP/w/jfqb9ByDtG97tUJF6nFMP5WzhM= username@shell.isp.com
+        <li> Item 6 </li> 自动拷贝 $ ssh-copy-id -i key_file user@host
     </ul>
     <p>Another paragraph here.</p>
     <blockquote>
