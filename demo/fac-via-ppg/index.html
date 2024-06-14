@@ -32,6 +32,13 @@
             border-bottom: 2px solid #4CAF50;
             padding-bottom: 0.5em;
         }
+        .audio-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .audio-container div {
+            width: 48%;
+        }
         audio {
             width: 100%;
             margin-top: 0.5em;
@@ -44,18 +51,42 @@
     </header>
     <main>
         <section id="demo1">
-            <h2>Demo 1: Baseline Speech</h2>
-            <audio controls>
-                <source src="audio/demo1.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
+            <h2>Demo 1</h2>
+            <div class="audio-container">
+                <div>
+                    <h3>Ground Truth</h3>
+                    <audio controls>
+                        <source src="audio/demo1_ground_truth.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div>
+                    <h3>Synthesized</h3>
+                    <audio controls>
+                        <source src="audio/demo1_synthesized.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
         </section>
         <section id="demo2">
-            <h2>Demo 2: Improved Speech</h2>
-            <audio controls>
-                <source src="audio/demo2.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
+            <h2>Demo 2</h2>
+            <div class="audio-container">
+                <div>
+                    <h3>Ground Truth</h3>
+                    <audio controls>
+                        <source src="audio/demo2_ground_truth.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div>
+                    <h3>Synthesized</h3>
+                    <audio controls>
+                        <source src="audio/demo2_synthesized.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
         </section>
         <!-- Add more sections as needed -->
     </main>
