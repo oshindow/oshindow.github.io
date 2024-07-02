@@ -84,7 +84,7 @@
     <table>
         <thead>
             <tr>
-                <th>Text</th>
+                <th>Model</th>
                 <th>甚至是希望，尤其是现在的讲华语行动啊</th>
                 <th>而去断定他是一个怎么样的人</th>
                 <th>没有我的意思是，就假如说</th>
@@ -100,28 +100,28 @@
                 <td><audio controls><source src="wav/gt/A0002_S002_0_G0004_segment_0057.wav" type="audio/wav"></audio></td>
             </tr>
             <tr>
-                <td class="audio-label">SG data</td>
+                <td class="audio-label">(M1) SG data</td>
                 <td><audio controls><source src="wav/syn/A0001_S001_0_G0001_segment_0151_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/syn/A0001_S005_0_G0002_segment_0293_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/syn/A0002_S001_0_G0003_segment_0117_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/syn/A0002_S002_0_G0004_segment_0057_gen.wav" type="audio/wav"></audio></td>
             </tr>
             <tr>
-                <td class="audio-label">Mandarin + SG data w/ accent embedding timestampes=10</td>
+                <td class="audio-label">(M2) Mandarin + SG data w/ accent embedding timestampes=10</td>
                 <td><audio controls><source src="wav/gen_grad_255_acc_t10/A0001_S001_0_G0001_segment_0151_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/gen_grad_255_acc_t10/A0001_S005_0_G0002_segment_0293_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/gen_grad_255_acc_t10/A0002_S001_0_G0003_segment_0117_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/gen_grad_255_acc_t10/A0002_S002_0_G0004_segment_0057_gen.wav" type="audio/wav"></audio></td>
             </tr>
             <tr>
-                <td class="audio-label">Mandarin + SG data w/ accent embedding timestampes=50</td>
+                <td class="audio-label">(M3) Mandarin + SG data w/ accent embedding timestampes=50</td>
                 <td><audio controls><source src="wav/gen_grad_255_acc/A0001_S001_0_G0001_segment_0151_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/gen_grad_255_acc/A0001_S005_0_G0002_segment_0293_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/gen_grad_255_acc/A0002_S001_0_G0003_segment_0117_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/gen_grad_255_acc/A0002_S002_0_G0004_segment_0057_gen.wav" type="audio/wav"></audio></td>
             </tr>
             <tr>
-                <td class="audio-label">Mandarin + SG data w/ accent embedding timestampes=10 + gradient reversal (spk, acc)</td>
+                <td class="audio-label">(M4) Mandarin + SG data w/ accent embedding timestampes=10 + gradient reversal (spk, acc)</td>
                 <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/A0001_S001_0_G0001_segment_0151_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/A0001_S005_0_G0002_segment_0293_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/A0002_S001_0_G0003_segment_0117_gen.wav" type="audio/wav"></audio></td>
@@ -131,55 +131,99 @@
     </table>
 
     <h2 style="color:#123693; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: x-large">Examples of SG style text TTS synthesis:</h2>
-    <p style="color:rgb(22, 22, 97); font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><b>Note:</b> Following examples are inputing SG style text, generating examples conditioned on SG and CN speakers, and SG and CN accent </p>
+    <p style="color:rgb(22, 22, 97); font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><b>Note:</b> Following examples are inputing SG style text <i>我也不知道，我知道乾隆就是是真的啦，但是还珠格格，这个人我就不知道</i>, generating examples conditioned on SG and CN speakers, and SG and CN accent </p>
     <!-- Add more sections as needed -->
     <table>
         <thead>
             <tr>
-                <th>我也不知道，我知道乾隆就是是真的啦，但是还珠格格，这个人我就不知道</th>
-                <th>Spk_CN SSB1837</th>
-                <th>Spk_SG G0001</th>
+                <th>Model</th>
+                <th></th>
+                <th>CN-spk SSB1837 | SG-acc </th>
+                <th>SG-spk G0001 | SG-acc </th>
+                <th>CN-spk SSB1837 | CN-acc </th>
+                <th>SG-spk G0001 | CN-acc </th>
                 
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td class="audio-label">Acc_SG</td>
+                <td class="audio-label">(M3) Mandarin + SG data w/ accent embedding timestampes=50</td>
                 <td><audio controls><source src="" type="audio/wav"></audio></td>
                 <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/A0002_S002_0_G0004_segment_0057_gen.wav" type="audio/wav"></audio></td>
-            
+                <td><audio controls><source src="" type="audio/wav"></audio></td>
+                <td><audio controls><source src="" type="audio/wav"></audio></td>
+                
             </tr>
             <tr>
-                <td class="audio-label">Acc_CN</td>
+                <td class="audio-label">(M4) Mandarin + SG data w/ accent embedding timestampes=10 + gradient reversal (spk, acc)</td>
+                <td><audio controls><source src="" type="audio/wav"></audio></td>
+                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/A0002_S002_0_G0004_segment_0057_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="" type="audio/wav"></audio></td>
                 <td><audio controls><source src="" type="audio/wav"></audio></td>
-            
+                
             </tr>
         </tbody>
     </table>
 
     <h2 style="color:#123693; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: x-large">Examples of CN style text TTS synthesis:</h2>
-    <p style="color:rgb(22, 22, 97); font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><b>Note:</b> Following examples are inputing CN style text, generating examples conditioned on SG and CN speakers, and SG and CN accent </p>
+    <p style="color:rgb(22, 22, 97); font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><b>Note:</b> Following examples are inputing CN style text <i>请求依法撤销中卫市中级人民法院的民事裁定书</i>, generating examples conditioned on SG and CN speakers, and SG and CN accent </p>
     <!-- Add more sections as needed -->
     <table>
         <thead>
             <tr>
-                <th>请求依法撤销中卫市中级人民法院的民事裁定书</th>
-                <th>Spk_CN SSB1837</th>
-                <th>Spk_SG G0001</th>
+                <th>Model</th>
+                <th></th>
+                <th>CN-spk SSB1837 | SG-acc </th>
+                <th>SG-spk G0001 | SG-acc </th>
+                <th>CN-spk SSB1837 | CN-acc </th>
+                <th>SG-spk G0001 | CN-acc </th>
                 
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td class="audio-label">Acc_SG</td>
-                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_acc3_gen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_acc3_G0001_gen.wav" type="audio/wav"></audio></td>
-            
+                <td class="audio-label">(M3) Mandarin + SG data w/ accent embedding timestampes=50</td>
+                <td><audio controls><source src="" type="audio/wav"></audio></td>
+                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/A0002_S002_0_G0004_segment_0057_gen.wav" type="audio/wav"></audio></td>
+                <td><audio controls><source src="" type="audio/wav"></audio></td>
+                <td><audio controls><source src="" type="audio/wav"></audio></td>
+                
             </tr>
             <tr>
-                <td class="audio-label">Acc_CN</td>
+                <td class="audio-label">(M4) Mandarin + SG data w/ accent embedding timestampes=10 + gradient reversal (spk, acc)</td>
+                <td><audio controls><source src="" type="audio/wav"></audio></td>
+                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/A0002_S002_0_G0004_segment_0057_gen.wav" type="audio/wav"></audio></td>
+                <td><audio controls><source src="" type="audio/wav"></audio></td>
+                <td><audio controls><source src="" type="audio/wav"></audio></td>
+                
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 style="color:#123693; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: x-large">Vocoder:</h2>
+    <p style="color:rgb(22, 22, 97); font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><b>Note:</b> Following examples are inputing gt log mel-spectrogram, generating audio sample for verifying audio quaility </p>
+    <!-- Add more sections as needed -->
+    <table>
+        <thead>
+            <tr>
+                <th>Text</th>
+                <th>bake famle</th>
+                <th>aishell3</th>
+                <th>SG</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="audio-label">Ground truth</td>
+                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_acc3_gen.wav" type="audio/wav"></audio></td>
+                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_acc3_G0001_gen.wav" type="audio/wav"></audio></td>
+                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_acc3_G0001_gen.wav" type="audio/wav"></audio></td>
+                
+            </tr>
+            <tr>
+                <td class="audio-label">bakefemale + aishell3 + SG data</td>
                 <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_gen.wav" type="audio/wav"></audio></td>
+                <td><audio controls><source src="" type="audio/wav"></audio></td>
                 <td><audio controls><source src="" type="audio/wav"></audio></td>
             
             </tr>
