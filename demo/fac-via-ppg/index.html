@@ -216,16 +216,40 @@
         <tbody>
             <tr>
                 <td class="audio-label">Ground truth</td>
-                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_acc3_gen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_acc3_G0001_gen.wav" type="audio/wav"></audio></td>
-                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_acc3_G0001_gen.wav" type="audio/wav"></audio></td>
+                <td><audio controls><source src="wav/gt/009901_16k.wav" type="audio/wav"></audio></td>
+                <td><audio controls><source src="wav/gt/SSB18370413.wav" type="audio/wav"></audio></td>
+                <td><audio controls><source src="wav/gt/A0002_S002_0_G0004_segment_0057.wav" type="audio/wav"></audio></td>
                 
             </tr>
             <tr>
-                <td class="audio-label">bakefemale + aishell3 + SG data</td>
-                <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_gen.wav" type="audio/wav"></audio></td>
+                <td class="audio-label">bakefemale training</td>
+                <td><audio controls><source src="wav/vocoder/bakefemale/csmsc_009901_gen.wav" type="audio/wav"></audio></td>
+                
+            </tr>
+            <tr>
+                <td class="audio-label">SG finetuning on bakefemale trained model</td>
+                <td><audio controls><source src="wav/vocoder/bakefemale_sg_finetuning/magichub_sg_A0002_S006_0_G0004_segment_0173_gen.wav" type="audio/wav"></audio></td>
+            
+            </tr>
+            <tr>
+                <td class="audio-label">bakefemale + aishell3 + SG data training</td>
+                <td><audio controls><source src="wav/vocoder/bakefemale_aishell3_sg/csmsc_009901_gen.wav" type="audio/wav"></audio></td>
+                <td><audio controls><source src="wav/vocoder/bakefemale_aishell3_sg/SSB18370413_gen.wav" type="audio/wav"></audio></td>
+                <td><audio controls><source src="wav/vocoder/bakefemale_aishell3_sg/magichub_sg_A0002_S006_0_G0004_segment_0173_gen_1.wav" type="audio/wav"></audio></td>
+            
+            </tr>
+            <tr>
+                <td class="audio-label">aishell3 training</td>
+                <!-- <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="" type="audio/wav"></audio></td>
+                <td><audio controls><source src="" type="audio/wav"></audio></td> -->
+            
+            </tr>
+            <tr>
+                <td class="audio-label">SG finetuning on training trained model</td>
+                <!-- <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/SSB18370413_gen.wav" type="audio/wav"></audio></td>
                 <td><audio controls><source src="" type="audio/wav"></audio></td>
+                <td><audio controls><source src="" type="audio/wav"></audio></td> -->
             
             </tr>
         </tbody>
