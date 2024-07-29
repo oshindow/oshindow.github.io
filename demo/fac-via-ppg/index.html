@@ -80,15 +80,14 @@
     <main>
         <h2 style="color:#123693; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: x-large">End-to-End Mandarin Text-to-Speech</h2>
         <p style="color:rgb(22, 22, 97); font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"><b>Note:</b> Pipeline: acoustic + vocoder </p>
-        <p style="color:rgb(22, 22, 97); font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Following examples are 5 speakers from the AISHELL3 dataset,  aim to test the capability of TTS reconstration. </p>
+        <p style="color:rgb(22, 22, 97); font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Following examples are 4 speakers from the AISHELL3 dataset,  aim to test the capability of TTS reconstration. </p>
         <table>
             <thead>
                 <tr>
                     <th>Model</th>
                     <th>较二零一三年同期增长二十一万约百分之零九一</th>
                     <th>并不肯定智能手机战略是否将被用于笔记本</th>
-                    <th>黄伟文歌曲有什么</th>
-                    <th>四点四</th>
+                    <th>黄伟文歌曲有什么</th>   
                     <th>请求依法撤销中卫市中级人民法院的民事裁定书</th>
                 </tr>
             </thead>
@@ -98,7 +97,6 @@
                     <td><audio controls><source src="wav/mandarin/gt/SSB05900401.wav" type="audio/wav"></audio></td>
                     <td><audio controls><source src="wav/mandarin/gt/SSB06320250.wav" type="audio/wav"></audio></td>
                     <td><audio controls><source src="wav/mandarin/gt/SSB07360237.wav" type="audio/wav"></audio></td>
-                    <td><audio controls><source src="wav/mandarin/gt/SSB11100246.wav" type="audio/wav"></audio></td>
                     <td><audio controls><source src="wav/mandarin/gt/SSB18370413.wav" type="audio/wav"></audio></td>
                     
                 </tr>
@@ -107,31 +105,25 @@
                     <td><audio controls><source src="wav/mandarin/gradtts/SSB05900401_gen.wav" type="audio/wav"></audio></td>
                     <td><audio controls><source src="wav/mandarin/gradtts/SSB06320250_gen.wav" type="audio/wav"></audio></td>
                     <td><audio controls><source src="wav/mandarin/gradtts/SSB07360237_gen.wav" type="audio/wav"></audio></td>
-                    <td><audio controls><source src="wav/mandarin/gradtts/SSB11100246_gen.wav" type="audio/wav"></audio></td>
                     <td><audio controls><source src="wav/mandarin/gradtts/SSB18370413_gen.wav" type="audio/wav"></audio></td>
                 
                 </tr>
                 <tr>
-                    <td class="audio-label">(M2) Mandarin + SG data w/ accent embedding timestampes=10</td>
-                    <td><audio controls><source src="wav/gen_grad_255_acc_t10/A0001_S001_0_G0001_segment_0151_gen.wav" type="audio/wav"></audio></td>
-                    <td><audio controls><source src="wav/gen_grad_255_acc_t10/A0001_S005_0_G0002_segment_0293_gen.wav" type="audio/wav"></audio></td>
-                    <td><audio controls><source src="wav/gen_grad_255_acc_t10/A0002_S001_0_G0003_segment_0117_gen.wav" type="audio/wav"></audio></td>
-                    <td><audio controls><source src="wav/gen_grad_255_acc_t10/A0002_S002_0_G0004_segment_0057_gen.wav" type="audio/wav"></audio></td>
+                    <td class="audio-label">(M1) Grad-tts Conformer Encoder</td>
+                    <td><audio controls><source src="wav/mandarin/gen_grad_255_conformer_blk/SSB05900401_gen.wav" type="audio/wav"></audio></td>
+                    <td><audio controls><source src="wav/mandarin/gen_grad_255_conformer_blk/SSB06320250_gen.wav" type="audio/wav"></audio></td>
+                    <td><audio controls><source src="wav/mandarin/gen_grad_255_conformer_blk/SSB07360237_gen.wav" type="audio/wav"></audio></td>
+                    <td><audio controls><source src="wav/mandarin/gen_grad_255_conformer_blk/SSB18370413_gen.wav" type="audio/wav"></audio></td>
                 </tr>
                 <tr>
-                    <td class="audio-label">(M3) Mandarin + SG data w/ accent embedding timestampes=50</td>
-                    <td><audio controls><source src="wav/gen_grad_255_acc/A0001_S001_0_G0001_segment_0151_gen.wav" type="audio/wav"></audio></td>
-                    <td><audio controls><source src="wav/gen_grad_255_acc/A0001_S005_0_G0002_segment_0293_gen.wav" type="audio/wav"></audio></td>
-                    <td><audio controls><source src="wav/gen_grad_255_acc/A0002_S001_0_G0003_segment_0117_gen.wav" type="audio/wav"></audio></td>
-                    <td><audio controls><source src="wav/gen_grad_255_acc/A0002_S002_0_G0004_segment_0057_gen.wav" type="audio/wav"></audio></td>
+                    <td class="audio-label">(M2) Grad-tts Conformer Encoder w/o Blank</td>
+                    <td><audio controls><source src="wav/mandarin/gen_grad_255_conformer/SSB05900401_gen.wav" type="audio/wav"></audio></td>
+                    <td><audio controls><source src="wav/mandarin/gen_grad_255_conformer/SSB06320250_gen.wav" type="audio/wav"></audio></td>
+                    <td><audio controls><source src="wav/mandarin/gen_grad_255_conformer/SSB07360237_gen.wav" type="audio/wav"></audio></td>
+                    <td><audio controls><source src="wav/mandarin/gen_grad_255_conformer/SSB18370413_gen.wav" type="audio/wav"></audio></td>
                 </tr>
-                <tr>
-                    <td class="audio-label">(M4) Mandarin + SG data w/ accent embedding timestampes=10 + gradient reversal (spk, acc)</td>
-                    <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/A0001_S001_0_G0001_segment_0151_gen.wav" type="audio/wav"></audio></td>
-                    <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/A0001_S005_0_G0002_segment_0293_gen.wav" type="audio/wav"></audio></td>
-                    <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/A0002_S001_0_G0003_segment_0117_gen.wav" type="audio/wav"></audio></td>
-                    <td><audio controls><source src="wav/gen_grad_100_acc_blk_grl/A0002_S002_0_G0004_segment_0057_gen.wav" type="audio/wav"></audio></td>
-                </tr>
+                
+                
             </tbody>
         </table>
 
