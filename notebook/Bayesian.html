@@ -1,0 +1,27 @@
+<p>The reason we do not call ( p(y | z, c) ) the <strong>posterior</strong> is because, in Bayesian terms, <strong>posterior</strong> refers specifically to the distribution of the unknown (latent) variable ( z ) after observing some data ( y ) and any known input ( c ).</p>
+<h3 id="heres-a-more-detailed-explanation">Here's a more detailed explanation:</h3>
+<h3 id="what-is-py-z-c">1. <strong>What is ( p(y | z, c) )?</strong></h3>
+<p>( p(y | z, c) ) is the <strong>likelihood</strong>. It expresses the probability of observing the output ( y ) (the data) given the latent variable ( z ) and the input ( c ).</p>
+<ul>
+<li><strong>Likelihood</strong>: In Bayesian terms, the likelihood refers to how probable the observed data ( y ) is, given specific values of the latent variable ( z ) and any known inputs ( c ). The likelihood helps update our belief about the unknown variable ( z ), but it is not itself a &quot;belief&quot; about ( z ).</li>
+</ul>
+<p>[ p(y | z, c) =  y  z  c ]</p>
+<p><strong>Why it's not called the posterior</strong>: The likelihood is conditional on the latent variable ( z ) and the input ( c ), but it does not provide any updated belief about ( z ). Instead, it's used to assess how well a particular ( z ) and ( c ) explain the data ( y ).</p>
+<h3 id="what-is-the-posterior-pz-y-c">2. <strong>What is the Posterior ( p(z | y, c) )?</strong></h3>
+<p>The <strong>posterior</strong> ( p(z | y, c) ) is the probability distribution over the latent variable ( z ), given the observed data ( y ) and the known input ( c ).</p>
+<ul>
+<li><strong>Posterior</strong>: This is the updated belief about ( z ) after observing both the data ( y ) and the input ( c ). It incorporates prior knowledge (through ( p(z | c) ), the prior) and the evidence (through the likelihood ( p(y | z, c) )) using <strong>Bayes' theorem</strong>:</li>
+</ul>
+<p>[ p(z | y, c) =  ]</p>
+<p>The posterior gives us a revised or updated understanding of the latent variable ( z ) after considering the observed data ( y ).</p>
+<h3 id="the-role-of-the-likelihood-and-posterior-in-bayesian-inference">3. <strong>The Role of the Likelihood and Posterior in Bayesian Inference</strong></h3>
+<ul>
+<li>The <strong>likelihood</strong> ( p(y | z, c) ) tells us how likely the observed data ( y ) is, given specific values of the latent variable ( z ) and the known input ( c ).</li>
+<li>The <strong>posterior</strong> ( p(z | y, c) ) is the result of updating our prior belief about ( z ) using the observed data ( y ) (via the likelihood) and the prior ( p(z | c) ).</li>
+</ul>
+<h3 id="why-the-difference-matters">Why the Difference Matters:</h3>
+<ul>
+<li>The <strong>likelihood</strong> ( p(y | z, c) ) is a function of the observed data ( y ) given the latent variable ( z ). It is used to compute the posterior but does not describe the distribution of ( z ).</li>
+<li>The <strong>posterior</strong> ( p(z | y, c) ) is the final distribution that tells us how our belief about ( z ) has changed after observing ( y ).</li>
+</ul>
+<p>In short, ( p(y | z, c) ) is the <strong>likelihood</strong>, not the posterior, because it tells us how likely the data is, given ( z ) and ( c ). The posterior ( p(z | y, c) ) updates our knowledge about ( z ) based on both the prior ( p(z | c) ) and the likelihood ( p(y | z, c) ).</p>
