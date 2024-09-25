@@ -15,45 +15,45 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 
 // Register the user and save user info in Firestore
-function register() {
-    const name = document.getElementById('name').value;
-    const firstLanguage = document.getElementById('first-language').value;
-    const age = document.getElementById('age').value;
-    const sex = document.getElementById('sex').value;
-    const email = document.getElementById('email').value;
+// function register() {
+//     const name = document.getElementById('name').value;
+//     const firstLanguage = document.getElementById('first-language').value;
+//     const age = document.getElementById('age').value;
+//     const sex = document.getElementById('sex').value;
+//     const email = document.getElementById('email').value;
 
-    console.log("Register button clicked!");
-    console.log("Name: ", name);
-    console.log("First Language: ", firstLanguage);
-    console.log("Age: ", age);
-    console.log("Sex: ", sex);
-    console.log("Email: ", email);
-    
-    if (name && firstLanguage && age && sex && email) {
-        auth.createUserWithEmailAndPassword(email, "default_password").then(userCredential => {
-            const user = userCredential.user;
-            // Save user info in Firestore
-            db.collection("users").doc(user.uid).set({
-                name: name,
-                firstLanguage: firstLanguage,
-                age: age,
-                sex: sex,
-                email: email,
-                registeredAt: new Date()
-            }).then(() => {
-                document.getElementById('register-section').style.display = 'none';
-                document.getElementById('evaluation-section').style.display = 'block';
-                loadNextSample();
-            }).catch(error => {
-                console.error("Error saving user info:", error);
-            });
-        }).catch(error => {
-            console.error("Error registering user:", error);
-        });
-    } else {
-        alert('Please fill in all fields');
-    }
-}
+//     console.log("Register button clicked!");
+//     console.log("Name: ", name);
+//     console.log("First Language: ", firstLanguage);
+//     console.log("Age: ", age);
+//     console.log("Sex: ", sex);
+//     console.log("Email: ", email);
+
+//     if (name && firstLanguage && age && sex && email) {
+//         auth.createUserWithEmailAndPassword(email, "default_password").then(userCredential => {
+//             const user = userCredential.user;
+//             // Save user info in Firestore
+//             db.collection("users").doc(user.uid).set({
+//                 name: name,
+//                 firstLanguage: firstLanguage,
+//                 age: age,
+//                 sex: sex,
+//                 email: email,
+//                 registeredAt: new Date()
+//             }).then(() => {
+//                 document.getElementById('register-section').style.display = 'none';
+//                 document.getElementById('evaluation-section').style.display = 'block';
+//                 loadNextSample();
+//             }).catch(error => {
+//                 console.error("Error saving user info:", error);
+//             });
+//         }).catch(error => {
+//             console.error("Error registering user:", error);
+//         });
+//     } else {
+//         alert('Please fill in all fields');
+//     }
+// }
 
 // Function to submit and save rating
 function submitRating() {

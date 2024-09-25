@@ -16,7 +16,11 @@
     <section id="register-section">
         <h2>Register to Start Evaluation</h2>
         <input type="text" id="name" placeholder="Enter your name" required><br>
-        <input type="text" id="first-language" placeholder="Enter your first language" required><br>
+        <select id="Chinese Accent">
+            <option value="North">North</option>
+            <option value="South">South</option>
+            <option value="SG">SG</option>
+        </select><br>
         <input type="number" id="age" placeholder="Enter your age" required><br>
         <select id="sex">
             <option value="Male">Male</option>
@@ -93,7 +97,7 @@
                     .then((userCredential) => {
                         const user = userCredential.user;
                         userId = user.uid;
-
+                        console.log("User registered:", userId);
                         // Save user info to Firestore
                         db.collection('users').doc(userId).set({
                             name: name,
