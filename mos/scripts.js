@@ -1,52 +1,72 @@
 let currentEvaluationType = 'MOS';
 let currentSampleIndex = 0;
+let mosSamplesCompleted = 0;
+let cmosSamplesCompleted = 0;
+let smosTimbreCompleted = 0;
+let smosAccentCompleted = 0;
+
 const mosSamples = ['mos-sample1.wav', 'mos-sample2.wav']; // Add your MOS sample URLs here
-const pairSamples = [
+const cmosSamples = [
     { a: 'pair1-a.wav', b: 'pair1-b.wav' }, 
     { a: 'pair2-a.wav', b: 'pair2-b.wav' }
 ];
+const smosTimbreSamples = [
+    { a: 'timbre1-a.wav', b: 'timbre1-b.wav' }, 
+    { a: 'timbre2-a.wav', b: 'timbre2-b.wav' }
+];
+const smosAccentSamples = [
+    { a: 'accent1-a.wav', b: 'accent1-b.wav' }, 
+    { a: 'accent2-a.wav', b: 'accent2-b.wav' }
+];
 
-function login() {
-    const username = document.getElementById('username').value;
-    if (username) {
-        document.getElementById('login-section').style.display = 'none';
+function register() {
+    const name = document.getElementById('name').value;
+    const firstLanguage = document.getElementById('first-language').value;
+    const age = document.getElementById('age').value;
+    const sex = document.getElementById('sex').value;
+    const email = document.getElementById('email').value;
+
+    if (name && firstLanguage && age && sex && email) {
+        document.getElementById('register-section').style.display = 'none';
         document.getElementById('evaluation-section').style.display = 'block';
         loadNextSample();
     } else {
-        alert('Please enter a username');
+        alert('Please fill in all fields');
     }
 }
 
 function loadNextSample() {
-    if (currentEvaluationType === 'MOS') {
+    if (mosSamplesCompleted < 60) {
+        currentEvaluationType = 'MOS';
         document.getElementById('evaluation-title').innerText = 'Mean Opinion Score (MOS) Evaluation';
         document.getElementById('mos-rating').style.display = 'block';
         document.getElementById('cmos-smos-rating').style.display = 'none';
-        document.getElementById('audio-source').src = mosSamples[currentSampleIndex];
-    } else {
-        document.getElementById('evaluation-title').innerText = 'Comparison Mean Opinion Score (CMOS/SMOS) Evaluation';
+        document.getElementById('audio-source').src = mosSamples[currentSampleIndex % mosSamples.length];
+    } else if (cmosSamplesCompleted < 30) {
+        currentEvaluationType = 'CMOS';
+        document.getElementById('evaluation-title').innerText = 'Comparison Mean Opinion Score (CMOS) Evaluation';
         document.getElementById('mos-rating').style.display = 'none';
         document.getElementById('cmos-smos-rating').style.display = 'block';
-        document.getElementById('audio-a').src = pairSamples[currentSampleIndex].a;
-        document.getElementById('audio-b').src = pairSamples[currentSampleIndex].b;
+        document.getElementById('audio-a').src = cmosSamples[currentSampleIndex % cmosSamples.length].a;
+        document.getElementById('audio-b').src = cmosSamples[currentSampleIndex % cmosSamples.length].b;
+    } else if (smosTimbreCompleted < 30) {
+        currentEvaluationType = 'SMOS-Timbre';
+        document.getElementById('evaluation-title').innerText = 'Similarity Mean Opinion Score (SMOS) for Timbre Evaluation';
+        document.getElementById('mos-rating').style.display = 'none';
+        document.getElementById('cmos-smos-rating').style.display = 'block';
+        document.getElementById('audio-a').src = smosTimbreSamples[currentSampleIndex % smosTimbreSamples.length].a;
+        document.getElementById('audio-b').src = smosTimbreSamples[currentSampleIndex % smosTimbreSamples.length].b;
+    } else if (smosAccentCompleted < 30) {
+        currentEvaluationType = 'SMOS-Accent';
+        document.getElementById('evaluation-title').innerText = 'Similarity Mean Opinion Score (SMOS) for Accent Evaluation';
+        document.getElementById('mos-rating').style.display = 'none';
+        document.getElementById('cmos-smos-rating').style.display = 'block';
+        document.getElementById('audio-a').src = smosAccentSamples[currentSampleIndex % smosAccentSamples.length].a;
+        document.getElementById('audio-b').src = smosAccentSamples[currentSampleIndex % smosAccentSamples.length].b;
+    } else {
+        alert('All evaluations completed. Thank you for your participation!');
     }
 }
 
 function submitRating() {
-    const feedback = document.getElementById('feedback').value;
-    const rating = document.querySelector('input[name="mos"]:checked')?.value || 
-                   document.querySelector('input[name="cmos"]:checked')?.value;
-    if (!rating) {
-        alert('Please select a rating');
-        return;
-    }
-
-    // Save or send feedback, rating, and current sample info
-
-    currentSampleIndex++;
-    if (currentSampleIndex < mosSamples.length) {
-        loadNextSample();
-    } else {
-        alert('Evaluation complete. Thank you!');
-    }
-}
+    const feedback = document.getElementById('feedback

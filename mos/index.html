@@ -9,12 +9,20 @@
 <body>
     <header>
         <h1>TTS Speech Evaluation</h1>
-        <p>Please login to start the evaluation</p>
+        <p>Please register to start the evaluation</p>
     </header>
 
-    <section id="login-section">
-        <input type="text" id="username" placeholder="Enter your username">
-        <button onclick="login()">Login</button>
+    <section id="register-section">
+        <input type="text" id="name" placeholder="Enter your name" required><br>
+        <input type="text" id="first-language" placeholder="Enter your first language" required><br>
+        <input type="number" id="age" placeholder="Enter your age" required><br>
+        <select id="sex">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br>
+        <input type="email" id="email" placeholder="Enter your email" required><br>
+        <button onclick="register()">Register</button>
     </section>
 
     <section id="evaluation-section" style="display:none;">
