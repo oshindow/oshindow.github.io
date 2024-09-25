@@ -1,24 +1,20 @@
-let currentEvaluationType = 'MOS';
-let currentSampleIndex = 0;
-let mosSamplesCompleted = 0;
-let cmosSamplesCompleted = 0;
-let smosTimbreCompleted = 0;
-let smosAccentCompleted = 0;
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
+    authDomain: "mos-evaluation.firebaseapp.com",
+    projectId: "mos-evaluation",
+    storageBucket: "mos-evaluation.appspot.com",
+    messagingSenderId: "672620926047",
+    appId: "1:672620926047:web:a755c5cd997de39e43b7ea",
+    measurementId: "G-4320F2Z87L"
+  };
 
-const mosSamples = ['mos-sample1.wav', 'mos-sample2.wav']; // Add your MOS sample URLs here
-const cmosSamples = [
-    { a: 'pair1-a.wav', b: 'pair1-b.wav' }, 
-    { a: 'pair2-a.wav', b: 'pair2-b.wav' }
-];
-const smosTimbreSamples = [
-    { a: 'timbre1-a.wav', b: 'timbre1-b.wav' }, 
-    { a: 'timbre2-a.wav', b: 'timbre2-b.wav' }
-];
-const smosAccentSamples = [
-    { a: 'accent1-a.wav', b: 'accent1-b.wav' }, 
-    { a: 'accent2-a.wav', b: 'accent2-b.wav' }
-];
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
 
+// Register the user and save user info in Firestore
 function register() {
     const name = document.getElementById('name').value;
     const firstLanguage = document.getElementById('first-language').value;
@@ -27,46 +23,71 @@ function register() {
     const email = document.getElementById('email').value;
 
     if (name && firstLanguage && age && sex && email) {
-        document.getElementById('register-section').style.display = 'none';
-        document.getElementById('evaluation-section').style.display = 'block';
-        loadNextSample();
+        auth.createUserWithEmailAndPassword(email, "default_password").then(userCredential => {
+            const user = userCredential.user;
+            // Save user info in Firestore
+            db.collection("users").doc(user.uid).set({
+                name: name,
+                firstLanguage: firstLanguage,
+                age: age,
+                sex: sex,
+                email: email,
+                registeredAt: new Date()
+            }).then(() => {
+                document.getElementById('register-section').style.display = 'none';
+                document.getElementById('evaluation-section').style.display = 'block';
+                loadNextSample();
+            }).catch(error => {
+                console.error("Error saving user info:", error);
+            });
+        }).catch(error => {
+            console.error("Error registering user:", error);
+        });
     } else {
         alert('Please fill in all fields');
     }
 }
 
-function loadNextSample() {
-    if (mosSamplesCompleted < 60) {
-        currentEvaluationType = 'MOS';
-        document.getElementById('evaluation-title').innerText = 'Mean Opinion Score (MOS) Evaluation';
-        document.getElementById('mos-rating').style.display = 'block';
-        document.getElementById('cmos-smos-rating').style.display = 'none';
-        document.getElementById('audio-source').src = mosSamples[currentSampleIndex % mosSamples.length];
-    } else if (cmosSamplesCompleted < 30) {
-        currentEvaluationType = 'CMOS';
-        document.getElementById('evaluation-title').innerText = 'Comparison Mean Opinion Score (CMOS) Evaluation';
-        document.getElementById('mos-rating').style.display = 'none';
-        document.getElementById('cmos-smos-rating').style.display = 'block';
-        document.getElementById('audio-a').src = cmosSamples[currentSampleIndex % cmosSamples.length].a;
-        document.getElementById('audio-b').src = cmosSamples[currentSampleIndex % cmosSamples.length].b;
-    } else if (smosTimbreCompleted < 30) {
-        currentEvaluationType = 'SMOS-Timbre';
-        document.getElementById('evaluation-title').innerText = 'Similarity Mean Opinion Score (SMOS) for Timbre Evaluation';
-        document.getElementById('mos-rating').style.display = 'none';
-        document.getElementById('cmos-smos-rating').style.display = 'block';
-        document.getElementById('audio-a').src = smosTimbreSamples[currentSampleIndex % smosTimbreSamples.length].a;
-        document.getElementById('audio-b').src = smosTimbreSamples[currentSampleIndex % smosTimbreSamples.length].b;
-    } else if (smosAccentCompleted < 30) {
-        currentEvaluationType = 'SMOS-Accent';
-        document.getElementById('evaluation-title').innerText = 'Similarity Mean Opinion Score (SMOS) for Accent Evaluation';
-        document.getElementById('mos-rating').style.display = 'none';
-        document.getElementById('cmos-smos-rating').style.display = 'block';
-        document.getElementById('audio-a').src = smosAccentSamples[currentSampleIndex % smosAccentSamples.length].a;
-        document.getElementById('audio-b').src = smosAccentSamples[currentSampleIndex % smosAccentSamples.length].b;
+// Function to submit and save rating
+function submitRating() {
+    const feedback = document.getElementById('feedback').value;
+    const rating = document.querySelector('input[name="mos"]:checked')?.value || 
+                   document.querySelector('input[name="cmos"]:checked')?.value;
+    
+    if (!rating) {
+        alert('Please select a rating');
+        return;
+    }
+
+    const user = auth.currentUser;
+    if (user) {
+        let evaluationType;
+        if (currentEvaluationType === 'MOS') {
+            evaluationType = 'MOS';
+        } else if (currentEvaluationType === 'CMOS') {
+            evaluationType = 'CMOS';
+        } else if (currentEvaluationType === 'SMOS-Timbre') {
+            evaluationType = 'SMOS-Timbre';
+        } else if (currentEvaluationType === 'SMOS-Accent') {
+            evaluationType = 'SMOS-Accent';
+        }
+
+        db.collection("evaluations").add({
+            userId: user.uid,
+            evaluationType: evaluationType,
+            sampleIndex: currentSampleIndex,
+            rating: rating,
+            feedback: feedback,
+            timestamp: new Date()
+        }).then(() => {
+            currentSampleIndex++;
+            loadNextSample();
+        }).catch(error => {
+            console.error("Error saving evaluation:", error);
+        });
     } else {
-        alert('All evaluations completed. Thank you for your participation!');
+        alert('User not logged in');
     }
 }
 
-function submitRating() {
-    const feedback = document.getElementById('feedback
+

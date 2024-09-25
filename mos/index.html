@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TTS Evaluation - MOS, CMOS, SMOS</title>
+    <title>TTS Evaluation - MOS</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <header>
-        <h1>TTS Speech Evaluation</h1>
-        <p>Please register to start the evaluation</p>
+        <h1>TTS MOS Evaluation</h1>
     </header>
 
+    <!-- Registration Form -->
     <section id="register-section">
+        <h2>Register to Start Evaluation</h2>
         <input type="text" id="name" placeholder="Enter your name" required><br>
         <input type="text" id="first-language" placeholder="Enter your first language" required><br>
         <input type="number" id="age" placeholder="Enter your age" required><br>
@@ -25,14 +27,15 @@
         <button onclick="register()">Register</button>
     </section>
 
+    <!-- MOS Evaluation Section (hidden until after registration) -->
     <section id="evaluation-section" style="display:none;">
-        <h2 id="evaluation-title">Mean Opinion Score (MOS) Evaluation</h2>
+        <h2>Mean Opinion Score (MOS) Evaluation</h2>
         <audio id="speech-sample" controls>
             <source id="audio-source" src="" type="audio/wav">
             Your browser does not support the audio element.
         </audio>
-        <div id="mos-rating" style="display: none;">
-            <p>Please rate the quality of the speech:</p>
+        <div id="mos-rating">
+            <p>Rate the quality of the speech:</p>
             <div>
                 <input type="radio" id="mos-1" name="mos" value="1">
                 <label for="mos-1">1 - Bad</label><br>
@@ -46,41 +49,105 @@
                 <label for="mos-5">5 - Excellent</label>
             </div>
         </div>
-
-        <div id="cmos-smos-rating" style="display: none;">
-            <p>Please compare the two samples:</p>
-            <audio id="sample-a" controls>
-                <source id="audio-a" src="" type="audio/wav">
-            </audio>
-            <audio id="sample-b" controls>
-                <source id="audio-b" src="" type="audio/wav">
-            </audio>
-            <div>
-                <input type="radio" id="cmos--3" name="cmos" value="-3">
-                <label for="cmos--3">-3: Definitely worse</label><br>
-                <input type="radio" id="cmos--2" name="cmos" value="-2">
-                <label for="cmos--2">-2: Worse</label><br>
-                <input type="radio" id="cmos--1" name="cmos" value="-1">
-                <label for="cmos--1">-1: Slightly worse</label><br>
-                <input type="radio" id="cmos-0" name="cmos" value="0">
-                <label for="cmos-0">0: About the same</label><br>
-                <input type="radio" id="cmos-1" name="cmos" value="1">
-                <label for="cmos-1">1: Slightly better</label><br>
-                <input type="radio" id="cmos-2" name="cmos" value="2">
-                <label for="cmos-2">2: Better</label><br>
-                <input type="radio" id="cmos-3" name="cmos" value="3">
-                <label for="cmos-3">3: Definitely better</label>
-            </div>
-        </div>
-
-        <textarea id="feedback" placeholder="Leave your notes or suggestions here..."></textarea>
-        <button onclick="submitRating()">Submit</button>
+        <textarea id="feedback" placeholder="Leave your feedback or suggestions here..."></textarea><br>
+        <button onclick="submitRating()">Submit Rating</button>
     </section>
 
-    <footer>
-        <p>&copy; 2024 TTS Evaluation Project</p>
-    </footer>
+    <!-- Firebase SDK Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js"></script>
 
-    <script src="scripts.js"></script>
+    <script>
+        // Firebase configuration from your project
+        const firebaseConfig = {
+            apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
+            authDomain: "mos-evaluation.firebaseapp.com",
+            projectId: "mos-evaluation",
+            storageBucket: "mos-evaluation.appspot.com",
+            messagingSenderId: "672620926047",
+            appId: "1:672620926047:web:a755c5cd997de39e43b7ea",
+            measurementId: "G-4320F2Z87L"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        let userId = null;
+        let currentSampleIndex = 0;
+        const mosSamples = ['audios/gt/A0001_S001_0_G0001_segment_0151.wav', 'audios/gt/A0001_S001_0_G0002_segment_0183.wav']; // Add your MOS sample file URLs here
+
+        // Function to register the user
+        function register() {
+            const name = document.getElementById('name').value;
+            const firstLanguage = document.getElementById('first-language').value;
+            const age = document.getElementById('age').value;
+            const sex = document.getElementById('sex').value;
+            const email = document.getElementById('email').value;
+
+            if (name && firstLanguage && age && sex && email) {
+                // Create a user with a temporary password (you can enhance this later with secure login)
+                auth.createUserWithEmailAndPassword(email, 'default_password')
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        userId = user.uid;
+
+                        // Save user info to Firestore
+                        db.collection('users').doc(userId).set({
+                            name: name,
+                            firstLanguage: firstLanguage,
+                            age: age,
+                            sex: sex,
+                            email: email,
+                            registeredAt: new Date()
+                        }).then(() => {
+                            document.getElementById('register-section').style.display = 'none';
+                            document.getElementById('evaluation-section').style.display = 'block';
+                            loadNextSample();
+                        }).catch(error => console.error('Error saving user data:', error));
+                    })
+                    .catch(error => console.error('Error registering user:', error));
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        // Function to load the next MOS sample
+        function loadNextSample() {
+            if (currentSampleIndex < mosSamples.length) {
+                document.getElementById('audio-source').src = mosSamples[currentSampleIndex];
+                document.getElementById('speech-sample').load();
+            } else {
+                alert('You have completed the MOS evaluation. Thank you!');
+                document.getElementById('evaluation-section').style.display = 'none';
+            }
+        }
+
+        // Function to submit the MOS rating and feedback
+        function submitRating() {
+            const rating = document.querySelector('input[name="mos"]:checked')?.value;
+            const feedback = document.getElementById('feedback').value;
+
+            if (!rating) {
+                alert('Please select a rating.');
+                return;
+            }
+
+            // Save rating to Firestore
+            db.collection('evaluations').add({
+                userId: userId,
+                sampleIndex: currentSampleIndex,
+                rating: rating,
+                feedback: feedback,
+                timestamp: new Date()
+            }).then(() => {
+                currentSampleIndex++;
+                loadNextSample();
+            }).catch(error => console.error('Error submitting evaluation:', error));
+        }
+    </script>
+
 </body>
 </html>
