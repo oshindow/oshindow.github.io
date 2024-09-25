@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTS Evaluation - MOS, CMOS, SMOS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>TTS Speech Evaluation</h1>
+        <p>Please login to start the evaluation</p>
+    </header>
+
+    <section id="login-section">
+        <input type="text" id="username" placeholder="Enter your username">
+        <button onclick="login()">Login</button>
+    </section>
+
+    <section id="evaluation-section" style="display:none;">
+        <h2 id="evaluation-title">Mean Opinion Score (MOS) Evaluation</h2>
+        <audio id="speech-sample" controls>
+            <source id="audio-source" src="" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+        <div id="mos-rating" style="display: none;">
+            <p>Please rate the quality of the speech:</p>
+            <div>
+                <input type="radio" id="mos-1" name="mos" value="1">
+                <label for="mos-1">1 - Bad</label><br>
+                <input type="radio" id="mos-2" name="mos" value="2">
+                <label for="mos-2">2 - Poor</label><br>
+                <input type="radio" id="mos-3" name="mos" value="3">
+                <label for="mos-3">3 - Fair</label><br>
+                <input type="radio" id="mos-4" name="mos" value="4">
+                <label for="mos-4">4 - Good</label><br>
+                <input type="radio" id="mos-5" name="mos" value="5">
+                <label for="mos-5">5 - Excellent</label>
+            </div>
+        </div>
+
+        <div id="cmos-smos-rating" style="display: none;">
+            <p>Please compare the two samples:</p>
+            <audio id="sample-a" controls>
+                <source id="audio-a" src="" type="audio/wav">
+            </audio>
+            <audio id="sample-b" controls>
+                <source id="audio-b" src="" type="audio/wav">
+            </audio>
+            <div>
+                <input type="radio" id="cmos--3" name="cmos" value="-3">
+                <label for="cmos--3">-3: Definitely worse</label><br>
+                <input type="radio" id="cmos--2" name="cmos" value="-2">
+                <label for="cmos--2">-2: Worse</label><br>
+                <input type="radio" id="cmos--1" name="cmos" value="-1">
+                <label for="cmos--1">-1: Slightly worse</label><br>
+                <input type="radio" id="cmos-0" name="cmos" value="0">
+                <label for="cmos-0">0: About the same</label><br>
+                <input type="radio" id="cmos-1" name="cmos" value="1">
+                <label for="cmos-1">1: Slightly better</label><br>
+                <input type="radio" id="cmos-2" name="cmos" value="2">
+                <label for="cmos-2">2: Better</label><br>
+                <input type="radio" id="cmos-3" name="cmos" value="3">
+                <label for="cmos-3">3: Definitely better</label>
+            </div>
+        </div>
+
+        <textarea id="feedback" placeholder="Leave your notes or suggestions here..."></textarea>
+        <button onclick="submitRating()">Submit</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 TTS Evaluation Project</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

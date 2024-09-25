@@ -1,3 +1,3 @@
 git add .
-git commit -m "update demos"
+git commit -m "update mos"
 git push origin 
