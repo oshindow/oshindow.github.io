@@ -22,6 +22,13 @@ function register() {
     const sex = document.getElementById('sex').value;
     const email = document.getElementById('email').value;
 
+    console.log("Register button clicked!");
+    console.log("Name: ", name);
+    console.log("First Language: ", firstLanguage);
+    console.log("Age: ", age);
+    console.log("Sex: ", sex);
+    console.log("Email: ", email);
+    
     if (name && firstLanguage && age && sex && email) {
         auth.createUserWithEmailAndPassword(email, "default_password").then(userCredential => {
             const user = userCredential.user;
