@@ -105,7 +105,7 @@
                 const progressElement = document.getElementById('progress');
                 const progressText = document.getElementById('progress-text');
                 const percentage = (currentSample / 10) * 100;
-                progressElement.style.width = `${percentage}%`;
+                document.getElementById('progress').style.width = `${percentage}%`;
                 progressText.textContent = `Progress: ${currentSample}/10 samples`;
 
                 // If completed, show the completion icon
