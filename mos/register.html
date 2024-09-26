@@ -112,6 +112,7 @@
                         alert('This email is already registered. Please log in instead.');
                     } else {
                         // Register new user
+                        
                         const userCredential = await createUserWithEmailAndPassword(auth, email, 'default_password');
                         const user = userCredential.user;
                         const userId = user.uid;
@@ -128,9 +129,9 @@
                         });
 
                         console.log("User registered and data saved:", userId);
-
                         // Show processing message and wait for 5 seconds before auto-redirecting
                         document.getElementById('message-box').style.display = 'block';
+                        
                         
                         setTimeout(() => {
                             window.location.href = "evaluation.html";  // Automatically redirect to the MOS, CMOS, SMOS evaluation page

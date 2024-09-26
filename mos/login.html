@@ -3,18 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firebase Example with User Check</title>
+    <title>Register for Speech Evaluation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .form-input {
+            margin: 10px;
+            padding: 10px;
+            width: 300px;
+            font-size: 16px;
+        }
+        .form-select {
+            margin: 10px;
+            padding: 10px;
+            width: 320px;
+            font-size: 16px;
+        }
+        .btn {
+            padding: 15px 25px;
+            margin: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        #message-box {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
     <div id="register-section">
-        <!-- <input type="text" id="name" placeholder="Enter your name" required><br>
-        <input type="text" id="first-language" placeholder="Enter your first language" required><br>
-        <input type="number" id="age" placeholder="Enter your age" required><br>
-        <select id="sex">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-        </select><br> -->
+        
         <input type="email" id="email" placeholder="Enter your email" required><br>
         <button id="loginBtn">login</button>
     </div>
