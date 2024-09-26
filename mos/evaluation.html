@@ -68,27 +68,43 @@
         <div class="evaluation-option">
             <button class="btn" onclick="location.href = 'mos.html'">MOS (Mean Opinion Score)</button>
             <p>Brief introduction: You will listen to 10 audio samples and evaluate them on a scale from 1 to 5 based on your perception of quality.</p>
+            <div class="progress-bar">
+                <div id="progress-mos" class="progress"></div>
+            </div>
+            <p id="progress-text-mos">Progress: 0/10 completed</p>
         </div>
         <div class="evaluation-option">
             <button class="btn" onclick="location.href = 'cmos.html'">CMOS (Comparison Mean Opinion Score)</button>
             <p>Compare two audio samples and evaluate the quality difference.</p>
+            <div class="progress-bar">
+                <div id="progress-mos" class="progress"></div>
+            </div>
+            <p id="progress-text-mos">Progress: 0/10 completed</p>
         </div>
         <div class="evaluation-option">
             <button class="btn" onclick="location.href = 'smos_timbre.html'">SMOS Timbre</button>
             <p>Evaluate the timbre (tone quality) of the synthesized audio compared to the original.</p>
+            <div class="progress-bar">
+                <div id="progress-mos" class="progress"></div>
+            </div>
+            <p id="progress-text-mos">Progress: 0/10 completed</p>
         </div>
         <div class="evaluation-option">
             <button class="btn" onclick="location.href = 'smos_accent.html'">SMOS Accent</button>
             <p>Evaluate the accent quality of the synthesized audio compared to the original.</p>
+            <div class="progress-bar">
+                <div id="progress-mos" class="progress"></div>
+            </div>
+            <p id="progress-text-mos">Progress: 0/10 completed</p>
         </div>
     </div>
 
     <!-- Progress Bar -->
-    <div class="progress-bar">
+    <!-- <div class="progress-bar">
         <div id="progress" class="progress"></div>
     </div>
     <p id="progress-text">Progress: 0/4 tasks completed</p>
-    <div id="complete-icon">✔</div>
+    <div id="complete-icon">✔</div> -->
 
     <!-- Message Box for feedback -->
     <div id="message-box">Redirecting to your selected evaluation task...</div>
