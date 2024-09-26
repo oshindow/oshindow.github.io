@@ -41,28 +41,6 @@
             font-size: 18px;
             color: #007bff;
         }
-        .progress-container {
-            margin-top: 30px;
-            width: 100%;
-            background-color: #f3f3f3;
-            border-radius: 5px;
-        }
-        .progress-bar {
-            height: 30px;
-            background-color: #007bff;
-            width: 0;
-            border-radius: 5px;
-            transition: width 0.3s ease;
-        }
-        #complete-icon {
-            display: none;
-            font-size: 3rem;
-            color: green;
-            margin-top: 20px;
-        }
-        #complete-icon.visible {
-            display: inline-block;
-        }
     </style>
 </head>
 <body>
@@ -72,30 +50,22 @@
     
     <div id="evaluation-options">
         <div class="evaluation-option">
-            <button class="btn" onclick="startMOS()">MOS (Mean Opinion Score)</button>
+            <button class="btn" onclick="location.href = 'mos.html'">MOS (Mean Opinion Score)</button>
             <p>Brief introduction: You will listen to 10 audio samples and evaluate them on a scale from 1 to 5 based on your perception of quality.</p>
         </div>
         <div class="evaluation-option">
-            <button class="btn" onclick="startCMOS()">CMOS (Comparison Mean Opinion Score)</button>
+            <button class="btn" onclick="location.href = 'cmos.html'">CMOS (Comparison Mean Opinion Score)</button>
             <p>Compare two audio samples and evaluate the quality difference.</p>
         </div>
         <div class="evaluation-option">
-            <button class="btn" onclick="startSMOSTimbre()">SMOS Timbre</button>
+            <button class="btn" onclick="location.href = 'smos_timbre.html'">SMOS Timbre</button>
             <p>Evaluate the timbre (tone quality) of the synthesized audio compared to the original.</p>
         </div>
         <div class="evaluation-option">
-            <button class="btn" onclick="startSMOSAccent()">SMOS Accent</button>
+            <button class="btn" onclick="location.href = 'smos_accent.html'">SMOS Accent</button>
             <p>Evaluate the accent quality of the synthesized audio compared to the original.</p>
         </div>
     </div>
-
-    <!-- Progress bar -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progress-bar"></div>
-    </div>
-
-    <!-- Complete icon -->
-    <div id="complete-icon">✔</div>
 
     <!-- Message Box for feedback -->
     <div id="message-box">Redirecting to your selected evaluation task...</div>
@@ -103,7 +73,7 @@
     <!-- Firebase SDK and task navigation -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
         import { getAuth } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 
         // Firebase configuration
@@ -122,103 +92,34 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // Task names for tracking progress
-        const taskNames = ['MOS', 'CMOS', 'SMOS Timbre', 'SMOS Accent'];
-
-        // Track how many tasks have been completed by the user
-        let completedTasks = 0;
-
         // Functions to start tasks
         function startMOS() {
-            saveProgress('MOS');
-            redirectToPage('mos.html');
-        }
-
-        function startCMOS() {
-            saveProgress('CMOS');
-            redirectToPage('cmos.html');
-        }
-
-        function startSMOSTimbre() {
-            saveProgress('SMOS Timbre');
-            redirectToPage('smos-timbre.html');
-        }
-
-        function startSMOSAccent() {
-            saveProgress('SMOS Accent');
-            redirectToPage('smos-accent.html');
-        }
-
-        // Redirect to the respective page after delay
-        function redirectToPage(page) {
             document.getElementById('message-box').style.display = 'block';
             setTimeout(() => {
-                window.location.href = page;
+                window.location.href = "mos.html";
             }, 2000);
         }
 
-        // Save progress to Firestore
-        async function saveProgress(task) {
-            const user = auth.currentUser;
-            if (user) {
-                const docRef = doc(db, 'progress', user.uid);
-                const docSnap = await getDoc(docRef);
-
-                let progress = {};
-                if (docSnap.exists()) {
-                    progress = docSnap.data();
-                }
-                progress[task] = true;
-
-                // Save the progress back to Firestore
-                await setDoc(docRef, progress);
-
-                // Update progress bar
-                updateProgress(progress);
-            }
+        function startCMOS() {
+            document.getElementById('message-box').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = "cmos.html";
+            }, 2000);
         }
 
-        // Update the progress bar and check for completion
-        async function updateProgress(progress = {}) {
-            completedTasks = 0;
-
-            // Count the completed tasks
-            taskNames.forEach(task => {
-                if (progress[task]) {
-                    completedTasks++;
-                }
-            });
-
-            // Calculate the percentage and update the progress bar
-            const percentage = (completedTasks / taskNames.length) * 100;
-            document.getElementById('progress-bar').style.width = percentage + '%';
-
-            // If all tasks are complete, display the completion icon
-            if (completedTasks === taskNames.length) {
-                document.getElementById('complete-icon').classList.add('visible');
-            }
+        function startSMOSTimbre() {
+            document.getElementById('message-box').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = "smos-timbre.html";
+            }, 2000);
         }
 
-        // Load progress on page load
-        async function loadProgress() {
-            const user = auth.currentUser;
-            if (user) {
-                const docRef = doc(db, 'progress', user.uid);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    updateProgress(docSnap.data());
-                }
-            }
+        function startSMOSAccent() {
+            document.getElementById('message-box').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = "smos-accent.html";
+            }, 2000);
         }
-
-        // Listen for auth state changes to load the user's progress
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                loadProgress();
-            }
-        });
-
     </script>
 
 </body>
