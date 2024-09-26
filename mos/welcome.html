@@ -91,7 +91,7 @@
                                 registeredAt: new Date()
                             });               
                             console.log("Document written with ID: ", docRef.id);
-                            // .then(() => {
+                            window.location.href = "evaluation.html"; // Redirect to the evaluation page
                         } catch (e) {
                                 console.error("Error adding document: ", e);
                         }
