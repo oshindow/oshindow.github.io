@@ -32,8 +32,8 @@
     <h1>Welcome to the Speech Evaluation Portal</h1>
     <p>Please log in or register to begin the evaluation process.</p>
 
-    <button class="btn" id="loginBtn">Login</button>
-    <button class="btn" id="registerBtn">Register</button>
+    <button class="btn" id="loginBtn", href="login.html">Login</button>
+    <button class="btn" id="registerBtn", href="register.html">Register</button>
 
     <!-- Firebase SDK -->
     
@@ -107,20 +107,7 @@
             }
         });
 
-        // Event listener for Login button
-        document.getElementById('loginBtn').addEventListener('click', () => {
-            const email = prompt("Enter your email:");
-            // const password = prompt("Enter your password:");
-
-            signInWithEmailAndPassword(auth, email, 'default_password')
-                .then((userCredential) => {
-                    alert("Login successful! Redirecting to the evaluation page...");
-                    window.location.href = "evaluation.html"; // Redirect to the evaluation page
-                })
-                .catch((error) => {
-                    alert("Login failed: " + error.message);
-                });
-        });
+        
 
         
         // document.getElementById('registerBtn').addEventListener('click', () => {

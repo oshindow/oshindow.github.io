@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Example with User Check</title>
+</head>
+<body>
+    <div id="register-section">
+        <!-- <input type="text" id="name" placeholder="Enter your name" required><br>
+        <input type="text" id="first-language" placeholder="Enter your first language" required><br>
+        <input type="number" id="age" placeholder="Enter your age" required><br>
+        <select id="sex">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br> -->
+        <input type="email" id="email" placeholder="Enter your email" required><br>
+        <button id="loginBtn">login</button>
+    </div>
+<script type="module">
+    // Import the Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, fetchSignInMethodsForEmail, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
+        authDomain: "mos-evaluation.firebaseapp.com",
+        projectId: "mos-evaluation",
+        storageBucket: "mos-evaluation.appspot.com",
+        messagingSenderId: "672620926047",
+        appId: "1:672620926047:web:a755c5cd997de39e43b7ea",
+        measurementId: "G-4320F2Z87L"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    // Event listener for Login button
+    document.getElementById('loginBtn').addEventListener('click', () => {
+        const email = prompt("Enter your email:");
+        // const password = prompt("Enter your password:");
+
+        signInWithEmailAndPassword(auth, email, 'default_password')
+            .then((userCredential) => {
+                alert("Login successful! Redirecting to the evaluation page...");
+                window.location.href = "evaluation.html"; // Redirect to the evaluation page
+            })
+            .catch((error) => {
+                alert("Login failed: " + error.message);
+            });
+    });
+</script>
+
+</body>
+</html>
