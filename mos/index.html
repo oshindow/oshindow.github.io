@@ -74,7 +74,7 @@
                         console.log("User registered:", userId);
                                            
                         // Save user info in Firestore
-                        db.collection('users').doc(userId).set({
+                        collection('users').doc(userId).set({
                             name: name,
                             firstLanguage: firstLanguage,
                             age: age,
