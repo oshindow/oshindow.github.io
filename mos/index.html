@@ -31,6 +31,7 @@
     <!-- Firebase Configuration and Initialization -->
     <script>
         // Your Firebase configuration
+        console.log("Initializing Firebase...");
         const firebaseConfig = {
             apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
             authDomain: "mos-evaluation.firebaseapp.com",
@@ -42,9 +43,12 @@
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        const firebaseApp = firebase.initializeApp(firebaseConfig);
+        console.log("Firebase App Initialized:", firebaseApp);
         const auth = firebase.auth();
         const db = firebase.firestore();
+        console.log("Auth Initialized:", auth);
+        console.log("Firestore Initialized:", db);
     </script>
 
     <!-- Your custom script for registration -->
@@ -57,7 +61,7 @@
             const email = document.getElementById('email').value;
 
             // Debugging: Log values to ensure inputs are not null
-            console.log({ name, firstLanguage, age, sex, email });
+            console.log("Registering User:", { name, firstLanguage, age, sex, email });
 
             if (name && firstLanguage && age && sex && email) {
                 auth.createUserWithEmailAndPassword(email, 'default_password')
