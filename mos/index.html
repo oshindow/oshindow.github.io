@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firebase Example</title>
+    <title>Firebase Example with User Check</title>
 </head>
 <body>
 
@@ -25,16 +25,11 @@
 
     <!-- Firebase SDK scripts and custom functionality -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
+        // Import the Firebase SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-        
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
-        import { getFirestore, doc, setDoc,collection, addDoc  } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
-        
-        // const { initializeApp } = require('https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js');
-        // const { getAuth, createUserWithEmailAndPassword } = require('https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js');
-        // const { getFirestore, doc, setDoc } = require('https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js');
-        
+        import { getAuth, createUserWithEmailAndPassword, fetchSignInMethodsForEmail, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
         // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
@@ -51,51 +46,49 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Debugging: Log initialization
-        console.log("Auth Initialized:", auth);
-        console.log("Firestore Initialized:", db);
-
-        // Register function
-        document.getElementById('registerBtn').addEventListener('click', () => {
+        // Register function with user existence check
+        document.getElementById('registerBtn').addEventListener('click', async () => {
             const name = document.getElementById('name').value;
             const firstLanguage = document.getElementById('first-language').value;
             const age = document.getElementById('age').value;
             const sex = document.getElementById('sex').value;
             const email = document.getElementById('email').value;
 
-            // Debugging: Log values
-            console.log("Registering User:", { name, firstLanguage, age, sex, email });
-
             if (name && firstLanguage && age && sex && email) {
-                createUserWithEmailAndPassword(auth, email, 'default_password')
-                    .then((userCredential) => {
+                try {
+                    // Check if the email is already registered
+                    const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+                    
+                    if (signInMethods.length > 0) {
+                        // User is already registered, prompt to log in
+                        alert('This email is already registered. Please log in instead.');
+                    } else {
+                        // Register new user
+                        const userCredential = await createUserWithEmailAndPassword(auth, email, 'default_password');
                         const user = userCredential.user;
                         const userId = user.uid;
-                        console.log("User registered:", userId);
-                                           
+
                         // Save user info in Firestore
-                        try {
-                            const docRef = addDoc(collection(db, "users"), {
-                                userid: user.uid,
-                                name: name,
-                                firstLanguage: firstLanguage,
-                                age: age,
-                                sex: sex,
-                                email: email,
-                                registeredAt: new Date()
-                            });               
-                            console.log("Document written with ID: ", docRef.id);
-                            // .then(() => {
-                        } catch (e) {
-                                console.error("Error adding document: ", e);
-                        }
-                        // }).catch((error) => {
-                        //     console.error("Error saving user data:", error);
-                        // });
-                    })
-                    // .catch((error) => {
-                    //     console.error("Error registering user:", error);
-            // });
+                        await addDoc(collection(db, "users"), {
+                            userid: userId,
+                            name: name,
+                            firstLanguage: firstLanguage,
+                            age: age,
+                            sex: sex,
+                            email: email,
+                            registeredAt: new Date()
+                        });
+
+                        console.log("User registered and data saved:", userId);
+
+                        // Auto login user and redirect to main portal
+                        alert('Registration successful! Redirecting to the main portal...');
+                        window.location.href = "main_portal.html";  // Redirect to the MOS, CMOS, SMOS evaluation page
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("Error during registration: " + error.message);
+                }
             } else {
                 alert('Please fill in all fields.');
             }
