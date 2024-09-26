@@ -106,8 +106,8 @@
         </select>
     </div>
 
-    <button class="btn" onclick="submitMOS()">Submit & Next</button>
-
+    <button class="btn" id="submitMOS">Submit & Next</button>
+    <!-- button class="btn" id="loginBtn">Login</button> -->
     <div id="message-box">Saving your response... Please wait.</div>
 
     <div class="footer">
@@ -139,7 +139,7 @@
         const totalSamples = 10;
         const userId = auth.currentUser ? auth.currentUser.uid : "unknown-user";
 
-        async function submitMOS() {
+        document.getElementById('loginBtn').addEventListener('click', async () => {
             const mosScore = document.getElementById('mos-score').value;
             const audioFileName = `sample${currentSampleIndex}.wav`;
 
@@ -174,7 +174,7 @@
                 console.error("Error saving score:", error);
                 alert("Error during submission: " + error.message);
             }
-        }
+        });
     </script>
 
 </body>
