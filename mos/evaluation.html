@@ -116,10 +116,12 @@
         }
 
         // Check for logged-in user and load progress
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                loadProgress(user.uid);
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    loadProgress(user.uid);
+                }
+            });
         });
     </script>
 
