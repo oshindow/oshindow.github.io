@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register for Speech Evaluation</title>
+    <title>Login to Speech Evaluation</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,12 +17,6 @@
             margin: 10px;
             padding: 10px;
             width: 300px;
-            font-size: 16px;
-        }
-        .form-select {
-            margin: 10px;
-            padding: 10px;
-            width: 320px;
             font-size: 16px;
         }
         .btn {
@@ -46,47 +40,69 @@
     </style>
 </head>
 <body>
-    <div id="register-section">
-        
-        <input type="email" id="email" placeholder="Enter your email" required><br>
-        <button id="loginBtn">login</button>
+
+    <h1>Login to Speech Evaluation</h1>
+
+    <!-- Login Form -->
+    <div id="login-section">
+        <input class="form-input" type="email" id="email" placeholder="Enter your email" required><br>
+        <!-- <input class="form-input" type="password" id="password" placeholder="Enter your password" required><br> -->
+        <button class="btn" id="loginBtn">Login</button>
     </div>
-<script type="module">
-    // Import the Firebase SDKs
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, fetchSignInMethodsForEmail, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
-        authDomain: "mos-evaluation.firebaseapp.com",
-        projectId: "mos-evaluation",
-        storageBucket: "mos-evaluation.appspot.com",
-        messagingSenderId: "672620926047",
-        appId: "1:672620926047:web:a755c5cd997de39e43b7ea",
-        measurementId: "G-4320F2Z87L"
-    };
+    <!-- Message Box for Processing -->
+    <div id="message-box">Logging in... Please wait.</div>
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    // Event listener for Login button
-    document.getElementById('loginBtn').addEventListener('click', () => {
-        const email = prompt("Enter your email:");
-        // const password = prompt("Enter your password:");
+    <!-- Firebase SDK scripts and custom functionality -->
+    <script type="module">
+        // Import the Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 
-        signInWithEmailAndPassword(auth, email, 'default_password')
-            .then((userCredential) => {
-                alert("Login successful! Redirecting to the evaluation page...");
-                window.location.href = "evaluation.html"; // Redirect to the evaluation page
-            })
-            .catch((error) => {
-                alert("Login failed: " + error.message);
-            });
-    });
-</script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
+            authDomain: "mos-evaluation.firebaseapp.com",
+            projectId: "mos-evaluation",
+            storageBucket: "mos-evaluation.appspot.com",
+            messagingSenderId: "672620926047",
+            appId: "1:672620926047:web:a755c5cd997de39e43b7ea",
+            measurementId: "G-4320F2Z87L"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Login function
+        document.getElementById('loginBtn').addEventListener('click', async () => {
+            const email = document.getElementById('email').value;
+            // const password = document.getElementById('password').value;
+
+            if (email) {
+                try {
+                    // Sign in user
+                    const userCredential = await signInWithEmailAndPassword(auth, email, 'default_password');
+                    const user = userCredential.user;
+
+                    console.log("User logged in:", user.uid);
+
+                    // Show processing message
+                    document.getElementById('message-box').style.display = 'block';
+
+                    // Auto-redirect after 5 seconds
+                    setTimeout(() => {
+                        window.location.href = "evaluation.html";  // Redirect to the MOS, CMOS, SMOS evaluation page
+                    }, 5000);  // 5 second delay
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("Error during login: " + error.message);
+                }
+            } else {
+                alert('Please enter both email and password.');
+            }
+        });
+    </script>
 
 </body>
 </html>
