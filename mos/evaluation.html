@@ -92,34 +92,35 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // Functions to start tasks
-        function startMOS() {
-            document.getElementById('message-box').style.display = 'block';
-            setTimeout(() => {
-                window.location.href = "mos.html";
-            }, 2000);
+        // Function to load progress
+        async function loadProgress(userId) {
+            const docRef = doc(db, 'progress', userId);
+            const progressDoc = await getDoc(docRef);
+
+            if (progressDoc.exists()) {
+                const progressData = progressDoc.data();
+                const currentSample = progressData.currentSample || 0;
+
+                // Update progress bar and text
+                const progressElement = document.getElementById('progress');
+                const progressText = document.getElementById('progress-text');
+                const percentage = (currentSample / 10) * 100;
+                progressElement.style.width = `${percentage}%`;
+                progressText.textContent = `Progress: ${currentSample}/10 samples`;
+
+                // If completed, show the completion icon
+                if (currentSample >= 10) {
+                    document.getElementById('complete-icon').style.display = 'block';
+                }
+            }
         }
 
-        function startCMOS() {
-            document.getElementById('message-box').style.display = 'block';
-            setTimeout(() => {
-                window.location.href = "cmos.html";
-            }, 2000);
-        }
-
-        function startSMOSTimbre() {
-            document.getElementById('message-box').style.display = 'block';
-            setTimeout(() => {
-                window.location.href = "smos-timbre.html";
-            }, 2000);
-        }
-
-        function startSMOSAccent() {
-            document.getElementById('message-box').style.display = 'block';
-            setTimeout(() => {
-                window.location.href = "smos-accent.html";
-            }, 2000);
-        }
+        // Check for logged-in user and load progress
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loadProgress(user.uid);
+            }
+        });
     </script>
 
 </body>
