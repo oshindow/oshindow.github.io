@@ -29,7 +29,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
         
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+        import { getFirestore, doc, setDoc,collection, addDoc  } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
         
         // const { initializeApp } = require('https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js');
         // const { getAuth, createUserWithEmailAndPassword } = require('https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js');
@@ -74,7 +74,7 @@
                         console.log("User registered:", userId);
                                            
                         // Save user info in Firestore
-                        collection('users').doc(userId).set({
+                        collection(db, 'users').doc(userId).set({
                             name: name,
                             firstLanguage: firstLanguage,
                             age: age,
