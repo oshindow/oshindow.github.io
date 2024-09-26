@@ -41,6 +41,22 @@
             font-size: 18px;
             color: #007bff;
         }
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            margin: 20px 0;
+        }
+        .progress {
+            width: 0;
+            height: 20px;
+            background-color: #007bff;
+            transition: width 0.4s;
+        }
+        #complete-icon {
+            display: none;
+            font-size: 50px;
+            color: green;
+        }
     </style>
 </head>
 <body>
@@ -104,10 +120,10 @@
 
                 // Update progress bar and text
                 const progressElement = document.getElementById('progress');
-                console.log(progressElement)
+                // console.log(progressElement)
                 const progressText = document.getElementById('progress-text');
                 const percentage = (currentSample / 10) * 100;
-                document.getElementById('progress').style.width = `${percentage}%`;
+                progressElement.style.width = `${percentage}%`;
                 progressText.textContent = `Progress: ${currentSample}/10 samples`;
 
                 // If completed, show the completion icon
