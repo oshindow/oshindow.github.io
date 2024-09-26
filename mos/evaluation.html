@@ -116,11 +116,11 @@
         }
 
         // Check for logged-in user and load progress
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                loadProgress(user.uid);
-            }
-        });
+        // onAuthStateChanged(auth, (user) => {
+        if (user) {
+            loadProgress(user.uid);
+        }
+        // });
     </script>
 
 </body>
