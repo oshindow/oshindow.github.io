@@ -89,8 +89,8 @@
     </p>
 
     <div class="audio-player">
-        <audio controls>
-            <source src="audios/gt/A0001_S001_0_G0001_segment_0151.wav" type="audio/wav">
+        <audio controls id="audio-player">
+            <source id="audio-source" src="mos/audios/sample1.wav" type="audio/wav">
             Your browser does not support the audio element.
         </audio>
     </div>
@@ -106,12 +106,13 @@
         </select>
     </div>
 
-    <button class="btn" id="submitMOS">Submit & Next</button>
-    <!-- button class="btn" id="loginBtn">Login</button> -->
+    <button class="btn" onclick="submitMOS()">Submit & Next</button>
+
     <div id="message-box">Saving your response... Please wait.</div>
 
     <div class="footer">
         <p>Sample <span id="current-sample">1</span> of 10</p>
+        <p>Current File: <span id="current-file">sample1.wav</span></p>
     </div>
 
     <script type="module">
@@ -135,13 +136,28 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        let currentSampleIndex = 1;
-        const totalSamples = 10;
+        // Array to manage real file names
+        const audioFiles = [
+            'mos/audios/gt/SSB18370003_north.wav',
+            'mos/audios/gt/A0001_S001_0_G0002_segment_0183.wav',
+            'mos/audios/gt/SSB05900043_north.wav',
+            'mos/audios/gt/SSB09970005_north.wav',
+            'mos/audios/gt/SSB06310207_south.wav',
+            'mos/audios/gt/SSB11000012_south.wav',
+            'mos/audios/gt/SSB12160001_north.wav',
+            'mos/audios/gt/SSB03660055_south.wav',
+            'mos/audios/gt/SSB11250021_south.wav',
+            'mos/audios/gt/SSB17590001_north.wav',
+        ];
+
+        let currentSampleIndex = 0;
+        const totalSamples = audioFiles.length;
         const userId = auth.currentUser ? auth.currentUser.uid : "unknown-user";
 
-        document.getElementById('loginBtn').addEventListener('click', async () => {
+        // Function to handle MOS submission and move to next sample
+        async function submitMOS() {
             const mosScore = document.getElementById('mos-score').value;
-            const audioFileName = `sample${currentSampleIndex}.wav`;
+            const audioFileName = audioFiles[currentSampleIndex];
 
             // Show processing message
             document.getElementById('message-box').style.display = 'block';
@@ -155,26 +171,29 @@
                     timestamp: new Date()
                 });
 
-                console.log("MOS score saved:", mosScore);
+                console.log("MOS score saved:", mosScore, "for file:", audioFileName);
 
                 // Move to the next audio sample
                 currentSampleIndex++;
 
-                if (currentSampleIndex > totalSamples) {
+                if (currentSampleIndex >= totalSamples) {
                     // All samples completed, redirect to thank you page
                     window.location.href = "thank_you.html";
                 } else {
                     // Update the audio file and the sample number
-                    document.querySelector("audio source").src = `mos/audios/sample${currentSampleIndex}.wav`;
-                    document.querySelector("audio").load();
-                    document.getElementById('current-sample').innerText = currentSampleIndex;
+                    const nextFile = audioFiles[currentSampleIndex];
+                    document.getElementById('audio-source').src = nextFile;
+                    document.getElementById('audio-player').load();
+                    document.getElementById('current-sample').innerText = currentSampleIndex + 1;
+                    document.getElementById('current-file').innerText = nextFile.split('/').pop();
                     document.getElementById('message-box').style.display = 'none';
                 }
             } catch (error) {
                 console.error("Error saving score:", error);
                 alert("Error during submission: " + error.message);
             }
-        });
+        }
+        window.submitMOS = submitMOS;
     </script>
 
 </body>
