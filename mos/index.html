@@ -74,23 +74,27 @@
                         console.log("User registered:", userId);
                                            
                         // Save user info in Firestore
-                        collection(db, 'users').doc(userId).set({
-                            name: name,
-                            firstLanguage: firstLanguage,
-                            age: age,
-                            sex: sex,
-                            email: email,
-                            registeredAt: new Date()
-                        }).then(() => {
-                            console.log("User data saved successfully.");
-                            alert('Registration successful!');
-                        }).catch((error) => {
-                            console.error("Error saving user data:", error);
-                        });
+                        try {
+                            const docRef = await addDoc(collection(db, "users"), {
+                                name: name,
+                                firstLanguage: firstLanguage,
+                                age: age,
+                                sex: sex,
+                                email: email,
+                                registeredAt: new Date()
+                            });               
+                            console.log("Document written with ID: ", docRef.id);
+                            // .then(() => {
+                        } catch (e) {
+                                console.error("Error adding document: ", e);
+                        }
+                        // }).catch((error) => {
+                        //     console.error("Error saving user data:", error);
+                        // });
                     })
-                    .catch((error) => {
-                        console.error("Error registering user:", error);
-                    });
+                    // .catch((error) => {
+                    //     console.error("Error registering user:", error);
+            // });
             } else {
                 alert('Please fill in all fields.');
             }
