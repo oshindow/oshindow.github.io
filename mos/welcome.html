@@ -36,13 +36,14 @@
     <button class="btn" id="registerBtn">Register</button>
 
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js"></script>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, fetchSignInMethodsForEmail, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-    <script>
-        // Firebase configuration
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
+            apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
             authDomain: "mos-evaluation.firebaseapp.com",
             projectId: "mos-evaluation",
             storageBucket: "mos-evaluation.appspot.com",
@@ -52,15 +53,66 @@
         };
 
         // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Debugging: Log initialization
+        console.log("Auth Initialized:", auth);
+        console.log("Firestore Initialized:", db);
+
+        // Register function
+        document.getElementById('registerBtn').addEventListener('click', () => {
+            const name = document.getElementById('name').value;
+            const firstLanguage = document.getElementById('first-language').value;
+            const age = document.getElementById('age').value;
+            const sex = document.getElementById('sex').value;
+            const email = document.getElementById('email').value;
+
+            // Debugging: Log values
+            console.log("Registering User:", { name, firstLanguage, age, sex, email });
+
+            if (name && firstLanguage && age && sex && email) {
+                createUserWithEmailAndPassword(auth, email, 'default_password')
+                    .then((userCredential) => {
+                        const user = userCredential.user;
+                        const userId = user.uid;
+                        console.log("User registered:", userId);
+                                           
+                        // Save user info in Firestore
+                        try {
+                            const docRef = addDoc(collection(db, "users"), {
+                                userid: user.uid,
+                                name: name,
+                                firstLanguage: firstLanguage,
+                                age: age,
+                                sex: sex,
+                                email: email,
+                                registeredAt: new Date()
+                            });               
+                            console.log("Document written with ID: ", docRef.id);
+                            // .then(() => {
+                        } catch (e) {
+                                console.error("Error adding document: ", e);
+                        }
+                        // }).catch((error) => {
+                        //     console.error("Error saving user data:", error);
+                        // });
+                    })
+                    // .catch((error) => {
+                    //     console.error("Error registering user:", error);
+            // });
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
 
         // Event listener for Login button
         document.getElementById('loginBtn').addEventListener('click', () => {
             const email = prompt("Enter your email:");
-            const password = prompt("Enter your password:");
+            // const password = prompt("Enter your password:");
 
-            auth.signInWithEmailAndPassword(email, password)
+            signInWithEmailAndPassword(auth, email, 'default_password')
                 .then((userCredential) => {
                     alert("Login successful! Redirecting to the evaluation page...");
                     window.location.href = "evaluation.html"; // Redirect to the evaluation page
@@ -70,19 +122,9 @@
                 });
         });
 
-        // Event listener for Register button
+        
         document.getElementById('registerBtn').addEventListener('click', () => {
-            const email = prompt("Enter your email:");
-            const password = prompt("Enter a password:");
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    alert("Registration successful! Redirecting to the evaluation page...");
-                    window.location.href = "evaluation.html"; // Redirect to the evaluation page
-                })
-                .catch((error) => {
-                    alert("Registration failed: " + error.message);
-                });
+            window.location.href = "register.html"; // Redirect to register page
         });
     </script>
 
