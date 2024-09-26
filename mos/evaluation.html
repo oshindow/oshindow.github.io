@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Evaluation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+        .btn {
+            padding: 15px 25px;
+            margin: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        #evaluation-options {
+            margin-top: 30px;
+        }
+        .evaluation-option {
+            margin-bottom: 20px;
+        }
+        #message-box {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Speech Evaluation</h1>
+    <p>Welcome to the speech evaluation platform. Here, you will evaluate various audio samples based on the following four tasks:</p>
+    
+    <div id="evaluation-options">
+        <div class="evaluation-option">
+            <button class="btn" onclick="startMOS()">MOS (Mean Opinion Score)</button>
+            <p>Brief introduction: You will listen to 10 audio samples and evaluate them on a scale from 1 to 5 based on your perception of quality.</p>
+        </div>
+        <div class="evaluation-option">
+            <button class="btn" onclick="startCMOS()">CMOS (Comparison Mean Opinion Score)</button>
+            <p>Compare two audio samples and evaluate the quality difference.</p>
+        </div>
+        <div class="evaluation-option">
+            <button class="btn" onclick="startSMOSTimbre()">SMOS Timbre</button>
+            <p>Evaluate the timbre (tone quality) of the synthesized audio compared to the original.</p>
+        </div>
+        <div class="evaluation-option">
+            <button class="btn" onclick="startSMOSAccent()">SMOS Accent</button>
+            <p>Evaluate the accent quality of the synthesized audio compared to the original.</p>
+        </div>
+    </div>
+
+    <!-- Message Box for feedback -->
+    <div id="message-box">Redirecting to your selected evaluation task...</div>
+
+    <!-- Firebase SDK and task navigation -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
+            authDomain: "mos-evaluation.firebaseapp.com",
+            projectId: "mos-evaluation",
+            storageBucket: "mos-evaluation.appspot.com",
+            messagingSenderId: "672620926047",
+            appId: "1:672620926047:web:a755c5cd997de39e43b7ea",
+            measurementId: "G-4320F2Z87L"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Functions to start tasks
+        function startMOS() {
+            document.getElementById('message-box').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = "mos.html";
+            }, 2000);
+        }
+
+        function startCMOS() {
+            document.getElementById('message-box').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = "cmos.html";
+            }, 2000);
+        }
+
+        function startSMOSTimbre() {
+            document.getElementById('message-box').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = "smos-timbre.html";
+            }, 2000);
+        }
+
+        function startSMOSAccent() {
+            document.getElementById('message-box').style.display = 'block';
+            setTimeout(() => {
+                window.location.href = "smos-accent.html";
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
