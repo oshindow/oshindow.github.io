@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TTS Evaluation</title>
+    <title>Firebase Example</title>
 </head>
 <body>
 
-    <h1>Register for MOS Evaluation</h1>
+    <h1>Firebase Authentication and Firestore Example</h1>
 
     <!-- Registration Form -->
     <div id="register-section">
@@ -20,20 +20,19 @@
             <option value="Other">Other</option>
         </select><br>
         <input type="email" id="email" placeholder="Enter your email" required><br>
-        <button onclick="register()">Register</button>
+        <button id="registerBtn">Register</button>
     </div>
 
-    <!-- Firebase SDK scripts -->
-    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js"></script>
+    <!-- Firebase SDK scripts and custom functionality -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-    <!-- Firebase Configuration and Initialization -->
-    <!-- <script>
-        // Your Firebase configuration
-        console.log("Initializing Firebase...");
+        // Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
+            apiKey: "YOUR_API_KEY",
             authDomain: "mos-evaluation.firebaseapp.com",
             projectId: "mos-evaluation",
             storageBucket: "mos-evaluation.appspot.com",
@@ -43,64 +42,34 @@
         };
 
         // Initialize Firebase
-        const firebaseApp = firebase.initializeApp(firebaseConfig);
-        console.log("Firebase App Initialized:", firebaseApp);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-        console.log("Auth Initialized:", auth);
-        console.log("Firestore Initialized:", db);
-    </script> -->
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-        // import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
-
-        // import { getAuth(app)
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-          apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
-          authDomain: "mos-evaluation.firebaseapp.com",
-          projectId: "mos-evaluation",
-          storageBucket: "mos-evaluation.appspot.com",
-          messagingSenderId: "672620926047",
-          appId: "1:672620926047:web:a755c5cd997de39e43b7ea",
-          measurementId: "G-4320F2Z87L"
-        };
-      
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        // const analytics = getAnalytics(app);
         const auth = getAuth(app);
         const db = getFirestore(app);
-      </script>
 
-    <!-- Your custom script for registration -->
-    <script>
-        function register() {
+        // Debugging: Log initialization
+        console.log("Auth Initialized:", auth);
+        console.log("Firestore Initialized:", db);
+
+        // Register function
+        document.getElementById('registerBtn').addEventListener('click', () => {
             const name = document.getElementById('name').value;
             const firstLanguage = document.getElementById('first-language').value;
             const age = document.getElementById('age').value;
             const sex = document.getElementById('sex').value;
             const email = document.getElementById('email').value;
 
-            // Debugging: Log values to ensure inputs are not null
+            // Debugging: Log values
             console.log("Registering User:", { name, firstLanguage, age, sex, email });
 
             if (name && firstLanguage && age && sex && email) {
-                auth.createUserWithEmailAndPassword(email, 'default_password')
+                createUserWithEmailAndPassword(auth, email, 'default_password')
                     .then((userCredential) => {
                         const user = userCredential.user;
                         const userId = user.uid;
                         console.log("User registered:", userId);
 
-                        // Save user info to Firestore
-                        db.collection('users').doc(userId).set({
+                        // Save user info in Firestore
+                        setDoc(doc(db, "users", userId), {
                             name: name,
                             firstLanguage: firstLanguage,
                             age: age,
@@ -109,7 +78,7 @@
                             registeredAt: new Date()
                         }).then(() => {
                             console.log("User data saved successfully.");
-                            alert('Registration successful! Proceed to MOS evaluation.');
+                            alert('Registration successful!');
                         }).catch((error) => {
                             console.error("Error saving user data:", error);
                         });
@@ -120,7 +89,7 @@
             } else {
                 alert('Please fill in all fields.');
             }
-        }
+        });
     </script>
 
 </body>
