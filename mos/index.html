@@ -76,6 +76,7 @@
                         // Save user info in Firestore
                         try {
                             const docRef = addDoc(collection(db, "users"), {
+                                userid: user.uid,
                                 name: name,
                                 firstLanguage: firstLanguage,
                                 age: age,
