@@ -67,14 +67,14 @@
             console.log("Registering User:", { name, firstLanguage, age, sex, email });
 
             if (name && firstLanguage && age && sex && email) {
-                createUserWithEmailAndPassword(auth, email, 'default_password')
+                auth.createUserWithEmailAndPassword(email, 'default_password')
                     .then((userCredential) => {
                         const user = userCredential.user;
                         const userId = user.uid;
                         console.log("User registered:", userId);
 
                         // Save user info in Firestore
-                        setDoc(doc(db, "users", userId), {
+                        db.collection('users').doc(userId).set({
                             name: name,
                             firstLanguage: firstLanguage,
                             age: age,
