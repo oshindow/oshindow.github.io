@@ -72,7 +72,7 @@
                         const user = userCredential.user;
                         const userId = user.uid;
                         console.log("User registered:", userId);
-
+                                           
                         // Save user info in Firestore
                         db.collection('users').doc(userId).set({
                             name: name,
