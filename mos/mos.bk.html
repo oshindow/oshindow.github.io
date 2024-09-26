@@ -73,17 +73,11 @@
             font-size: 0.9rem;
             color: #999;
         }
-        .user-info {
-            font-size: 1.1rem;
-            color: #007bff;
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
 
     <h1>MOS Evaluation</h1>
-    <p id="user-info" class="user-info">Loading user information...</p>
     <p>
         In this task, you will evaluate the quality of audio samples based on a Mean Opinion Score (MOS). 
         You will be presented with 10 different audio samples and asked to rate each on a scale of 1 to 5 
@@ -124,7 +118,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
         import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 
         // Firebase configuration
         const firebaseConfig = {
@@ -142,12 +136,9 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        let currentSampleIndex = 0;
-        const totalSamples = 10;
-        let userId = null;
-
         // Array to manage real file names
         const audioFiles = [
+            // 'audios/gt/SSB18370003_north.wav',
             'audios/gt/A0001_S001_0_G0002_segment_0183.wav',
             'audios/gt/SSB05900043_north.wav',
             'audios/gt/SSB09970005_north.wav',
@@ -159,23 +150,12 @@
             'audios/gt/SSB17590001_north.wav',
         ];
 
-        // Check for logged-in user and display user ID
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                userId = user.uid;
-                document.getElementById('user-info').textContent = `User ID: ${userId}`;
-            } else {
-                document.getElementById('user-info').textContent = 'No user is logged in.';
-            }
-        });
+        let currentSampleIndex = 0;
+        const totalSamples = audioFiles.length;
+        const userId = auth.currentUser ? auth.currentUser.uid : "unknown-user";
 
         // Function to handle MOS submission and move to next sample
         async function submitMOS() {
-            if (!userId) {
-                alert('User is not logged in. Please log in before continuing.');
-                return;
-            }
-
             const mosScore = document.getElementById('mos-score').value;
             const audioFileName = audioFiles[currentSampleIndex];
 
