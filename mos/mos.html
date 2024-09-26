@@ -98,7 +98,7 @@
         let currentSampleIndex = 1;
         const totalSamples = 10;
         const userId = auth.currentUser ? auth.currentUser.uid : "unknown-user";
-
+        // console.log("userId:", userId)
         async function submitMOS() {
             const mosScore = document.getElementById('mos-score').value;
             const audioFileName = `sample${currentSampleIndex}.wav`;
