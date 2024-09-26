@@ -96,9 +96,10 @@
         async function loadProgress(userId) {
             const docRef = doc(db, 'progress', userId);
             const progressDoc = await getDoc(docRef);
-
+            
             if (progressDoc.exists()) {
                 const progressData = progressDoc.data();
+                console.log(progressData)
                 const currentSample = progressData.currentSample || 0;
 
                 // Update progress bar and text
