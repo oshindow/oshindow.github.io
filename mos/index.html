@@ -67,7 +67,7 @@
             console.log("Registering User:", { name, firstLanguage, age, sex, email });
 
             if (name && firstLanguage && age && sex && email) {
-                createUserWithEmailAndPassword(email, 'default_password')
+                createUserWithEmailAndPassword(auth, email, 'default_password')
                     .then((userCredential) => {
                         const user = userCredential.user;
                         const userId = user.uid;
