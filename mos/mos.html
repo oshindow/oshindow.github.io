@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOS Evaluation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+        .btn {
+            padding: 15px 25px;
+            margin: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .audio-player {
+            margin: 20px;
+        }
+        #message-box {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>MOS Evaluation</h1>
+    <p>Listen to the audio sample and rate it on a scale from 1 to 5, where:</p>
+    <ul>
+        <li>1 = Bad</li>
+        <li>2 = Poor</li>
+        <li>3 = Fair</li>
+        <li>4 = Good</li>
+        <li>5 = Excellent</li>
+    </ul>
+
+    <div class="audio-player">
+        <audio controls>
+            <source src="gt/A0001_S001_0_G0001_segment_0151.wav" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <div>
+        <label for="mos-score">Select your rating:</label>
+        <select id="mos-score">
+            <option value="1">1 - Bad</option>
+            <option value="2">2 - Poor</option>
+            <option value="3">3 - Fair</option>
+            <option value="4">4 - Good</option>
+            <option value="5">5 - Excellent</option>
+        </select>
+    </div>
+
+    <button class="btn" onclick="submitMOS()">Submit & Next</button>
+
+    <div id="message-box">Saving your response... Please wait.</div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
+            authDomain: "mos-evaluation.firebaseapp.com",
+            projectId: "mos-evaluation",
+            storageBucket: "mos-evaluation.appspot.com",
+            messagingSenderId: "672620926047",
+            appId: "1:672620926047:web:a755c5cd997de39e43b7ea",
+            measurementId: "G-4320F2Z87L"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let currentSampleIndex = 1;
+        const totalSamples = 10;
+        const userId = auth.currentUser ? auth.currentUser.uid : "unknown-user";
+
+        async function submitMOS() {
+            const mosScore = document.getElementById('mos-score').value;
+            const audioFileName = `sample${currentSampleIndex}.wav`;
+
+            // Show processing message
+            document.getElementById('message-box').style.display = 'block';
+
+            try {
+                // Save the MOS score to Firebase
+                await setDoc(doc(db, 'evaluations', `${userId}-${audioFileName}`), {
+                    userid: userId,
+                    audioFile: audioFileName,
+                    mosScore: mosScore,
+                    timestamp: new Date()
+                });
+
+                console.log("MOS score saved:", mosScore);
+
+                // Move to the next audio sample
+                currentSampleIndex++;
+
+                if (currentSampleIndex > totalSamples) {
+                    // All samples completed, redirect to thank you page
+                    window.location.href = "thank_you.html";
+                } else {
+                    // Load the next sample
+                    document.querySelector("audio source").src = `audio/sample${currentSampleIndex}.wav`;
+                    document.querySelector("audio").load();
+                    document.getElementById('message-box').style.display = 'none';
+                }
+            } catch (error) {
+                console.error("Error saving score:", error);
+                alert("Error during submission: " + error.message);
+            }
+        }
+    </script>
+
+</body>
+</html>
