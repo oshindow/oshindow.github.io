@@ -162,18 +162,21 @@
         ];
 
         // Check for logged-in user and display user ID
+        async function loadProgress(userId) {
+            const docRef = doc(db, 'progress', userId);
+            const progressDoc = await getDoc(docRef);
+            
+            if (progressDoc.exists()) {
+                const progressData = progressDoc.data();
+                // console.log(progressData)
+                const currentSampleIndex = progressData.currentSample || 0;
+                // console.log(currentSample)
+            }
+            updateUI();
+        }
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                userId = user.uid;
-                document.getElementById('user-info').textContent = `User ID: ${userId}`;
-                // Load the user's current progress from Firestore
-                const progressDoc = getDoc(doc(db, 'progress', userId));
-                console.log(progressDoc)
-                if (progressDoc.exists()) {
-                    const progressData = progressDoc.data();
-                    currentSampleIndex = progressData.currentSample || 0;  // Start from the next uncompleted sample
-                    updateUI();
-                }
+                loadProgress(user.uid);
             } else {
                 document.getElementById('user-info').textContent = 'No user is logged in.';
             }
