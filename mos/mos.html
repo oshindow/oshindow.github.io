@@ -187,11 +187,12 @@
         // Function to update the UI based on the current sample
         function updateUI() {
             const nextFile = audioFiles[currentSampleIndex];
-                    document.getElementById('audio-source').src = nextFile;
-                    document.getElementById('audio-player').load();
-                    document.getElementById('current-sample').innerText = currentSampleIndex + 1;
-                    document.getElementById('current-file').innerText = nextFile.split('/').pop();
-                    document.getElementById('message-box').style.display = 'none';
+            console.log(currentSampleIndex)
+            document.getElementById('audio-source').src = nextFile;
+            document.getElementById('audio-player').load();
+            document.getElementById('current-sample').innerText = currentSampleIndex + 1;
+            document.getElementById('current-file').innerText = nextFile.split('/').pop();
+            document.getElementById('message-box').style.display = 'none';
         }
 
         // Function to handle MOS submission and move to next sample
