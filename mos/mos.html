@@ -167,11 +167,11 @@
                 document.getElementById('user-info').textContent = `User ID: ${userId}`;
                 // Load the user's current progress from Firestore
                 const progressDoc = getDoc(doc(db, 'progress', userId));
-                if (progressDoc.exists()) {
-                    const progressData = progressDoc.data();
-                    currentSampleIndex = progressData.currentSample || 0;  // Start from the next uncompleted sample
-                    updateUI();
-                }
+                // if (progressDoc.exists()) {
+                const progressData = progressDoc.data();
+                currentSampleIndex = progressData.currentSample || 0;  // Start from the next uncompleted sample
+                updateUI();
+                // }
             } else {
                 document.getElementById('user-info').textContent = 'No user is logged in.';
             }
