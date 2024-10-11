@@ -62,6 +62,14 @@
             border-radius: 5px;
             margin-left: 10px;
         }
+        #message-box, #loading-box {
+            font-size: 1.1rem;
+            color: #007bff;
+            margin-top: 20px;
+        }
+        #loading-box {
+            display: none;
+        }
         #message-box {
             display: none;
             margin-top: 20px;
@@ -115,7 +123,7 @@
     <button class="btn" onclick="submitMOS()">Submit & Next</button>
 
     <div id="message-box">Saving your response... Please wait.</div>
-
+    <div id="loading-box">Loading progress... Please wait.</div>
     <div class="footer">
         <p>Sample <span id="current-sample">1</span> of 10</p>
         <p>Current File: <span id="current-file">SSB18370003_north.wav</span></p>
@@ -178,7 +186,7 @@
             if (user) {
                 userId = user.uid;
                 document.getElementById('user-info').textContent = `User ID: ${userId}`;
-                
+                document.getElementById('loading-box').style.display = 'block'; // Show loading message
                 loadProgress(userId);
             } else {
                 document.getElementById('user-info').textContent = 'No user is logged in.';
@@ -193,6 +201,9 @@
             document.getElementById('current-sample').innerText = currentSampleIndex + 1;
             document.getElementById('current-file').innerText = nextFile.split('/').pop();
             document.getElementById('message-box').style.display = 'none';
+            document.getElementById('loading-box').style.display = 'none';  // Hide loading message
+            document.getElementById('submit-btn').disabled = false;  // Enable Submit button
+
         }
 
         // Function to handle MOS submission and move to next sample
