@@ -165,10 +165,26 @@
             if (user) {
                 userId = user.uid;
                 document.getElementById('user-info').textContent = `User ID: ${userId}`;
+                // Load the user's current progress from Firestore
+                const progressDoc = await getDoc(doc(db, 'progress', userId));
+                if (progressDoc.exists()) {
+                    const progressData = progressDoc.data();
+                    currentSampleIndex = progressData.currentSample || 0;  // Start from the next uncompleted sample
+                    updateUI();
+                }
             } else {
                 document.getElementById('user-info').textContent = 'No user is logged in.';
             }
         });
+        // Function to update the UI based on the current sample
+        function updateUI() {
+            const nextFile = audioFiles[currentSampleIndex];
+                    document.getElementById('audio-source').src = nextFile;
+                    document.getElementById('audio-player').load();
+                    document.getElementById('current-sample').innerText = currentSampleIndex + 1;
+                    document.getElementById('current-file').innerText = nextFile.split('/').pop();
+                    document.getElementById('message-box').style.display = 'none';
+        }
 
         // Function to handle MOS submission and move to next sample
         async function submitMOS() {
@@ -206,12 +222,7 @@
                     window.location.href = "evaluation.html";
                 } else {
                     // Update the audio file and the sample number
-                    const nextFile = audioFiles[currentSampleIndex];
-                    document.getElementById('audio-source').src = nextFile;
-                    document.getElementById('audio-player').load();
-                    document.getElementById('current-sample').innerText = currentSampleIndex + 1;
-                    document.getElementById('current-file').innerText = nextFile.split('/').pop();
-                    document.getElementById('message-box').style.display = 'none';
+                    updateUI()
                 }
             } catch (error) {
                 console.error("Error saving score:", error);

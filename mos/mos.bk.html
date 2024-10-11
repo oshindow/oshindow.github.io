@@ -123,7 +123,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 
         // Firebase configuration
@@ -161,14 +161,31 @@
         ];
 
         // Check for logged-in user and display user ID
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 userId = user.uid;
                 document.getElementById('user-info').textContent = `User ID: ${userId}`;
+                
+                // Load the user's current progress from Firestore
+                const progressDoc = await getDoc(doc(db, 'progress', userId));
+                if (progressDoc.exists()) {
+                    const progressData = progressDoc.data();
+                    currentSampleIndex = progressData.currentSample || 0;  // Start from the next uncompleted sample
+                    updateUI();
+                }
             } else {
                 document.getElementById('user-info').textContent = 'No user is logged in.';
             }
         });
+
+        // Function to update the UI based on the current sample
+        function updateUI() {
+            const nextFile = audioFiles[currentSampleIndex];
+            document.getElementById('audio-source').src = nextFile;
+            document.getElementById('audio-player').load();
+            document.getElementById('current-sample').innerText = currentSampleIndex + 1;
+            document.getElementById('current-file').innerText = nextFile.split('/').pop();
+        }
 
         // Function to handle MOS submission and move to next sample
         async function submitMOS() {
@@ -192,21 +209,20 @@
                     timestamp: new Date()
                 });
 
+                // Save the user's progress to Firestore
+                currentSampleIndex++;
+                await setDoc(doc(db, 'progress', userId), {
+                    currentSample: currentSampleIndex
+                });
+
                 console.log("MOS score saved:", mosScore, "for file:", audioFileName);
 
-                // Move to the next audio sample
-                currentSampleIndex++;
-                console.log(currentSampleIndex)
                 if (currentSampleIndex >= totalSamples) {
-                    // All samples completed, redirect to thank you page
+                    // All samples completed, redirect to evaluation page
                     window.location.href = "evaluation.html";
                 } else {
-                    // Update the audio file and the sample number
-                    const nextFile = audioFiles[currentSampleIndex];
-                    document.getElementById('audio-source').src = nextFile;
-                    document.getElementById('audio-player').load();
-                    document.getElementById('current-sample').innerText = currentSampleIndex + 1;
-                    document.getElementById('current-file').innerText = nextFile.split('/').pop();
+                    // Update the UI with the next sample
+                    updateUI();
                     document.getElementById('message-box').style.display = 'none';
                 }
             } catch (error) {
