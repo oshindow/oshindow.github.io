@@ -176,7 +176,10 @@
         }
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                loadProgress(user.uid);
+                userId = user.uid;
+                document.getElementById('user-info').textContent = `User ID: ${userId}`;
+                
+                loadProgress(userId);
             } else {
                 document.getElementById('user-info').textContent = 'No user is logged in.';
             }
