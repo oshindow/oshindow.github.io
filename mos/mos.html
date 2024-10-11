@@ -172,7 +172,7 @@
                 const currentSampleIndex = progressData.currentSample || 0;
                 console.log('progressDoc.exists()', currentSampleIndex)
             }
-            updateUI();
+            updateUI(currentSampleIndex);
         }
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -185,7 +185,7 @@
             }
         });
         // Function to update the UI based on the current sample
-        function updateUI() {
+        function updateUI(currentSampleIndex) {
             const nextFile = audioFiles[currentSampleIndex];
             console.log('currentSampleIndex', currentSampleIndex)
             document.getElementById('audio-source').src = nextFile;
@@ -231,7 +231,7 @@
                     window.location.href = "evaluation.html";
                 } else {
                     // Update the audio file and the sample number
-                    updateUI()
+                    updateUI(currentSampleIndex)
                 }
             } catch (error) {
                 console.error("Error saving score:", error);
