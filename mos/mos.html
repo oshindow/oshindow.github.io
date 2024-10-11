@@ -143,12 +143,7 @@
         const auth = getAuth(app);
 
         let currentSampleIndex = 0;
-        const progressDoc = getDoc(doc(db, 'progress', userId));
-        if (progressDoc.exists()) {
-            const progressData = progressDoc.data();
-            currentSampleIndex = progressData.currentSample || 0;  // Start from the next uncompleted sample
-            updateUI();
-        }
+        
         const totalSamples = 10;
         let userId = null;
 
@@ -172,12 +167,12 @@
                 userId = user.uid;
                 document.getElementById('user-info').textContent = `User ID: ${userId}`;
                 // Load the user's current progress from Firestore
-                // const progressDoc = getDoc(doc(db, 'progress', userId));
-                // if (progressDoc.exists()) {
-                //     const progressData = progressDoc.data();
-                //     currentSampleIndex = progressData.currentSample || 0;  // Start from the next uncompleted sample
-                //     updateUI();
-                // }
+                const progressDoc = await (doc(db, 'progress', userId));
+                if (progressDoc.exists()) {
+                    const progressData = progressDoc.data();
+                    currentSampleIndex = progressData.currentSample || 0;  // Start from the next uncompleted sample
+                    updateUI();
+                }
             } else {
                 document.getElementById('user-info').textContent = 'No user is logged in.';
             }
