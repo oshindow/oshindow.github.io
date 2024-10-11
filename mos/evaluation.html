@@ -142,9 +142,9 @@
                 const currentSample = progressData.currentSample || 0;
                 console.log(currentSample)
                 // Update progress bar and text
-                const progressElement = document.getElementById('progress');
+                const progressElement = document.getElementById('progress-mos');
                 // console.log(progressElement)
-                const progressText = document.getElementById('progress-text');
+                const progressText = document.getElementById('progress-text-mos');
                 const percentage = (currentSample / 10) * 100;
                 progressElement.style.width = `${percentage}%`;
                 progressText.textContent = `Progress: ${currentSample}/10 samples`;
