@@ -169,7 +169,7 @@
             if (progressDoc.exists()) {
                 const progressData = progressDoc.data();
                 // console.log(progressData)
-                const currentSampleIndex = progressData.currentSample || 0;
+                currentSampleIndex = progressData.currentSample || 0;
                 console.log('progressDoc.exists()', currentSampleIndex)
             }
             updateUI(currentSampleIndex);
@@ -225,7 +225,7 @@
                     currentSample: currentSampleIndex
                 });
                 
-                console.log(currentSampleIndex)
+                // console.log(currentSampleIndex)
                 if (currentSampleIndex >= totalSamples) {
                     // All samples completed, redirect to thank you page
                     window.location.href = "evaluation.html";
