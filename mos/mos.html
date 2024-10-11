@@ -170,7 +170,7 @@
                 const progressData = progressDoc.data();
                 // console.log(progressData)
                 const currentSampleIndex = progressData.currentSample || 0;
-                // console.log(currentSample)
+                console.log('progressDoc.exists()', currentSampleIndex)
             }
             updateUI();
         }
@@ -187,7 +187,7 @@
         // Function to update the UI based on the current sample
         function updateUI() {
             const nextFile = audioFiles[currentSampleIndex];
-            console.log(currentSampleIndex)
+            console.log('currentSampleIndex', currentSampleIndex)
             document.getElementById('audio-source').src = nextFile;
             document.getElementById('audio-player').load();
             document.getElementById('current-sample').innerText = currentSampleIndex + 1;
