@@ -66,7 +66,7 @@
     
     <div id="evaluation-options">
         <div class="evaluation-option">
-            <button class="btn" onclick="location.href = 'mos.html'">MOS (Mean Opinion Score)</button>
+            <button class="btn" id="mos-btn" onclick="location.href = 'mos.html'">MOS (Mean Opinion Score)</button>
             <p>Brief introduction: You will listen to 10 audio samples and evaluate them on a scale from 1 to 5 based on your perception of quality.</p>
             <div class="progress-bar">
                 <div id="progress-mos" class="progress"></div>
@@ -151,6 +151,9 @@
 
                 // If completed, show the completion icon
                 if (currentSample >= 10) {
+                    document.getElementById('mos-btn').disabled = true;
+                    document.getElementById('mos-btn').textContent = 'Completed';
+                    // document.getElementById('complete-icon').style.display = 'block';
                     document.getElementById('complete-icon').style.display = 'block';
                 }
             }
