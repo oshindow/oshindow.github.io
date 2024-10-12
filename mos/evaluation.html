@@ -96,15 +96,16 @@
                 <div id="progress-mos" class="progress"></div>
             </div>
             <p id="progress-text-mos">Progress: 0/10 completed</p>
+            <!-- <div id="complete-icon">✔</div> -->
         </div>
     </div>
 
     <!-- Progress Bar -->
-    <!-- <div class="progress-bar">
+    <div class="progress-bar">
         <div id="progress" class="progress"></div>
     </div>
     <p id="progress-text">Progress: 0/4 tasks completed</p>
-    <div id="complete-icon">✔</div> -->
+    <div id="complete-icon">✔</div>
 
     <!-- Message Box for feedback -->
     <div id="message-box">Redirecting to your selected evaluation task...</div>
@@ -152,7 +153,7 @@
                 // If completed, show the completion icon
                 if (currentSample >= 10) {
                     document.getElementById('mos-btn').disabled = true;
-                    document.getElementById('mos-btn').textContent = 'Completed';
+                    document.getElementById('mos-btn').textContent = 'MOS Completed';
                     // document.getElementById('complete-icon').style.display = 'block';
                     document.getElementById('complete-icon').style.display = 'block';
                 }
