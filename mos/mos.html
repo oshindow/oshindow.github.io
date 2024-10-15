@@ -93,13 +93,7 @@
     <h1>MOS Evaluation</h1>
     <p id="user-info" class="user-info">Loading user information...</p>
     <p>
-        In this task, you will evaluate the quality of audio samples based on a Mean Opinion Score (MOS). 
-        You will be presented with 10 different audio samples and asked to rate each on a scale of 1 to 5 
-        according to how you perceive the quality of the audio.
-    </p>
-    <p>
-        MOS is widely used to subjectively measure the quality of speech. It evaluates the clarity, 
-        naturalness, and intelligibility of the audio signal. A higher score represents better perceived quality.
+        After you listen to each sentence, you will choose a score for the audio file you've just heard. This score should reflect your opinion of how natural or unnatural the sentence sounded. You should not judge the grammar or content of the sentence, just how it sounds.
     </p>
 
     <div class="audio-player">
@@ -110,14 +104,19 @@
     </div>
 
     <div class="rating-section">
-        <label for="mos-score">Rate the quality of the audio:</label>
-        <select id="mos-score">
-            <option value="1">1 - Bad</option>
-            <option value="2">2 - Poor</option>
-            <option value="3">3 - Fair</option>
-            <option value="4">4 - Good</option>
-            <option value="5">5 - Excellent</option>
-        </select>
+        <label for="mos-score">Rate the audio quality:</label>
+        <div class="radio-group">
+            <!-- 1: Completely Unnatural
+        2: Mostly Unnatural
+        3: Equally Natural and Unnatural
+        4: Mostly Natural
+        5: Completely Natural -->
+            <label><input type="radio" name="mos-score" value="5"> Completely Natural</label>
+            <label><input type="radio" name="mos-score" value="4"> Mostly Natural</label>
+            <label><input type="radio" name="mos-score" value="3"> Equally Natural and Unnatural</label>
+            <label><input type="radio" name="mos-score" value="2"> Mostly Unnatural</label>
+            <label><input type="radio" name="mos-score" value="1"> Completely Unnatural </label>
+        </div>
     </div>
 
     <button class="btn" onclick="submitMOS()">Submit & Next</button>
