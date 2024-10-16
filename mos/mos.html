@@ -124,7 +124,12 @@
     <p class="text-description"> 
         After you listen to each sentence, you will choose a score for the audio file you've just heard. This score should reflect your opinion of how natural or unnatural the sentence sounded. You should not judge the grammar or content of the sentence, just how it sounds.
     </p>
-
+    <div id="message-box">Saving your response... Please wait.</div>
+    <div id="loading-box">Loading progress... Please wait.</div>
+    <div class="footer">
+        <p>Sample <span id="current-sample">1</span> of 10</p>
+        <p>Current File: <span id="current-file">SSB18370003_north.wav</span></p>
+    </div>
     <div class="audio-player">
         <audio controls id="audio-player">
             <source id="audio-source" src="audios/gt/SSB18370003_north.wav" type="audio/wav">
@@ -150,12 +155,7 @@
 
     <button class="btn" onclick="submitMOS()">Submit & Next</button>
 
-    <div id="message-box">Saving your response... Please wait.</div>
-    <div id="loading-box">Loading progress... Please wait.</div>
-    <div class="footer">
-        <p>Sample <span id="current-sample">1</span> of 10</p>
-        <p>Current File: <span id="current-file">SSB18370003_north.wav</span></p>
-    </div>
+    
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
