@@ -127,7 +127,7 @@
     <div id="message-box">Saving your response... Please wait.</div>
     <div id="loading-box">Loading progress... Please wait.</div>
     <div class="footer">
-        <p>Sample <span id="current-sample">1</span> of 10</p>
+        <p>Sample <span id="current-sample">1</span> of 30</p>
         <!-- <p>Current File: <span id="current-file">SSB18370003_north.wav</span></p> -->
     </div>
     <div class="audio-player">
@@ -140,16 +140,16 @@
     <div class="rating-section">
         <!-- <label for="mos-score">Rate the audio quality:</label> -->
         <div class="radio-group">
-            <!-- 1: Completely Unnatural
-        2: Mostly Unnatural
-        3: Equally Natural and Unnatural
-        4: Mostly Natural
-        5: Completely Natural -->
-            <label><input type="radio" name="mos-score" value="5"> 5 - Completely Natural</label>
-            <label><input type="radio" name="mos-score" value="4"> 4 - Mostly Natural</label>
-            <label><input type="radio" name="mos-score" value="3"> 3 - Equally Natural and Unnatural</label>
-            <label><input type="radio" name="mos-score" value="2"> 2 - Mostly Unnatural</label>
-            <label><input type="radio" name="mos-score" value="1"> 1 - Completely Unnatural </label>
+        <!-- Completely Natural (5): This is a human-produced speech, but it may have some low-quality noise.
+        Mostly Natural (4): This is probably human speech, though there may be some noise present.
+        Equally Natural and Unnatural (3): It is unclear whether the speech is produced by a human or a machine.
+        Mostly Unnatural (2): This is likely machine-generated speech.
+        Completely Unnatural (1): This is clearly machine-generated speech. -->
+            <label><input type="radio" name="mos-score" value="5"> 5 - Completely Natural: This is a human-produced speech, though there may be some noise present.</label>
+            <label><input type="radio" name="mos-score" value="4"> 4 - Mostly Natural: This is probably human speech, but it may have some low-quality noise.</label>
+            <label><input type="radio" name="mos-score" value="3"> 3 - Equally Natural and Unnatural: It is unclear whether the speech is produced by a human or a machine.</label>
+            <label><input type="radio" name="mos-score" value="2"> 2 - Mostly Unnatural: This is likely machine-generated speech.</label>
+            <label><input type="radio" name="mos-score" value="1"> 1 - Completely Unnatural: This is clearly machine-generated speech. </label>
         </div>
     </div>
 
@@ -185,6 +185,7 @@
 
         // Array to manage real file names
         const audioFiles = [
+            
             'audios/gt/SSB18370003_north.wav',
             'audios/gt/A0001_S001_0_G0002_segment_0183.wav',
             'audios/gt/SSB05900043_north.wav',
