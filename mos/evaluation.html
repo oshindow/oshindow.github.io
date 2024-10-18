@@ -71,7 +71,7 @@
             <div class="progress-bar">
                 <div id="progress-mos" class="progress"></div>
             </div>
-            <p id="progress-text-mos">Progress: 0/10 completed</p>
+            <p id="progress-text-mos">Progress: 0/30 completed</p>
             <div id="complete-icon">✔</div>
         </div>
         <div class="evaluation-option">
@@ -80,7 +80,7 @@
             <div class="progress-bar">
                 <div id="progress-mos" class="progress"></div>
             </div>
-            <p id="progress-text-mos">Progress: 0/10 completed</p>
+            <p id="progress-text-mos">Progress: 0/30 completed</p>
         </div>
         <div class="evaluation-option">
             <button class="btn" onclick="location.href = 'smos_timbre.html'">SMOS Timbre</button>
@@ -152,7 +152,7 @@
                 progressText.textContent = `Progress: ${currentSample}/10 samples`;
 
                 // If completed, show the completion icon
-                if (currentSample >= 10) {
+                if (currentSample >= 30) {
                     document.getElementById('mos-btn').disabled = true;
                     document.getElementById('mos-btn').textContent = 'MOS Completed';
                     // document.getElementById('complete-icon').style.display = 'block';
