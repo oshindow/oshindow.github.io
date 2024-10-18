@@ -157,6 +157,7 @@
                     document.getElementById('mos-btn').textContent = 'MOS Completed';
                     // document.getElementById('complete-icon').style.display = 'block';
                     document.getElementById('complete-icon').style.display = 'block';
+                    exportEvaluationsToJSON();
                 } else {
                     document.getElementById('complete-icon').style.display = 'none';
                 }
@@ -171,6 +172,25 @@
                 }
             });
         });
+        async function exportEvaluationsToJSON() {
+            const evaluationsRef = collection(db, "evaluations");
+            const evaluationsSnapshot = await getDocs(evaluationsRef);
+            const evaluationsData = {};
+
+            evaluationsSnapshot.forEach((doc) => {
+                // Storing each document's data with its ID as key
+                evaluationsData[doc.id] = doc.data();
+            });
+
+            // Converting the data to JSON format
+            const jsonData = JSON.stringify(evaluationsData, null, 2);
+
+            // Saving JSON data to a file (Node.js only)
+            fs.writeFileSync("evaluationsData.json", jsonData);
+
+            console.log("Data has been exported to evaluationsData.json");
+        }
+
     </script>
 
 </body>
