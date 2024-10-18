@@ -286,7 +286,10 @@
 
             try {
                 // Save the MOS score to Firebase
-                await setDoc(doc(db, 'evaluations', `${userId}-${audioFileName}`), {
+                // const audioFileNameParts = audioFileName.split('/');
+                // const audioFileId = audioFileNameParts[audioFileNameParts.length - 2:]; // Get the last part (the actual file name)
+
+                await setDoc(doc(db, 'evaluations', `${userId}-${audioFileName.replace(/\//g, '_')}`), {
                     userid: userId,
                     audioFile: audioFileName,
                     mosScore: mosScore,
