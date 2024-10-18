@@ -146,7 +146,7 @@
         Mostly Unnatural (2): This is likely machine-generated speech.
         Completely Unnatural (1): This is clearly machine-generated speech. -->
             <label><input type="radio" name="mos-score" value="5"> 5 - Completely Natural: This is a human-produced speech, though there may be some noise present.</label>
-            <label><input type="radio" name="mos-score" value="4"> 4 - Mostly Natural: This is probably human speech, but it may have some low-quality noise.</label>
+            <label><input type="radio" name="mos-score" value="4"> 4 - Mostly Natural: This is probably human-produced speech.</label>
             <label><input type="radio" name="mos-score" value="3"> 3 - Equally Natural and Unnatural: It is unclear whether the speech is produced by a human or a machine.</label>
             <label><input type="radio" name="mos-score" value="2"> 2 - Mostly Unnatural: This is likely machine-generated speech.</label>
             <label><input type="radio" name="mos-score" value="1"> 1 - Completely Unnatural: This is clearly machine-generated speech. </label>
@@ -185,17 +185,36 @@
 
         // Array to manage real file names
         const audioFiles = [
-            
-            'audios/gt/SSB18370003_north.wav',
-            'audios/gt/A0001_S001_0_G0002_segment_0183.wav',
-            'audios/gt/SSB05900043_north.wav',
-            'audios/gt/SSB09970005_north.wav',
-            'audios/gt/SSB06310207_south.wav',
-            'audios/gt/SSB11000012_south.wav',
-            'audios/gt/SSB12160001_north.wav',
-            'audios/gt/SSB03660055_south.wav',
-            'audios/gt/SSB11250021_south.wav',
-            'audios/gt/SSB17590001_north.wav',
+            "mos/audios/aishell3/gen_grad_400_E16_ours/SSB00180003_south.wav",
+            "mos/audios/gt/SSB05880447_north.wav",
+            "mos/audios/magichub-sg/gen_grad_30_P4/A0002_S001_0_G0003_segment_0117_gen.wav",
+            "mos/audios/aishell3/gen_grad_30_P4/SSB05880447_north.wav",
+            "mos/audios/gt/A0001_S005_0_G0002_segment_0293.wav",
+            "mos/audios/aishell3/gen_grad_400_E16_ours/SSB03660055_south.wav",
+            "mos/audios/aishell3/gen_grad_30_P4/SSB10200104_south.wav",
+            "mos/audios/aishell3/gen_grad_30_P4/SSB11000012_south.wav",
+            "mos/audios/gt/A0001_S001_0_G0001_segment_0151.wav",
+            "mos/audios/aishell3/gen_grad_400_E16_ours/SSB05880447_north.wav",
+            "mos/audios/magichub-sg/gen_grad_30_P4/A0001_S005_0_G0002_segment_0293_gen.wav",
+            "mos/audios/magichub-sg/gen_grad_400_E16_ours/A0002_S002_0_G0004_segment_0057_gen.wav",
+            "mos/audios/aishell3/gen_grad_30_P4/SSB00180003_south.wav",
+            "mos/audios/gt/SSB03660055_south.wav",
+            "mos/audios/aishell3/gen_grad_400_E16_ours/SSB11250021_south.wav",
+            "mos/audios/magichub-sg/gen_grad_30_P4/A0002_S002_0_G0004_segment_0057_gen.wav",
+            "mos/audios/gt/SSB11000012_south.wav",
+            "mos/audios/aishell3/gen_grad_400_E16_ours/SSB11000012_south.wav",
+            "mos/audios/magichub-sg/gen_grad_400_E16_ours/A0002_S001_0_G0003_segment_0117_gen.wav",
+            "mos/audios/magichub-sg/gen_grad_30_P4/A0001_S001_0_G0001_segment_0151_gen.wav",
+            "mos/audios/aishell3/gen_grad_400_E16_ours/SSB10200104_south.wav",
+            "mos/audios/gt/SSB11250021_south.wav",
+            "mos/audios/magichub-sg/gen_grad_400_E16_ours/A0001_S005_0_G0002_segment_0293_gen.wav",
+            "mos/audios/gt/SSB10200104_south.wav",
+            "mos/audios/magichub-sg/gen_grad_400_E16_ours/A0001_S001_0_G0001_segment_0151_gen.wav",
+            "mos/audios/aishell3/gen_grad_30_P4/SSB11250021_south.wav",
+            "mos/audios/gt/A0002_S001_0_G0003_segment_0117.wav",
+            "mos/audios/gt/SSB00180003_south.wav",
+            "mos/audios/aishell3/gen_grad_30_P4/SSB03660055_south.wav",
+            "mos/audios/gt/A0002_S002_0_G0004_segment_0057.wav"
         ];
 
         // Check for logged-in user and display user ID
