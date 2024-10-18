@@ -253,6 +253,7 @@
             document.getElementById('audio-player').load();
             document.getElementById('current-sample').innerText = currentSampleIndex + 1;
             // document.getElementById('current-file').innerText = nextFile.split('/').pop();
+            console.log('update UI')
             window.addEventListener('DOMContentLoaded', () => {
                 const loadingBox = document.getElementById('loading-box');
     
@@ -260,7 +261,7 @@
                     console.log('Hiding the loading box...');
                     loadingBox.style.display = 'none';  // Try to hide the element
                 } else {
-                    console.error('Element with id "loading-box" not found.');
+                    console.log('Element with id "loading-box" not found.');
                 }
             
                 // document.getElementById('message-box').style.display = 'none';
