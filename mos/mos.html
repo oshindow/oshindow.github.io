@@ -253,8 +253,12 @@
             document.getElementById('audio-player').load();
             document.getElementById('current-sample').innerText = currentSampleIndex + 1;
             document.getElementById('current-file').innerText = nextFile.split('/').pop();
-            document.getElementById('message-box').style.display = 'none';
-            document.getElementById('loading-box').style.display = 'none';  // Hide loading message
+            window.addEventListener('DOMContentLoaded', () => {
+                // document.getElementById('loading-box').style.display = 'none';
+            
+                document.getElementById('message-box').style.display = 'none';
+                document.getElementById('loading-box').style.display = 'none';  // Hide loading message
+            });
             // document.getElementById('submit-btn').disabled = false;  // Enable Submit button
 
         }
