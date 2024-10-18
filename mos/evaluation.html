@@ -185,8 +185,19 @@
             // Converting the data to JSON format
             const jsonData = JSON.stringify(evaluationsData, null, 2);
 
-            // Saving JSON data to a file (Node.js only)
-            fs.writeFileSync("evaluationsData.json", jsonData);
+            // Create a Blob from the JSON data
+            const blob = new Blob([jsonData], { type: 'application/json' });
+
+            // Create a URL for the Blob
+            const url = URL.createObjectURL(blob);
+
+            // Create a temporary anchor element to trigger the download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'evaluationsData.json'; // Name of the file to be downloaded
+            document.body.appendChild(a);
+            a.click(); // Programmatically trigger the download
+            document.body.removeChild(a); // Remove the temporary anchor
 
             console.log("Data has been exported to evaluationsData.json");
         }
