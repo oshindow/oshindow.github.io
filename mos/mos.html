@@ -310,7 +310,7 @@
                 const audioFileNameParts = audioFileName.split('/');
                 const audioFileID = audioFileNameParts.slice(-3).join('/'); // Get the last part (the actual file name)
 
-                await setDoc(doc(db, 'evaluations', `${userId}-${audioFileID}`), {
+                await setDoc(doc(db, 'evaluations', `${userId}`, `${audioFileID}`), {
                     userid: userId,
                     audioFile: audioFileName,
                     mosScore: mosScore,

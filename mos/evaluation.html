@@ -173,7 +173,7 @@
             });
         });
         async function exportEvaluationsToJSON() {
-            const evaluationsRef = collection(db, "evaluations");
+            const evaluationsRef = collection(db, "evaluations", `${userId}`);
             const evaluationsSnapshot = await getDocs(evaluationsRef);
             const evaluationsData = {};
 
