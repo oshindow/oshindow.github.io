@@ -95,9 +95,15 @@
             color: #007bff;
         }
         .footer {
-            margin-top: 30px;
-            font-size: 0.9rem;
-            color: #999;
+        text-align: center; /* Center the text */
+        margin-top: 20px;
+        }
+        
+        /* Highlight the counter */
+        .highlighted {
+            font-size: 2rem; /* Increase font size */
+            color: #ff0000;  /* Make the color red */
+            font-weight: bold; /* Make the font bold */
         }
         .user-info {
             font-size: 1.1rem;
@@ -130,7 +136,7 @@
     <div id="message-box">Saving your response... Please wait.</div>
     <div id="loading-box">Loading progress... Please wait.</div>
     <div class="footer">
-        <p>Sample <span id="current-sample">1</span> of 30</p>
+        <p>Sample <span id="current-sample" class="highlighted">1</span> of 30</p>
         <!-- <p>Current File: <span id="current-file">SSB18370003_north.wav</span></p> -->
     </div>
     <div class="audio-player">
@@ -183,7 +189,7 @@
 
         let currentSampleIndex = 0;
         
-        const totalSamples = 10;
+        const totalSamples = 30;
         let userId = null;
 
         // Array to manage real file names
@@ -264,6 +270,14 @@
                 console.log('Element with id "loading-box" not found.');
             }
             
+            const messageBox = document.getElementById('message-box');
+
+            if (messageBox) {
+                console.log('Hiding the message box...');
+                messageBox.style.display = 'none';  // Try to hide the element
+            } else {
+                console.log('Element with id "message-box" not found.');
+            }
                 // document.getElementById('message-box').style.display = 'none';
                 // document.getElementById('loading-box').style.display = 'none';  // Hide loading message
             // });
