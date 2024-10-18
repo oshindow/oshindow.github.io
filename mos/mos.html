@@ -278,7 +278,14 @@
                 return;
             }
 
-            const mosScore = document.getElementsByName('mos-score').value;
+            const radios = document.getElementsByName('mos-score').value;
+            let mosScore;
+            for (const radio of radios) {
+                if (radio.checked) {
+                    mosScore = radio.value;
+                    break;
+                }
+            }
             const audioFileName = audioFiles[currentSampleIndex];
 
             // Show processing message
