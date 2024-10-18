@@ -254,10 +254,17 @@
             document.getElementById('current-sample').innerText = currentSampleIndex + 1;
             document.getElementById('current-file').innerText = nextFile.split('/').pop();
             window.addEventListener('DOMContentLoaded', () => {
-                // document.getElementById('loading-box').style.display = 'none';
+                const loadingBox = document.getElementById('loading-box');
+    
+                if (loadingBox) {
+                    console.log('Hiding the loading box...');
+                    loadingBox.style.display = 'none';  // Try to hide the element
+                } else {
+                    console.error('Element with id "loading-box" not found.');
+                }
             
-                document.getElementById('message-box').style.display = 'none';
-                document.getElementById('loading-box').style.display = 'none';  // Hide loading message
+                // document.getElementById('message-box').style.display = 'none';
+                // document.getElementById('loading-box').style.display = 'none';  // Hide loading message
             });
             // document.getElementById('submit-btn').disabled = false;  // Enable Submit button
 
