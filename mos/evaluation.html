@@ -78,7 +78,7 @@
         <div class="task-row">
             <div class="task-left">
                 <button class="btn" id="mos-btn" onclick="location.href = 'mos.html'">MOS (Mean Opinion Score)</button>
-                <span id="complete-icon">✔</span>
+                <span id="complete-icon-mos">✔</span>
             </div>
             <div class="task-right">
                 <p>Brief introduction: You will listen to 10 audio samples and evaluate them on a scale from 1 to 5 based on your perception of quality.</p>
@@ -154,31 +154,31 @@
 
         // Function to load progress
         async function loadProgress(userId) {
-            const docRef = doc(db, 'progress', userId);
-            const progressDoc = await getDoc(docRef);
+            const docRefMos = doc(db, 'progress', `${userId}` + '/mos');
+            const progressDocMos = await getDoc(docRefMos);
             
-            if (progressDoc.exists()) {
-                const progressData = progressDoc.data();
-                console.log(progressData)
-                const currentSample = progressData.currentSample || 0;
-                console.log(currentSample)
+            if (progressDocMos.exists()) {
+                const progressDataMos = progressDocMos.data();
+                // console.log(progressData)
+                const currentSampleMos = progressDataMos.currentSample || 0;
+                // console.log(currentSample)
                 // Update progress bar and text
-                const progressElement = document.getElementById('progress-mos');
+                const progressElementMos = document.getElementById('progress-mos');
                 // console.log(progressElement)
-                const progressText = document.getElementById('progress-text-mos');
-                const percentage = (currentSample / 30) * 100;
-                progressElement.style.width = `${percentage}%`;
-                progressText.textContent = `Progress: ${currentSample}/10 samples`;
+                const progressTextMos = document.getElementById('progress-text-mos');
+                const percentageMos = (currentSampleMos / 30) * 100;
+                progressElementMos.style.width = `${percentageMos}%`;
+                progressTextMos.textContent = `Progress: ${currentSampleMos}/10 samples`;
 
                 // If completed, show the completion icon
-                if (currentSample >= 30) {
+                if (currentSampleMos >= 30) {
                     document.getElementById('mos-btn').disabled = true;
-                    document.getElementById('mos-btn').textContent = 'MOS Completed';
+                    document.getElementById('mos-btn').textContent = 'Completed';
                     // document.getElementById('complete-icon').style.display = 'block';
-                    document.getElementById('complete-icon').style.display = 'block';
+                    document.getElementById('complete-icon-mos').style.display = 'block';
                     exportEvaluationsToJSON();
                 } else {
-                    document.getElementById('complete-icon').style.display = 'none';
+                    document.getElementById('complete-icon-mos').style.display = 'none';
                 }
             }
         }
