@@ -77,11 +77,11 @@
     <div id="evaluation-options">
         <div class="task-row">
             <div class="task-left">
-                <button class="btn" id="mos-btn" onclick="location.href = 'mos.html'">MOS (Mean Opinion Score)</button>
+                <button class="btn" id="mos-btn" onclick="location.href = 'mos.html'">Mean Opinion Score (MOS)</button>
                 <span id="complete-icon-mos">✔</span>
             </div>
             <div class="task-right">
-                <p>Brief introduction: You will listen to 10 audio samples and evaluate them on a scale from 1 to 5 based on your perception of quality.</p>
+                <p>You will listen to 30 audio clips and evaluate them on a scale from 1 to 5 based on your perception of quality.</p>
                 <div class="progress-bar">
                     <div id="progress-mos" class="progress"></div>
                 </div>
@@ -91,10 +91,11 @@
 
         <div class="task-row">
             <div class="task-left">
-                <button class="btn" onclick="location.href = 'cmos.html'">CMOS (Comparison Mean Opinion Score)</button>
+                <button class="btn" id="cmos-btn" onclick="location.href = 'cmos.html'">Comparison Mean Opinion Score (CMOS)</button>
+                <span id="complete-icon-cmos">✔</span>
             </div>
             <div class="task-right">
-                <p>Compare two audio samples and evaluate the quality difference.</p>
+                <p>Compare 30 audio clips pairs and evaluate the quality difference.</p>
                 <div class="progress-bar">
                     <div id="progress-cmos" class="progress"></div>
                 </div>
@@ -104,27 +105,29 @@
 
         <div class="task-row">
             <div class="task-left">
-                <button class="btn" onclick="location.href = 'smos_timbre.html'">SMOS Timbre</button>
+                <button class="btn" id="smos-timbre-btn" onclick="location.href = 'smos_timbre.html'">Similarity Mean Opinion Score - Timbre (SMOS - Timbre)</button>
+                <span id="complete-icon-smos-timbre">✔</span>
             </div>
             <div class="task-right">
-                <p>Evaluate the timbre (tone quality) of the synthesized audio compared to the original.</p>
+                <p>Evaluate the timbre similarity of the synthesized audio compared to the original (30 pairs).</p>
                 <div class="progress-bar">
                     <div id="progress-smos-timbre" class="progress"></div>
                 </div>
-                <p id="progress-text-smos-timbre">Progress: 0/10 completed</p>
+                <p id="progress-text-smos-timbre">Progress: 0/30 completed</p>
             </div>
         </div>
 
         <div class="task-row">
             <div class="task-left">
-                <button class="btn" onclick="location.href = 'smos_accent.html'">SMOS Accent</button>
+                <button class="btn" id="smos-accent-btn" onclick="location.href = 'smos_accent.html'">Similarity Mean Opinion Score - Accent (SMOS - Accent)</button>
+                <span id="complete-icon-smos-accent">✔</span>
             </div>
             <div class="task-right">
-                <p>Evaluate the accent quality of the synthesized audio compared to the original.</p>
+                <p>Evaluate the accent similarity of the synthesized audio compared to the original (30 pairs).</p>
                 <div class="progress-bar">
                     <div id="progress-smos-accent" class="progress"></div>
                 </div>
-                <p id="progress-text-smos-accent">Progress: 0/10 completed</p>
+                <p id="progress-text-smos-accent">Progress: 0/30 completed</p>
             </div>
         </div>
     </div>
@@ -154,31 +157,51 @@
 
         // Function to load progress
         async function loadProgress(userId) {
+            // mos
             const docRefMos = doc(db, 'progress', `${userId}` + '/mos');
             const progressDocMos = await getDoc(docRefMos);
             
             if (progressDocMos.exists()) {
                 const progressDataMos = progressDocMos.data();
-                // console.log(progressData)
                 const currentSampleMos = progressDataMos.currentSample || 0;
-                // console.log(currentSample)
-                // Update progress bar and text
+
                 const progressElementMos = document.getElementById('progress-mos');
-                // console.log(progressElement)
                 const progressTextMos = document.getElementById('progress-text-mos');
                 const percentageMos = (currentSampleMos / 30) * 100;
                 progressElementMos.style.width = `${percentageMos}%`;
-                progressTextMos.textContent = `Progress: ${currentSampleMos}/10 samples`;
+                progressTextMos.textContent = `Progress: ${currentSampleMos}/30 samples`;
 
-                // If completed, show the completion icon
                 if (currentSampleMos >= 30) {
                     document.getElementById('mos-btn').disabled = true;
                     document.getElementById('mos-btn').textContent = 'Completed';
-                    // document.getElementById('complete-icon').style.display = 'block';
                     document.getElementById('complete-icon-mos').style.display = 'block';
-                    exportEvaluationsToJSON();
+                    // exportEvaluationsToJSON();
                 } else {
                     document.getElementById('complete-icon-mos').style.display = 'none';
+                }
+            }
+
+            // cmos
+            const docRefCmos = doc(db, 'progress', `${userId}` + '/cmos');
+            const progressDocCmos = await getDoc(docRefCmos);
+            
+            if (progressDocCmos.exists()) {
+                const progressDataCmos = progressDocCmos.data();
+                const currentSampleCmos = progressDataCmos.currentSample || 0;
+
+                const progressElementCmos = document.getElementById('progress-cmos');
+                const progressTextCmos = document.getElementById('progress-text-cmos');
+                const percentageCmos = (currentSampleCmos / 30) * 100;
+                progressElementCmos.style.width = `${percentageCmos}%`;
+                progressTextCmos.textContent = `Progress: ${currentSampleCmos}/30 samples`;
+
+                if (currentSampleMos >= 30) {
+                    document.getElementById('cmos-btn').disabled = true;
+                    document.getElementById('cmos-btn').textContent = 'Completed';
+                    document.getElementById('complete-icon-cmos').style.display = 'block';
+                    // exportEvaluationsToJSON();
+                } else {
+                    document.getElementById('complete-icon-cmos').style.display = 'none';
                 }
             }
         }
