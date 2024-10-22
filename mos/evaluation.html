@@ -158,7 +158,7 @@
         // Function to load progress
         async function loadProgress(userId) {
             // mos
-            const docRefMos = doc(db, 'progress', `${userId}` + '/mos');
+            const docRefMos = doc(db, 'progress', `${userId}` + '/mos/a');
             const progressDocMos = await getDoc(docRefMos);
             
             if (progressDocMos.exists()) {
@@ -182,7 +182,7 @@
             }
 
             // cmos
-            const docRefCmos = doc(db, 'progress', `${userId}` + '/cmos');
+            const docRefCmos = doc(db, 'progress', `${userId}` + '/cmos/a');
             const progressDocCmos = await getDoc(docRefCmos);
             
             if (progressDocCmos.exists()) {

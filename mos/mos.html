@@ -308,7 +308,7 @@
             try {
                 // Save the MOS score to Firebase
                 const audioFileNameParts = audioFileName.split('/');
-                const audioFileID = audioFileNameParts.slice(-3).join('/'); // Get the last part (the actual file name)
+                const audioFileID = audioFileNameParts.slice(-2).join('/'); // Get the last part (the actual file name)
 
                 await setDoc(doc(db, 'evaluations', `${userId}`, `${audioFileID}`), {
                     userid: userId,
