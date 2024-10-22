@@ -321,7 +321,7 @@
 
                 // Move to the next audio sample
                 currentSampleIndex++;
-                await setDoc(doc(db, 'progress', `${userId}` + '/mos'), {
+                await setDoc(doc(db, 'progress', `${userId}` + '/mos/a'), {
                     currentSample: currentSampleIndex
                 });
                 
