@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMOS Timbre Evaluation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.1rem;
+            color: #555;
+            margin: 10px 0 30px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            padding: 15px 30px;
+            margin: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .audio-player {
+            margin: 30px 0;
+        }
+        .audio-player audio {
+            width: 100%;
+            max-width: 400px;
+            outline: none;
+        }
+        .rating-section {
+            margin: 20px 0;
+        }
+        label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .radio-group {
+            margin: 15px 0;
+            text-align: left;
+            display: inline-block;
+        }
+        .radio-group label {
+            display: block;
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+        #loading-box, #message-box {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: #007bff;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .highlighted {
+            font-size: 2rem;
+            color: #ff0000;
+            font-weight: bold;
+        }
+        .user-info {
+            font-size: 1.1rem;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .text-description {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.5;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>SMOS Timbre Evaluation</h1>
+    <p id="user-info" class="user-info">Loading user information...</p>
+    
+    <p class="text-description"> 
+        Listen to the two audio samples and rate whether they could have been produced by the same speaker. Please concentrate on identifying the voice beyond any distortion or noise. Are the two voices the same or different?
+    </p>
+    <div id="message-box">Saving your response... Please wait.</div>
+    <div id="loading-box">Loading progress... Please wait.</div>
+    <div class="footer">
+        <p>Sample <span id="current-sample" class="highlighted">1</span> of 30</p>
+    </div>
+
+    <!-- Audio Players for the two audio samples -->
+    <div class="audio-player">
+        <h3>Audio Sample 1:</h3>
+        <audio controls id="audio-player-1">
+            <source id="audio-source-1" src="audios/gt/SSB18370003_north.wav" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <div class="audio-player">
+        <h3>Audio Sample 2:</h3>
+        <audio controls id="audio-player-2">
+            <source id="audio-source-2" src="audios/gt/SSB18370003_north.wav" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <!-- SMOS Timbre Rating Section -->
+    <div class="rating-section">
+        <div class="radio-group">
+            <label><input type="radio" name="smos-score" value="4"> 4 - Same, absolutely sure</label>
+            <label><input type="radio" name="smos-score" value="3"> 3 - Same, not sure</label>
+            <label><input type="radio" name="smos-score" value="2"> 2 - Different, not sure</label>
+            <label><input type="radio" name="smos-score" value="1"> 1 - Different, absolutely sure</label>
+        </div>
+    </div>
+
+    <button class="btn" onclick="submitSMOS()">Submit & Next</button>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+        // Firebase configuration (same as before)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDz2cHQ0ho7CHt6eyyRueN-XkBgbl4Bas4",
+            authDomain: "mos-evaluation.firebaseapp.com",
+            projectId: "mos-evaluation",
+            storageBucket: "mos-evaluation.appspot.com",
+            messagingSenderId: "672620926047",
+            appId: "1:672620926047:web:a755c5cd997de39e43b7ea",
+            measurementId: "G-4320F2Z87L"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let currentSampleIndex = 0;
+        const totalSamples = 30;
+        let userId = null;
+
+        // Array of audio pairs (replace with actual paths)
+        const audioPairs = [
+        { sample1: "audios/gt/SSB05880447_north.wav", sample2: "audios/aishell3/gen_grad_30_P4/SSB05880447_north_gen.wav" },
+{ sample1: "audios/gt/SSB05880447_north.wav", sample2: "audios/aishell3/gen_grad_400_E16_ours/SSB05880447_north_gen.wav" },
+
+{ sample1: "audios/gt/SSB00180003_south.wav", sample2: "audios/aishell3/gen_grad_30_P4/SSB00180003_south_gen.wav" },
+{ sample1: "audios/gt/SSB00180003_south.wav", sample2: "audios/aishell3/gen_grad_400_E16_ours/SSB00180003_south_gen.wav" },
+
+{ sample1: "audios/gt/SSB03660055_south.wav", sample2: "audios/aishell3/gen_grad_30_P4/SSB03660055_south_gen.wav" },
+{ sample1: "audios/gt/SSB03660055_south.wav", sample2: "audios/aishell3/gen_grad_400_E16_ours/SSB03660055_south_gen.wav" },
+
+{ sample1: "audios/gt/SSB10200104_south.wav", sample2: "audios/aishell3/gen_grad_30_P4/SSB10200104_south_gen.wav" },
+{ sample1: "audios/gt/SSB10200104_south.wav", sample2: "audios/aishell3/gen_grad_400_E16_ours/SSB10200104_south_gen.wav" },
+
+{ sample1: "audios/gt/SSB11000012_south.wav", sample2: "audios/aishell3/gen_grad_30_P4/SSB11000012_south_gen.wav" },
+{ sample1: "audios/gt/SSB11000012_south.wav", sample2: "audios/aishell3/gen_grad_400_E16_ours/SSB11000012_south_gen.wav" },
+
+{ sample1: "audios/gt/SSB11250021_south.wav", sample2: "audios/aishell3/gen_grad_30_P4/SSB11250021_south_gen.wav" },
+{ sample1: "audios/gt/SSB11250021_south.wav", sample2: "audios/aishell3/gen_grad_400_E16_ours/SSB11250021_south_gen.wav" },
+
+{ sample1: "audios/gt/A0001_S001_0_G0001_segment_0151.wav", sample2: "audios/aishell3/A0001_S001_0_G0001_segment_0151_gen.wav" },
+{ sample1: "audios/gt/A0001_S001_0_G0001_segment_0151.wav", sample2: "audios/aishell3/gen_grad_400_E16_ours/A0001_S001_0_G0001_segment_0151_gen.wav" },
+
+{ sample1: "audios/gt/A0001_S005_0_G0002_segment_0293.wav", sample2: "audios/aishell3/A0001_S005_0_G0002_segment_0293_gen.wav" },
+{ sample1: "audios/gt/A0001_S005_0_G0002_segment_0293.wav", sample2: "audios/aishell3/gen_grad_400_E16_ours/A0001_S005_0_G0002_segment_0293_gen.wav" },
+
+{ sample1: "audios/gt/A0002_S001_0_G0003_segment_0117.wav", sample2: "audios/aishell3/A0002_S001_0_G0003_segment_0117_gen.wav" },
+{ sample1: "audios/gt/A0002_S001_0_G0003_segment_0117.wav", sample2: "audios/aishell3/gen_grad_400_E16_ours/A0002_S001_0_G0003_segment_0117_gen.wav" },
+
+{ sample1: "audios/gt/A0002_S002_0_G0004_segment_0057.wav", sample2: "audios/aishell3/A0002_S002_0_G0004_segment_0057_gen.wav" },
+{ sample1: "audios/gt/A0002_S002_0_G0004_segment_0057.wav", sample2: "audios/aishell3/gen_grad_400_E16_ours/A0002_S002_0_G0004_segment_0057_gen.wav" },
+
+            // Add more pairs of audio samples here...
+        ];
+
+        // Check for logged-in user and display user ID
+        async function loadProgress(userId) {
+            document.getElementById('loading-box').style.display = 'block'; // Show loading message
+            const docRef = doc(db, 'progress', userId);
+            const progressDoc = await getDoc(docRef);
+
+            if (progressDoc.exists()) {
+                const progressData = progressDoc.data();
+                currentSampleIndex = progressData.currentSample || 0;
+            }
+            updateUI(currentSampleIndex);
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                userId = user.uid;
+                document.getElementById('user-info').textContent = `User ID: ${userId}`;
+                loadProgress(userId);
+            } else {
+                document.getElementById('user-info').textContent = 'No user is logged in.';
+            }
+        });
+
+        // Function to update the UI based on the current sample
+        function updateUI(currentSampleIndex) {
+            const nextPair = audioPairs[currentSampleIndex];
+            document.getElementById('audio-source-1').src = nextPair.sample1;
+            document.getElementById('audio-source-2').src = nextPair.sample2;
+            document.getElementById('audio-player-1').load();
+            document.getElementById('audio-player-2').load();
+            document.getElementById('current-sample').innerText = currentSampleIndex + 1;
+
+            document.getElementById('loading-box').style.display = 'none';  // Hide loading message
+        }
+
+        // Function to handle SMOS submission and move to next sample
+        async function submitSMOS() {
+            if (!userId) {
+                alert('User is not logged in. Please log in before continuing.');
+                return;
+            }
+
+            const radios = document.getElementsByName('smos-score');
+            let smosScore;
+            for (const radio of radios) {
+                if (radio.checked) {
+                    smosScore = radio.value;
+                    break;
+                }
+            }
+
+            const audioPair = audioPairs[currentSampleIndex];
+            document.getElementById('message-box').style.display = 'block'; // Show saving message
+
+            try {
+                await setDoc(doc(db, 'evaluations', `${userId}` + '/smos_timbre', `${audioPair.sample1}_${audioPair.sample2}`), {
+                    userid: userId,
+                    audioSample1: audioPair.sample1,
+                    audioSample2: audioPair.sample2,
+                    smosScore: smosScore,
+                    timestamp: new Date()
+                });
+
+                currentSampleIndex++;
+                await setDoc(doc(db, 'progress', `${userId}` + '/smos/timbre'), { currentSample: currentSampleIndex });
+
+                if (currentSampleIndex >= totalSamples) {
+                    window.location.href = "evaluation.html";
+                } else {
+                    updateUI(currentSampleIndex);
+                }
+            } catch (error) {
+                console.error("Error saving score:", error);
+                alert("Error during submission: " + error.message);
+            }
+        }
+
+        window.submitSMOS = submitSMOS;
+    </script>
+
+</body>
+</html>

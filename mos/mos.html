@@ -131,7 +131,7 @@
     <p id="user-info" class="user-info">Loading user information...</p>
     
     <p class="text-description"> 
-        After you listen to each sentence, you will choose a score for the audio file you've just heard. This score should reflect your opinion of how natural or unnatural the sentence sounded. You should not judge the grammar or content of the sentence, just how it sounds.
+        Do you think these two samples could have been produced by the same speaker? Some of the samples may sound somewhat degraded/distorted. Please try to listen beyond the distortion and concentrate on identifying the voice. Are the two voices the same or different? You have the option to indicate how sure you are of your decision.
     </p>
     <div id="message-box">Saving your response... Please wait.</div>
     <div id="loading-box">Loading progress... Please wait.</div>
@@ -310,7 +310,7 @@
                 const audioFileNameParts = audioFileName.split('/');
                 const audioFileID = audioFileNameParts.slice(-2).join('/'); // Get the last part (the actual file name)
 
-                await setDoc(doc(db, 'evaluations', `${userId}`, `${audioFileID}`), {
+                await setDoc(doc(db, 'evaluations', `${userId}` + '/mos', `${audioFileID}`), {
                     userid: userId,
                     audioFile: audioFileName,
                     mosScore: mosScore,

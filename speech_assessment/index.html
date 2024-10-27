@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Recorder</title>
+</head>
+<body>
+    <h1>Record and Analyze Voice</h1>
+    <button id="recordButton">Start Recording</button>
+    <p id="status"></p>
+    <div id="result"></div>
+
+    <script>
+        const recordButton = document.getElementById('recordButton');
+        const statusText = document.getElementById('status');
+        let mediaRecorder;
+        let audioChunks = [];
+
+        recordButton.addEventListener('click', async () => {
+            if (!mediaRecorder || mediaRecorder.state === 'inactive') {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = async () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                    await sendAudioToBackend(audioBlob);
+                    audioChunks = [];
+                };
+
+                mediaRecorder.start();
+                recordButton.textContent = 'Stop Recording';
+                statusText.textContent = 'Recording...';
+            } else {
+                mediaRecorder.stop();
+                recordButton.textContent = 'Start Recording';
+                statusText.textContent = 'Processing...';
+            }
+        });
+
+        async function sendAudioToBackend(audioBlob) {
+            const formData = new FormData();
+            formData.append('audio', audioBlob, 'audio.wav');
+            formData.append('text', 'Sample reference text');
+
+            try {
+                const response = await fetch('/upload-audio', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    document.getElementById('result').textContent = JSON.stringify(result, null, 2);
+                } else {
+                    statusText.textContent = 'Failed to send audio to server.';
+                }
+            } catch (error) {
+                statusText.textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
