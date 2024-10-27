@@ -56,7 +56,7 @@
             const textData = textInput.value || 'Sample reference text';  // Get text from input or use default
 
             formData.append('audio', audioBlob, 'audio.wav');
-            formData.append('text', 'textData');
+            formData.append('text', textData);
 
             try {
                 const response = await fetch('https://137.132.92.133:8800/upload-audio', {
