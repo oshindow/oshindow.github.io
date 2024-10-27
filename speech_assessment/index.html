@@ -7,6 +7,13 @@
 </head>
 <body>
     <h1>Record and Analyze Voice</h1>
+    <a> You can access the server via https://oshindow.github.io/speech_assessment/index.html. The front end was deployed on the https://oshindow.github.io and the backend was deployed on the gpu1. </a>
+    <a> The access must be configed under SSL and https </a>
+    <a> backend is app.py port 8800</a>
+    <a> asr is serve_mdd.py port 8888</a>
+    <label for="textInput">Enter reference text:</label>
+    <input type="text" id="textInput" placeholder="Type your reference text here" />
+    
     <button id="recordButton">Start Recording</button>
     <p id="status"></p>
     <div id="result"></div>
@@ -14,6 +21,8 @@
     <script>
         const recordButton = document.getElementById('recordButton');
         const statusText = document.getElementById('status');
+        const textInput = document.getElementById('textInput');  // Reference to the text input
+        
         let mediaRecorder;
         let audioChunks = [];
 
@@ -44,8 +53,10 @@
 
         async function sendAudioToBackend(audioBlob) {
             const formData = new FormData();
+            const textData = textInput.value || 'Sample reference text';  // Get text from input or use default
+
             formData.append('audio', audioBlob, 'audio.wav');
-            formData.append('text', 'Sample reference text');
+            formData.append('text', 'textData');
 
             try {
                 const response = await fetch('https://137.132.92.133:8800/upload-audio', {
