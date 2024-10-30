@@ -253,7 +253,7 @@
         });
         // Function to update the UI based on the current sample
         function updateUI(currentSampleIndex) {
-            const nextFile = audioFiles[currentSampleIndex];
+            const nextFile = audioFiles[currentSampleIndex - 1];
             console.log('currentSampleIndex', currentSampleIndex)
             document.getElementById('audio-source').src = nextFile;
             document.getElementById('audio-player').load();
