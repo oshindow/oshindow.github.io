@@ -189,7 +189,7 @@
 
         let currentSampleIndex = 1;
         
-        const totalSamples = 29;
+        const totalSamples = 30;
         let userId = null;
 
         // Array to manage real file names
@@ -222,7 +222,7 @@
             "audios/gt/A0002_S001_0_G0003_segment_0117.wav",
             "audios/gt/SSB17590001_north.wav",
             "audios/aishell3/gen_grad_30_P4/SSB11610003_north_gen.wav",
-            "audios/gt/A0002_S002_0_G0004_segment_0057.wav"
+            "audios/gt/A0002_S002_0_G0004_segment_0057.wav" // idx 28
         ];
 
         // Check for logged-in user and display user ID
@@ -256,7 +256,7 @@
             console.log('currentSampleIndex', currentSampleIndex)
             document.getElementById('audio-source').src = nextFile;
             document.getElementById('audio-player').load();
-            document.getElementById('current-sample').innerText = currentSampleIndex + 1;
+            document.getElementById('current-sample').innerText = currentSampleIndex;
             // document.getElementById('current-file').innerText = nextFile.split('/').pop();
             console.log('update UI')
             // window.addEventListener('DOMContentLoaded', () => {
