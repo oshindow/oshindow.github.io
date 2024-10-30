@@ -229,7 +229,7 @@
         // Check for logged-in user and display user ID
         async function loadProgress(userId) {
             document.getElementById('loading-box').style.display = 'block'; // Show loading message
-            const docRef = doc(db, 'progress', userId);
+            const docRef = doc(db, 'progress', userId, '/mos/a');
             const progressDoc = await getDoc(docRef);
             
             if (progressDoc.exists()) {
