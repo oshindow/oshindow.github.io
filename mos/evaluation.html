@@ -195,13 +195,61 @@
                 progressElementCmos.style.width = `${percentageCmos}%`;
                 progressTextCmos.textContent = `Progress: ${currentSampleCmos}/30 samples`;
 
-                if (currentSampleMos >= 30) {
+                if (currentSampleCmos >= 30) {
                     document.getElementById('cmos-btn').disabled = true;
                     document.getElementById('cmos-btn').textContent = 'Completed';
                     document.getElementById('complete-icon-cmos').style.display = 'block';
                     // exportEvaluationsToJSON();
                 } else {
                     document.getElementById('complete-icon-cmos').style.display = 'none';
+                }
+            }
+
+            // smos-timbre
+            const docRefSmost = doc(db, 'progress', `${userId}` + '/smos/timbre');
+            const progressDocSmost = await getDoc(docRefSmost);
+            
+            if (progressDocSmost.exists()) {
+                const progressDataSmost = progressDocSmost.data();
+                const currentSampleSmost = progressDataSmost.currentSample || 0;
+
+                const progressElementSmost = document.getElementById('progress-smos-timbre');
+                const progressTextSmost = document.getElementById('progress-text-smos-timbre');
+                const percentageSmost = (currentSampleSmost / 30) * 100;
+                progressElementSmost.style.width = `${percentageSmost}%`;
+                progressTextSmost.textContent = `Progress: ${currentSampleSmost}/30 samples`;
+
+                if (currentSampleSmost >= 30) {
+                    document.getElementById('smos-timbre-btn').disabled = true;
+                    document.getElementById('smos-timbre-btn').textContent = 'Completed';
+                    document.getElementById('complete-icon-smos-timbre').style.display = 'block';
+                    // exportEvaluationsToJSON();
+                } else {
+                    document.getElementById('complete-icon-smos-timbre').style.display = 'none';
+                }
+            }
+
+            // smos-accent
+            const docRefSmosa = doc(db, 'progress', `${userId}` + '/smos/accent');
+            const progressDocSmosa = await getDoc(docRefSmosa);
+            
+            if (progressDocSmosa.exists()) {
+                const progressDataSmosa = progressDocSmosa.data();
+                const currentSampleSmosa = progressDataSmosa.currentSample || 0;
+
+                const progressElementSmosa = document.getElementById('progress-smos-accent');
+                const progressTextSmosa = document.getElementById('progress-text-smos-accent');
+                const percentageSmosa = (currentSampleSmosa / 30) * 100;
+                progressElementSmosa.style.width = `${percentageSmosa}%`;
+                progressTextSmosa.textContent = `Progress: ${currentSampleSmosa}/30 samples`;
+
+                if (currentSampleSmosa >= 30) {
+                    document.getElementById('smos-accent-btn').disabled = true;
+                    document.getElementById('smos-accent-btn').textContent = 'Completed';
+                    document.getElementById('complete-icon-smos-accent').style.display = 'block';
+                    // exportEvaluationsToJSON();
+                } else {
+                    document.getElementById('complete-icon-smos-accent').style.display = 'none';
                 }
             }
         }

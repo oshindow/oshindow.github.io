@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMOS Timbre Evaluation</title>
+    <title>SMOS accent Evaluation</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -107,7 +107,7 @@
 </head>
 <body>
 
-    <h1>SMOS Timbre Evaluation</h1>
+    <h1>SMOS accent Evaluation</h1>
     <p id="user-info" class="user-info">Loading user information...</p>
     
     <p class="text-description"> 
@@ -136,7 +136,7 @@
         </audio>
     </div>
 
-    <!-- SMOS Timbre Rating Section -->
+    <!-- SMOS accent Rating Section -->
     <div class="rating-section">
         <div class="radio-group">
             <label><input type="radio" name="smos-score" value="4"> 4 - Same, absolutely sure</label>
@@ -263,7 +263,7 @@
             document.getElementById('message-box').style.display = 'block'; // Show saving message
 
             try {
-                await setDoc(doc(db, 'evaluations', `${userId}` + '/smos_timbre', `${audioPair.sample1}_${audioPair.sample2}`), {
+                await setDoc(doc(db, 'evaluations', `${userId}` + '/smos_accent', `${audioPair.sample1}_${audioPair.sample2}`), {
                     userid: userId,
                     audioSample1: audioPair.sample1,
                     audioSample2: audioPair.sample2,
@@ -272,7 +272,7 @@
                 });
 
                 currentSampleIndex++;
-                await setDoc(doc(db, 'progress', `${userId}` + '/smos/timbre'), { currentSample: currentSampleIndex });
+                await setDoc(doc(db, 'progress', `${userId}` + '/smos/accent'), { currentSample: currentSampleIndex });
 
                 if (currentSampleIndex >= totalSamples) {
                     window.location.href = "evaluation.html";
