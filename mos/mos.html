@@ -252,7 +252,7 @@
         });
         // Function to update the UI based on the current sample
         function updateUI(currentSampleIndex) {
-            const nextFile = audioFiles[currentSampleIndex - 1];
+            const nextFile = audioFiles[currentSampleIndex - 2];
             console.log('currentSampleIndex', currentSampleIndex)
             document.getElementById('audio-source').src = nextFile;
             document.getElementById('audio-player').load();
@@ -299,7 +299,7 @@
                     break;
                 }
             }
-            const audioFileName = audioFiles[currentSampleIndex - 1];
+            const audioFileName = audioFiles[currentSampleIndex - 2];
 
             // Show processing message
             document.getElementById('message-box').style.display = 'block';
