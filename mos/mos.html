@@ -189,12 +189,11 @@
 
         let currentSampleIndex = 1;
         
-        const totalSamples = 30;
+        const totalSamples = 29;
         let userId = null;
 
         // Array to manage real file names
         const audioFiles = [
-            // "audios/aishell3/gen_grad_400_E16_ours/SSB17590001_north_gen.wav",
             "audios/gt/SSB05880447_north.wav",
             "audios/magichub-sg/gen_grad_30_P4/A0002_S001_0_G0003_segment_0117_gen.wav",
             "audios/aishell3/gen_grad_30_P4/SSB05880447_north_gen.wav",
@@ -257,7 +256,7 @@
             console.log('currentSampleIndex', currentSampleIndex)
             document.getElementById('audio-source').src = nextFile;
             document.getElementById('audio-player').load();
-            document.getElementById('current-sample').innerText = currentSampleIndex;
+            document.getElementById('current-sample').innerText = currentSampleIndex + 1;
             // document.getElementById('current-file').innerText = nextFile.split('/').pop();
             console.log('update UI')
             // window.addEventListener('DOMContentLoaded', () => {
