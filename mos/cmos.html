@@ -237,6 +237,7 @@
         // Function to update the UI based on the current sample
         function updateUI(currentSampleIndex) {
             const nextPair = audioPairs[currentSampleIndex - 1];
+            console.log("nextPair:", nextPair)
             document.getElementById('audio-source-1').src = nextPair.sample1;
             document.getElementById('audio-source-2').src = nextPair.sample2;
             document.getElementById('audio-player-1').load();
