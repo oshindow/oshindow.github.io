@@ -283,7 +283,7 @@
                 currentSampleIndex++;
                 await setDoc(doc(db, 'progress', `${userId}` + '/cmos/a'), { currentSample: currentSampleIndex });
 
-                if (currentSampleIndex >= totalSamples) {
+                if (currentSampleIndex > totalSamples) {
                     window.location.href = "evaluation.html";
                 } else {
                     updateUI(currentSampleIndex);
