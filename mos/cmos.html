@@ -267,7 +267,12 @@
             document.getElementById('message-box').style.display = 'block'; // Show saving message
 
             try {
-                await setDoc(doc(db, 'evaluations', `${userId}` + '/cmos', `${audioPair.sample1}_${audioPair.sample2}`), {
+                const audioFileNameParts1 = audioPair.sample1.split('/');
+                const audioFileNameParts2 = audioPair.sample2.split('/');
+                const audioFileID1 = audioFileNameParts1.slice(-3).join('_'); // Get the last part (the actual file name)
+                const audioFileID2 = audioFileNameParts2.slice(-3).join('_'); // Get the last part (the actual file name)
+
+                await setDoc(doc(db, 'evaluations', `${userId}` + '/cmos', `${audioFileID1}_${audioFileID2}`), {
                     userid: userId,
                     audioSample1: audioPair.sample1,
                     audioSample2: audioPair.sample2,
