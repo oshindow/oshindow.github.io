@@ -169,7 +169,7 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        let currentSampleIndex = 0;
+        let currentSampleIndex = 1;
         const totalSamples = 30;
         let userId = null;
 
@@ -211,12 +211,12 @@
         // Check for logged-in user and display user ID
         async function loadProgress(userId) {
             document.getElementById('loading-box').style.display = 'block'; // Show loading message
-            const docRef = doc(db, 'progress', userId);
+            const docRef = doc(db, 'progress', userId, '/smos/timbre');
             const progressDoc = await getDoc(docRef);
 
             if (progressDoc.exists()) {
                 const progressData = progressDoc.data();
-                currentSampleIndex = progressData.currentSample || 0;
+                currentSampleIndex = progressData.currentSample || 1;
             }
             updateUI(currentSampleIndex);
         }
@@ -233,12 +233,13 @@
 
         // Function to update the UI based on the current sample
         function updateUI(currentSampleIndex) {
-            const nextPair = audioPairs[currentSampleIndex];
+            const nextPair = audioPairs[currentSampleIndex - 1];
+            console.log("nextPair:", nextPair)
             document.getElementById('audio-source-1').src = nextPair.sample1;
             document.getElementById('audio-source-2').src = nextPair.sample2;
             document.getElementById('audio-player-1').load();
             document.getElementById('audio-player-2').load();
-            document.getElementById('current-sample').innerText = currentSampleIndex + 1;
+            document.getElementById('current-sample').innerText = currentSampleIndex;
 
             document.getElementById('loading-box').style.display = 'none';  // Hide loading message
         }
@@ -259,11 +260,16 @@
                 }
             }
 
-            const audioPair = audioPairs[currentSampleIndex];
+            const audioPair = audioPairs[currentSampleIndex - 1];
             document.getElementById('message-box').style.display = 'block'; // Show saving message
 
             try {
-                await setDoc(doc(db, 'evaluations', `${userId}` + '/smos_timbre', `${audioPair.sample1}_${audioPair.sample2}`), {
+                const audioFileNameParts1 = audioPair.sample1.split('/');
+                const audioFileNameParts2 = audioPair.sample2.split('/');
+                const audioFileID1 = audioFileNameParts1.slice(-3).join('_'); // Get the last part (the actual file name)
+                const audioFileID2 = audioFileNameParts2.slice(-3).join('_'); // Get the last part (the actual file name)
+
+                await setDoc(doc(db, 'evaluations', `${userId}` + '/smos_timbre', `${audioFileID1}_${audioFileID2}`), {
                     userid: userId,
                     audioSample1: audioPair.sample1,
                     audioSample2: audioPair.sample2,
@@ -274,7 +280,7 @@
                 currentSampleIndex++;
                 await setDoc(doc(db, 'progress', `${userId}` + '/smos/timbre'), { currentSample: currentSampleIndex });
 
-                if (currentSampleIndex >= totalSamples) {
+                if (currentSampleIndex > totalSamples) {
                     window.location.href = "evaluation.html";
                 } else {
                     updateUI(currentSampleIndex);
