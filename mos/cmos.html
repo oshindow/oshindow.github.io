@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cmos  Evaluation</title>
+    <title>CMOS Evaluation</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -107,7 +107,7 @@
 </head>
 <body>
 
-    <h1>cmos  Evaluation</h1>
+    <h1>CMOS Evaluation</h1>
     <p id="user-info" class="user-info">Loading user information...</p>
     
     <p class="text-description"> 
@@ -175,7 +175,7 @@
 
         // Array of audio pairs (replace with actual paths)
         const audioPairs = [
-        // { sample1: "audios/gt/SSB17590001_north.wav", sample2: "audios/aishell3/gen_grad_30_P4/SSB17590188_north_gen.wav" },
+        { sample1: "audios/gt/SSB17590001_north.wav", sample2: "audios/aishell3/gen_grad_30_P4/SSB17590188_north_gen.wav" },
         {sample1: 'audios/aishell3/gen_grad_400_E16_ours/SSB17590188_north_gen.wav', sample2: 'audios/aishell3/gen_grad_400_E16_ours/SSB17590188_north_gen.wav'},
 {sample1: 'audios/gt/SSB11610003_north.wav', sample2: 'audios/aishell3/gen_grad_30_P4/SSB11610125_north_gen.wav'},
 {sample1: 'audios/gt/A0001_S005_0_G0002_segment_0293.wav', sample2: 'audios/aishell3/A0001_S001_0_G0002_segment_0183_gen.wav'},
@@ -214,7 +214,7 @@
         // Check for logged-in user and display user ID
         async function loadProgress(userId) {
             document.getElementById('loading-box').style.display = 'block'; // Show loading message
-            const docRef = doc(db, 'progress', userId);
+            const docRef = doc(db, 'progress', userId, '/cmos/a');
             const progressDoc = await getDoc(docRef);
 
             if (progressDoc.exists()) {
@@ -236,7 +236,7 @@
 
         // Function to update the UI based on the current sample
         function updateUI(currentSampleIndex) {
-            const nextPair = audioPairs[currentSampleIndex];
+            const nextPair = audioPairs[currentSampleIndex - 1];
             document.getElementById('audio-source-1').src = nextPair.sample1;
             document.getElementById('audio-source-2').src = nextPair.sample2;
             document.getElementById('audio-player-1').load();
@@ -262,11 +262,11 @@
                 }
             }
 
-            const audioPair = audioPairs[currentSampleIndex];
+            const audioPair = audioPairs[currentSampleIndex - 1];
             document.getElementById('message-box').style.display = 'block'; // Show saving message
 
             try {
-                await setDoc(doc(db, 'evaluations', `${userId}` + '/cmos_', `${audioPair.sample1}_${audioPair.sample2}`), {
+                await setDoc(doc(db, 'evaluations', `${userId}` + '/cmos', `${audioPair.sample1}_${audioPair.sample2}`), {
                     userid: userId,
                     audioSample1: audioPair.sample1,
                     audioSample2: audioPair.sample2,
@@ -275,7 +275,7 @@
                 });
 
                 currentSampleIndex++;
-                await setDoc(doc(db, 'progress', `${userId}` + '/cmos/'), { currentSample: currentSampleIndex });
+                await setDoc(doc(db, 'progress', `${userId}` + '/cmos/a'), { currentSample: currentSampleIndex });
 
                 if (currentSampleIndex >= totalSamples) {
                     window.location.href = "evaluation.html";

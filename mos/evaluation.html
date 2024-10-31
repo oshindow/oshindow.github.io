@@ -163,7 +163,7 @@
             
             if (progressDocMos.exists()) {
                 const progressDataMos = progressDocMos.data();
-                const currentSampleMos = progressDataMos.currentSample || 0;
+                const currentSampleMos = progressDataMos.currentSample-1 || 0;
 
                 const progressElementMos = document.getElementById('progress-mos');
                 const progressTextMos = document.getElementById('progress-text-mos');
@@ -187,7 +187,7 @@
             
             if (progressDocCmos.exists()) {
                 const progressDataCmos = progressDocCmos.data();
-                const currentSampleCmos = progressDataCmos.currentSample || 0;
+                const currentSampleCmos = progressDataCmos.currentSample-1|| 0;
 
                 const progressElementCmos = document.getElementById('progress-cmos');
                 const progressTextCmos = document.getElementById('progress-text-cmos');
@@ -211,7 +211,7 @@
             
             if (progressDocSmost.exists()) {
                 const progressDataSmost = progressDocSmost.data();
-                const currentSampleSmost = progressDataSmost.currentSample || 0;
+                const currentSampleSmost = progressDataSmost.currentSample-1 || 0;
 
                 const progressElementSmost = document.getElementById('progress-smos-timbre');
                 const progressTextSmost = document.getElementById('progress-text-smos-timbre');
@@ -235,7 +235,7 @@
             
             if (progressDocSmosa.exists()) {
                 const progressDataSmosa = progressDocSmosa.data();
-                const currentSampleSmosa = progressDataSmosa.currentSample || 0;
+                const currentSampleSmosa = progressDataSmosa.currentSample-1 || 0;
 
                 const progressElementSmosa = document.getElementById('progress-smos-accent');
                 const progressTextSmosa = document.getElementById('progress-text-smos-accent');
