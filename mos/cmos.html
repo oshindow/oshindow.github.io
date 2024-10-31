@@ -219,7 +219,7 @@
 
             if (progressDoc.exists()) {
                 const progressData = progressDoc.data();
-                currentSampleIndex = progressData.currentSample || 0;
+                currentSampleIndex = progressData.currentSample || 1;
             }
             updateUI(currentSampleIndex);
         }
@@ -242,7 +242,7 @@
             document.getElementById('audio-source-2').src = nextPair.sample2;
             document.getElementById('audio-player-1').load();
             document.getElementById('audio-player-2').load();
-            document.getElementById('current-sample').innerText = currentSampleIndex + 1;
+            document.getElementById('current-sample').innerText = currentSampleIndex;
 
             document.getElementById('loading-box').style.display = 'none';  // Hide loading message
         }
