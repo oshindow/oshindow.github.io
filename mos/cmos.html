@@ -111,7 +111,7 @@
     <p id="user-info" class="user-info">Loading user information...</p>
     
     <p class="text-description"> 
-        Listen to the two audio samples and rate whether they could have been produced by the same speaker. Please concentrate on identifying the voice beyond any distortion or noise. Are the two voices the same or different?
+        Listen to the two audio samples and rate whether the second audio, from System B, sounds more natural than the first audio, from System A. Please focus on identifying the naturalness of the voice beyond any distortion or noise. Does the audio from System B sound better than the speech from System A?
     </p>
     <div id="message-box">Saving your response... Please wait.</div>
     <div id="loading-box">Loading progress... Please wait.</div>
@@ -139,12 +139,21 @@
     <!-- cmos  Rating Section -->
     <div class="rating-section">
         <div class="radio-group">
-            <label><input type="radio" name="cmos-score" value="4"> 4 - Same, absolutely sure</label>
-            <label><input type="radio" name="cmos-score" value="3"> 3 - Same, not sure</label>
-            <label><input type="radio" name="cmos-score" value="2"> 2 - Different, not sure</label>
-            <label><input type="radio" name="cmos-score" value="1"> 1 - Different, absolutely sure</label>
+            <label><input type="radio" name="cmos-score" value="2"> 2 - system B significantly better than system A</label>
+            <label><input type="radio" name="cmos-score" value="1"> 1 - system B better than system A</label>
+            <label><input type="radio" name="cmos-score" value="0"> 0 - both systems are equally better</label>
+            <label><input type="radio" name="cmos-score" value="-1"> -1 - system B worse than system A</label>
+            <label><input type="radio" name="cmos-score" value="-2"> -2 - system B significantly worse than system A</label>
         </div>
     </div>
+    <!-- 
+2 - system B  significantly better than system A
+1 - system B  better than system A
+0 - both systems are equally better
+-1 - system B worse than system A
+-2 - system B significantly worse than system A
+
+ -->
 
     <button class="btn" onclick="submitcmos()">Submit & Next</button>
 
