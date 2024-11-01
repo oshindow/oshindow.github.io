@@ -215,11 +215,11 @@
 
                 const progressElementSmost = document.getElementById('progress-smos-timbre');
                 const progressTextSmost = document.getElementById('progress-text-smos-timbre');
-                const percentageSmost = (currentSampleSmost / 30) * 100;
+                const percentageSmost = (currentSampleSmost / 20) * 100;
                 progressElementSmost.style.width = `${percentageSmost}%`;
-                progressTextSmost.textContent = `Progress: ${currentSampleSmost}/30 samples`;
+                progressTextSmost.textContent = `Progress: ${currentSampleSmost}/20 samples`;
 
-                if (currentSampleSmost >= 30) {
+                if (currentSampleSmost >= 20) {
                     document.getElementById('smos-timbre-btn').disabled = true;
                     document.getElementById('smos-timbre-btn').textContent = 'Completed';
                     document.getElementById('complete-icon-smos-timbre').style.display = 'block';
@@ -239,11 +239,11 @@
 
                 const progressElementSmosa = document.getElementById('progress-smos-accent');
                 const progressTextSmosa = document.getElementById('progress-text-smos-accent');
-                const percentageSmosa = (currentSampleSmosa / 30) * 100;
+                const percentageSmosa = (currentSampleSmosa / 20) * 100;
                 progressElementSmosa.style.width = `${percentageSmosa}%`;
-                progressTextSmosa.textContent = `Progress: ${currentSampleSmosa}/30 samples`;
+                progressTextSmosa.textContent = `Progress: ${currentSampleSmosa}/20 samples`;
 
-                if (currentSampleSmosa >= 30) {
+                if (currentSampleSmosa >= 20) {
                     document.getElementById('smos-accent-btn').disabled = true;
                     document.getElementById('smos-accent-btn').textContent = 'Completed';
                     document.getElementById('complete-icon-smos-accent').style.display = 'block';
