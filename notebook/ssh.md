@@ -2,7 +2,7 @@
 1. 生成 SSH 密钥对
 首先需要在本地机器上生成 SSH 密钥对id_rsa 和id_rsa.pub 。
 ```sh
-ssh-keygen -t rsa -b 4096 -C "wangxt@nus.edu.sg"
+ssh-keygen -t rsa -b 4096 -C "xintong.wang@u.nus.edu"
 ```
 
 2. 将公钥复制到远程服务器
