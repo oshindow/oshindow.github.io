@@ -55,7 +55,7 @@
 
     <!-- 右侧文字 -->
     <div style="flex:1 1 70%; min-width:300px; padding:10px;">
-      <p>I am <span id="age"></span>, a <span id="phd"></span>-year PhD student at NUS, supervised by Prof. Wang Ye. My research interests broadly focus on the speech and singing voice related perception and synthesis, such as speech recognition, speech synthesis, singing voice synthesis, and voice conversion. I earned my B.S. from Beijing Forestry University in 2022.</p>
+      <p>I am <span id="age"></span>, a PhD student at NUS (Year <span id="phd"></span>), supervised by Prof. Wang Ye. My research interests broadly focus on the speech and singing voice related perception and synthesis, such as speech recognition, speech synthesis, singing voice synthesis, and voice conversion. I earned my B.S. from Beijing Forestry University in 2022.</p>
       <p>My <a href="media/cv/cv_20241121.pdf" target="_blank">cv</a> is here. If you would like to reach out to me, my email address is <u><i>xintongwang9709 at gmail dot com</i></u>.</p>
     </div>
   </div>
@@ -283,7 +283,7 @@ function updateAge() {
     const phd = (now - phdStart) / yearMs;
 
     document.getElementById("age").innerText = age.toFixed(2) + " years old";
-    document.getElementById("phd").innerText = phd.toFixed(2) + "-year";
+    document.getElementById("phd").innerText = phd.toFixed(2);
 }
 
 updateAge();
