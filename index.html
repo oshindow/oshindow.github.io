@@ -41,7 +41,8 @@
       </div>
       <h1>Xintong Wang <span lang="zh-Hans">王心童</span></h1>
       <p class="lead">
-        I am <span id="age"></span>, a third-year PhD student supervised by Prof. Wang Ye. My research focuses on
+        I am 28.77 years old, a third-year PhD student at the National University of Singapore,
+        supervised by Prof. Wang Ye. My research focuses on
         real-time and data-efficient methods for audio and audio-language models.
       </p>
       <p>
@@ -50,7 +51,7 @@
       </p>
       <div class="action-row">
         <a class="button secondary" href="https://github.com/oshindow" target="_blank" rel="noopener">GitHub</a>
-        <a class="button secondary" href="https://scholar.google.com/citations?user=oQH2fkAAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+        <a class="button secondary" href="https://scholar.google.com/citations?hl=en&user=A36ZIGEAAAAJ" target="_blank" rel="noopener">Scholar</a>
         <a class="button secondary" href="media/cv/CV_150626_xintong_wang_intern_ASR_TTS.pdf">CV</a> -->
     
         <!-- <a class="button secondary" href="notebook/index.html">Notebook</a> -->
@@ -189,20 +190,5 @@
   <p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> Xintong Wang. All Rights Reserved.</p>
 </footer>
 
-<script>
-function updateAge() {
-    const birth = new Date("1997-09-09T00:00:00+08:00");
-    const phdStart = new Date("2024-09-05T00:00:00+08:00");
-    const now = new Date();
-    const yearMs = 365.2425 * 24 * 60 * 60 * 1000;
-    const age = (now - birth) / yearMs;
-    const phd = (now - phdStart) / yearMs;
-
-    document.getElementById("age").innerText = age.toFixed(2) + " years old";
-}
-
-updateAge();
-setInterval(updateAge, 1000);
-</script>
 </body>
 </html>
