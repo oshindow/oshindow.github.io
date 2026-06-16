@@ -478,12 +478,18 @@ p {
   background: #ffebe9;
 }
 
+.bottom-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+  gap: 14px;
+}
+
 .visitor-panel,
-.note-panel {
+.interests-panel {
   padding-bottom: 14px;
 }
 
-.note-panel p {
+.interests-panel p {
   margin-bottom: 0;
   color: var(--text);
   font-weight: 600;
@@ -549,7 +555,8 @@ p {
   }
 
   .nav-shell,
-  .about-panel {
+  .about-panel,
+  .bottom-grid {
     grid-template-columns: 1fr;
   }
 
