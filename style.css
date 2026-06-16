@@ -495,8 +495,8 @@ p {
 }
 
 .interests-panel {
-  flex: 0 0 36%;
-  min-width: 280px;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .interests-panel p {
@@ -573,6 +573,7 @@ p {
     flex-direction: column;
   }
 
+  .visitor-panel,
   .interests-panel {
     flex-basis: auto;
     min-width: 0;
