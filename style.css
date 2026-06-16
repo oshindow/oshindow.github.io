@@ -132,18 +132,20 @@ a:focus-visible {
 
 .about-panel {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 174px;
-  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 24px;
   align-items: start;
 }
 
 .profile-photo {
-  width: 174px;
-  height: 200px;
-  border: 4px solid var(--border);
+  justify-self: end;
+  width: 280px;
+  height: 180px;
+  margin-top: 48px;
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   object-fit: cover;
-  object-position: 67% 52%;
+  object-position: 66% 50%;
   background: #d8dee4;
 }
 
@@ -458,6 +460,24 @@ p {
   vertical-align: 1px;
 }
 
+.pill-note {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  margin-left: 5px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  vertical-align: 1px;
+}
+
+.oral-note {
+  border: 1px solid #ffb3b8;
+  color: #cf222e;
+  background: #ffebe9;
+}
+
 .visitor-panel,
 .note-panel {
   padding-bottom: 14px;
@@ -542,6 +562,7 @@ p {
     width: 100%;
     height: auto;
     max-height: 220px;
+    margin-top: 0;
     object-position: 62% 52%;
   }
 
