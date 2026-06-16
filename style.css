@@ -139,7 +139,7 @@ a:focus-visible {
 
 .profile-photo {
   justify-self: end;
-  width: 280px;
+  width: 180px;
   height: 180px;
   margin-top: 48px;
   border: 1px solid var(--border);
