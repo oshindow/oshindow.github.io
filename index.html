@@ -19,14 +19,12 @@
 <body>
 <header class="site-header">
   <nav class="nav-shell" aria-label="Primary navigation">
-    <a class="brand-pill" href="index.html" aria-label="Xintong Wang homepage">
-      <span class="brand-avatar">XW</span>
-      <span>Xintong Wang</span>
-    </a>
+    <a class="brand-pill" href="index.html">Xintong Wang</a>
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#publications">Publications</a>
-      <a href="#demos">Demos</a>
+      <a href="#playaround">Playaround</a>
+      <a href="#experience">Experience</a>
       <a href="https://github.com/oshindow" target="_blank" rel="noopener">GitHub</a>
       <a href="https://scholar.google.com/citations?user=oQH2fkAAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
     </div>
@@ -34,8 +32,8 @@
 </header>
 
 <main class="page">
-  <section class="hero" id="about">
-    <div class="hero-copy">
+  <section class="panel about-panel" id="about">
+    <div class="about-copy">
       <div class="eyebrow-row">
         <span class="status-dot"></span>
         <span>PhD student at NUS</span>
@@ -46,12 +44,12 @@
         real-time and data-efficient methods for audio and audio-language models.
       </p>
       <p>
-        I earned my B.S. from Beijing Forestry University in 2022. If you would like to
-        reach out, my email address is <span class="email">xintongwang9709 at gmail dot com</span>.
+        I earned my B.S. from Beijing Forestry University in 2022. Email:
+        <span class="email">xintongwang9709 at gmail dot com</span>.
       </p>
       <div class="action-row">
-        <a class="button primary" href="https://huggingface.co/spaces/walston/whisper-pinyin" target="_blank" rel="noopener">Whisper Pinyin</a>
         <a class="button secondary" href="https://github.com/oshindow" target="_blank" rel="noopener">GitHub</a>
+        <a class="button secondary" href="https://scholar.google.com/citations?user=oQH2fkAAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
         <a class="button secondary" href="notebook/index.html">Notebook</a>
       </div>
       <div class="meta-pills" aria-label="Research interests">
@@ -61,61 +59,30 @@
         <span>Data-efficient learning</span>
       </div>
     </div>
-
-    <figure class="hero-photo">
-      <img src="media/image/me4.jpg" alt="Xintong Wang">
-    </figure>
+    <img class="profile-photo" src="media/image/me4.jpg" alt="Xintong Wang">
   </section>
 
-  <section class="section-grid">
-    <article class="panel">
-      <div class="section-heading">
-        <span class="section-kicker">Experience</span>
-        <h2>Work Experience</h2>
-      </div>
-      <div class="timeline">
-        <div class="timeline-item">
-          <span class="timeline-date">Oct 2023 - Aug 2024</span>
-          <h3>Research Assistant</h3>
-          <p>School of Computing, SMC Lab, National University of Singapore</p>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-date">Jul 2022 - Oct 2023</span>
-          <h3>Speech Synthesis Engineer</h3>
-          <p>Xiaoice X Studio, Beijing</p>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-date">May 2021 - Jul 2022</span>
-          <h3>Speech Recognition Intern</h3>
-          <p>Xiaoice AI Being BU, Beijing</p>
-        </div>
-      </div>
-    </article>
-
-    <aside class="panel compact-panel">
-      <div class="section-heading">
-        <span class="section-kicker">Demo</span>
-        <h2>Hugging Face Space</h2>
-      </div>
-      <p>Year <span id="phd"></span> PhD student at NUS, working on efficient speech and audio modeling.</p>
-      <div class="mini-links">
-        <a href="https://huggingface.co/spaces/walston/whisper-pinyin" target="_blank" rel="noopener">Whisper Pinyin</a>
-      </div>
-    </aside>
-  </section>
-
-  <section class="panel demo-panel" id="demos">
+  <section class="panel playaround-panel" id="playaround">
     <div class="section-heading">
-      <span class="section-kicker">Interactive demo</span>
-      <h2>Hugging Face Spaces</h2>
+      <span class="section-kicker">Interactive</span>
+      <h2>Playaround</h2>
     </div>
-    <div class="demo-list">
-      <a class="demo-card" href="https://huggingface.co/spaces/walston/whisper-pinyin" target="_blank" rel="noopener">
-        <span class="demo-badge">Space</span>
-        <strong>Whisper Pinyin</strong>
-        <span>Speech recognition demo with pinyin-oriented output.</span>
-      </a>
-    </div>
+    <p class="section-intro">A small place for interactive demos and experiments around speech, pronunciation, and audio-language tools.</p>
+    <a class="space-card" href="https://huggingface.co/spaces/walston/whisper-pinyin" target="_blank" rel="noopener">
+      <span class="space-top">
+        <span class="space-badges">
+          <span>Running</span>
+          <span>Agents</span>
+        </span>
+        <span class="space-like">1</span>
+      </span>
+      <span class="space-title">Whisper-Pinyin Demo <span aria-hidden="true">🎧</span></span>
+      <span class="space-subtitle">Transcribe Mandarin speech to Pinyin text</span>
+      <span class="space-footer">
+        <span class="space-owner">walston</span>
+        <span>Hugging Face Space</span>
+      </span>
+    </a>
   </section>
 
   <section class="panel publications" id="publications">
@@ -124,48 +91,33 @@
       <h2>Publications</h2>
     </div>
 
-<<<<<<< HEAD
     <div class="paper-group">
       <h3>Conference Articles</h3>
       <ol class="paper-list">
         <li>
-          <div>
-            <strong>Xintong Wang</strong>, Mingqian Shi, and Ye Wang,
-            "Pitch-Aware RNN-T for Mandarin Chinese Mispronunciation Detection and Diagnosis,"
-            <em>Interspeech 2024</em>.
-          </div>
+          <strong>Xintong Wang</strong>, Mingqian Shi, and Ye Wang,
+          "Pitch-Aware RNN-T for Mandarin Chinese Mispronunciation Detection and Diagnosis,"
+          <em>Interspeech 2024</em>.
           <a class="pill-link" href="media/publication/Interspeech_2024__Mandarin_Chinese_MDD_camera_ready3.pdf" target="_blank" rel="noopener">PDF</a>
         </li>
         <li>
-          <div>
-            Junchuan Zhao, <strong>Xintong Wang</strong>, and Ye Wang,
-            "Prosody-Adaptable Audio Codecs for Zero-Shot Voice Conversion via In-Context Learning,"
-            <em>Interspeech 2025</em>.
-          </div>
+          Junchuan Zhao, <strong>Xintong Wang</strong>, and Ye Wang,
+          "Prosody-Adaptable Audio Codecs for Zero-Shot Voice Conversion via In-Context Learning,"
+          <em>Interspeech 2025</em>.
           <a class="pill-link" href="https://arxiv.org/abs/2505.15402" target="_blank" rel="noopener">arXiv</a>
         </li>
       </ol>
-=======
-    <!-- 右侧文字 -->
-    <div style="flex:1 1 70%; min-width:300px; padding:10px;">
-      <p>I am <span id="age"></span>, a PhD student at NUS (Year <span id="phd"></span>), supervised by Prof. Wang Ye. My research interests broadly focus on real-time and data-efficient methods for audio and audio-language models. I earned my B.S. from Beijing Forestry University in 2022.</p>
-      <p>My <a href="media/cv/CV_150626_xintong_wang_intern_ASR_TTS.pdf" target="_blank">cv</a> is here. If you would like to reach out to me, my email address is <u><i>xintongwang9709 at gmail dot com</i></u>.</p>
->>>>>>> 7004e11701a37b78cf4de27ef73d373beabcb6de
     </div>
 
     <div class="paper-group">
       <h3>Workshop Articles</h3>
       <ol class="paper-list">
         <li>
-          <div>
-            <strong>Xintong Wang</strong>, Chang Zeng, Jun Chen, and Chunhui Wang,
-            "Crosssinger: A Cross-Lingual Multi-Singer High-Fidelity Singing Voice Synthesizer Trained on Monolingual Singers,"
-            <em>2023 IEEE Automatic Speech Recognition and Understanding Workshop</em>.
-          </div>
-          <div class="paper-actions">
-            <a class="pill-link" href="https://wavelandspeech.github.io/CrossSinger/" target="_blank" rel="noopener">Demo</a>
-            <a class="pill-link" href="https://arxiv.org/abs/2309.12672/" target="_blank" rel="noopener">arXiv</a>
-          </div>
+          <strong>Xintong Wang</strong>, Chang Zeng, Jun Chen, and Chunhui Wang,
+          "Crosssinger: A Cross-Lingual Multi-Singer High-Fidelity Singing Voice Synthesizer Trained on Monolingual Singers,"
+          <em>2023 IEEE Automatic Speech Recognition and Understanding Workshop</em>.
+          <a class="pill-link" href="https://wavelandspeech.github.io/CrossSinger/" target="_blank" rel="noopener">Demo</a>
+          <a class="pill-link" href="https://arxiv.org/abs/2309.12672/" target="_blank" rel="noopener">arXiv</a>
         </li>
       </ol>
     </div>
@@ -174,14 +126,36 @@
       <h3>Journal Articles</h3>
       <ol class="paper-list">
         <li>
-          <div>
-            <strong>Xintong Wang</strong>, Chuangang Zhao,
-            "A 2D Convolutional Gating Mechanism for Mandarin Streaming Speech Recognition,"
-            <em>Information</em>, 12.4 (2021): 165.
-          </div>
+          <strong>Xintong Wang</strong>, Chuangang Zhao,
+          "A 2D Convolutional Gating Mechanism for Mandarin Streaming Speech Recognition,"
+          <em>Information</em>, 12.4 (2021): 165.
           <a class="pill-link" href="media/publication/information-12-00165-v2.pdf" target="_blank" rel="noopener">PDF</a>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <section class="panel" id="experience">
+    <div class="section-heading">
+      <span class="section-kicker">Experience</span>
+      <h2>Work Experience</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-date">Oct 2023 - Aug 2024</span>
+        <strong>Research Assistant</strong>
+        <p>School of Computing, SMC Lab, National University of Singapore</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">Jul 2022 - Oct 2023</span>
+        <strong>Speech Synthesis Engineer</strong>
+        <p>Xiaoice X Studio, Beijing</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-date">May 2021 - Jul 2022</span>
+        <strong>Speech Recognition Intern</strong>
+        <p>Xiaoice AI Being BU, Beijing</p>
+      </div>
     </div>
   </section>
 
@@ -196,13 +170,16 @@
       </a>
     </div>
   </section>
+
+  <section class="panel note-panel">
+    <p>I often climb at fitbloc. Feel free to reach out if you want to talk about research, demos, audio models, or climbing.</p>
+  </section>
 </main>
 
 <footer class="site-footer">
   <div class="footer-links">
     <a href="index.html">Home</a>
     <a href="https://github.com/oshindow" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://huggingface.co/spaces/walston/whisper-pinyin" target="_blank" rel="noopener">Whisper Pinyin</a>
     <a href="https://scholar.google.com/citations?user=oQH2fkAAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
     <a href="notebook/index.html">Notebook</a>
   </div>
@@ -219,7 +196,6 @@ function updateAge() {
     const phd = (now - phdStart) / yearMs;
 
     document.getElementById("age").innerText = age.toFixed(2) + " years old";
-    document.getElementById("phd").innerText = phd.toFixed(2);
 }
 
 updateAge();
