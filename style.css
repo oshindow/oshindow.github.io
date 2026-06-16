@@ -138,7 +138,7 @@ a:focus-visible {
 }
 
 .profile-photo {
-  justify-self: end;
+  /* justify-self: end; */
   width: 180px;
   height: 180px;
   margin-top: 48px;
@@ -478,15 +478,25 @@ p {
   background: #ffebe9;
 }
 
-.bottom-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+.page > .bottom-grid {
+  display: flex;
+  align-items: stretch;
   gap: 14px;
 }
 
 .visitor-panel,
 .interests-panel {
   padding-bottom: 14px;
+}
+
+.visitor-panel {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.interests-panel {
+  flex: 0 0 36%;
+  min-width: 280px;
 }
 
 .interests-panel p {
@@ -555,9 +565,17 @@ p {
   }
 
   .nav-shell,
-  .about-panel,
-  .bottom-grid {
+  .about-panel {
     grid-template-columns: 1fr;
+  }
+
+  .page > .bottom-grid {
+    flex-direction: column;
+  }
+
+  .interests-panel {
+    flex-basis: auto;
+    min-width: 0;
   }
 
   .nav-shell {
