@@ -343,9 +343,9 @@ p {
 
 .space-card {
   display: grid;
-  gap: 10px;
-  max-width: 760px;
-  padding: 14px 18px 16px;
+  gap: 7px;
+  max-width: 520px;
+  padding: 10px 13px 12px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: var(--radius);
@@ -356,7 +356,7 @@ p {
 
 .space-card:hover {
   color: #ffffff;
-  box-shadow: 0 14px 30px rgba(31, 35, 40, 0.18);
+  box-shadow: 0 10px 22px rgba(31, 35, 40, 0.16);
 }
 
 .space-top,
@@ -378,10 +378,11 @@ p {
 
 .space-badges span,
 .space-like {
-  min-height: 24px;
-  padding: 2px 8px;
+  min-height: 20px;
+  padding: 1px 7px;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.16);
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -390,24 +391,24 @@ p {
 }
 
 .space-title {
-  font-size: 24px;
+  font-size: 19px;
   font-weight: 800;
   line-height: 1.18;
 }
 
 .space-subtitle {
-  margin-top: -5px;
+  margin-top: -3px;
   color: rgba(255, 255, 255, 0.86);
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .space-footer {
-  margin: 4px -2px -2px;
-  padding: 10px 12px;
+  margin: 2px -1px -1px;
+  padding: 7px 9px;
   border-radius: 7px;
   background: rgba(0, 0, 0, 0.1);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
 }
 
