@@ -132,7 +132,7 @@ a:focus-visible {
 
 .about-panel {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
+  grid-template-columns: minmax(0, 1fr) 200px;
   gap: 24px;
   align-items: start;
 }
