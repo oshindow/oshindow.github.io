@@ -15,26 +15,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="w3.css">
 <link rel="stylesheet" href="style.css">
-<link rel='stylesheet' href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel='stylesheet' href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fredoka:wght@500;600;700&display=swap">
 <!-- <link rel="icon" href="media/image/favicon.png"> -->
 </head>
  
   
-<body class="w3-light-grey">
+<body>
+
+<div class="clay-sky" aria-hidden="true">
+  <span class="clay-cloud cloud-one"></span>
+  <span class="clay-cloud cloud-two"></span>
+</div>
 
 <!-- Page Container -->
-<div class="w3-content w3-margin-top" style="max-width:1400px;">
+<div class="w3-content page-shell" style="max-width:1180px;">
 
   <!-- The Grid -->
     <div class="w3-row-padding">
 
         <!-- The Main Body -->
-        <div class="w3-container">
-            <h2>Xintong Wang, <span lang="zh-Hans">王心童</span></h2>
+        <div class="w3-container hero">
+            <div class="hero-copy">
+              <span class="eyebrow">HELLO, I'M</span>
+              <h1>Xintong Wang <span lang="zh-Hans">王心童</span></h1>
+              <p class="hero-tagline">I shape ideas into <span>audio intelligence.</span></p>
+              <div class="hero-links">
+                <a href="#about">About me</a>
+                <a href="#publications" class="secondary">My work</a>
+              </div>
+            </div>
+            <div class="hero-sculpture" aria-hidden="true">
+              <span class="orbit orbit-one"></span>
+              <span class="orbit orbit-two"></span>
+              <span class="clay-core"><i></i><i></i><i></i></span>
+              <span class="sound-wave wave-one"></span>
+              <span class="sound-wave wave-two"></span>
+            </div>
         </div>
          
         <div class="w3-container">
-            <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <div class="w3-container w3-card w3-white w3-margin-bottom" id="about">
   <h3>About</h3>
   <div style="display:flex; align-items:center; flex-wrap:wrap;">
     <!-- 左侧照片 -->
@@ -68,7 +90,7 @@
                     <p>B.S. in Mathematics and Applied Mathematics, <a>Beijing Forestry University</a>, 2018 - 2022</p>
             </div> -->
 
-            <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <div class="w3-container w3-card w3-white w3-margin-bottom experience-card">
                 <h3>Work Experience</h3>
                 <p>National University of Singapore</p>
                 <ol start="1">
@@ -82,7 +104,7 @@
                 </ol>
             </div>
 
-            <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <div class="w3-container w3-card w3-white w3-margin-bottom publications-card" id="publications">
                 <h3>Publications</h3>
                 <!-- <p>Under Review</p>
                 <ol start="1"></ol> -->
@@ -244,7 +266,7 @@
                 </ul>
             </div> -->
 
-            <div class="w3-container w3-card w3-white w3-margin-bottom">
+            <div class="w3-container w3-card w3-white w3-margin-bottom visitor-card">
                 <!-- <h3>Visitors</h3> -->
                 <a href="https://info.flagcounter.com/cjrd"><img src="https://s11.flagcounter.com/count2/cjrd/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="1"></a>
             </div>
