@@ -34,7 +34,7 @@ a:hover { color: var(--coral-dark); }
 
 .hero {
     min-height: 280px; margin: 0 8px; padding: 44px 7% 40px !important; border-radius: 18px;
-    background-color: #eadfce;
+    background-color: transparent;
     background-image: none;
     box-shadow: none;
     display: flex; align-items: center; overflow: hidden; position: relative;
@@ -43,7 +43,7 @@ a:hover { color: var(--coral-dark); }
 .hero-copy { position: relative; z-index: 2; width: 100%; }
 .hero h1, .hero-role { font-family: "Patrick Hand", "Comic Sans MS", cursive; }
 .hero h1 { margin: 0; font-size: 36px; line-height: 1.1; letter-spacing: .015em; color: #26372f; text-shadow: 0 2px 2px rgba(24,39,31,.16); filter: none; }
-.hero-role { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; margin: 18px 0 20px; color: #33483e; font-size: 20px; line-height: 1.35; letter-spacing: .018em; text-shadow: -1px -1px 0 rgba(255,255,255,.58), 1px 1px 1px rgba(25,39,32,.42), 1px 2px 3px rgba(24,39,31,.14); filter: url(#clay-type); }
+.hero-role { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; margin: 18px 0 20px; color: #33483e; font-size: 20px; line-height: 1.35; letter-spacing: .018em; text-shadow: 0 1px 1px rgba(24,39,31,.1); filter: none; }
 .hero-email { margin: 0 0 18px; color: #52675d; font-size: 14px; }
 .hero-email a { display: inline-block; color: #314f41; font-weight: 600; transform: rotate(180deg); }
 .hero-email a:hover { color: var(--coral-dark); }
