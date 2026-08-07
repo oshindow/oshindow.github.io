@@ -13,16 +13,16 @@
 }
 
 @font-face {
-    font-family: "Latin Modern Roman";
-    src: url("media/font/lmroman-normal.woff") format("woff");
+    font-family: "CMU Serif";
+    src: url("media/font/computer-modern-roman.woff") format("woff");
     font-style: normal;
     font-weight: 400;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Latin Modern Roman";
-    src: url("media/font/lmroman-bold.woff") format("woff");
+    font-family: "CMU Serif";
+    src: url("media/font/computer-modern-roman-bold.woff") format("woff");
     font-style: normal;
     font-weight: 700;
     font-display: swap;
@@ -34,12 +34,12 @@ html { scroll-behavior: smooth; }
 body {
     margin: 0;
     color: var(--ink);
-    font-family: "Latin Modern Roman", "Computer Modern", serif;
+    font-family: "Iowan Old Style BT", "Iowan Old Style", "CMU Serif", Georgia, serif;
     background: var(--cream);
     overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 { font-family: "Latin Modern Roman", "Computer Modern", serif; font-weight: 700; }
+h1, h2, h3, h4, h5, h6 { font-family: "Iowan Old Style BT", "Iowan Old Style", "CMU Serif", Georgia, serif; font-weight: 700; }
 b, strong { font-weight: 700; }
 p, li { font-size: 17px; line-height: 1.72; }
 a { color: #477e68; text-decoration: none; transition: .2s ease; }
@@ -91,7 +91,7 @@ a:hover { color: var(--coral-dark); }
 .about-layout { display: grid; grid-template-columns: 350px minmax(0, 1fr); align-items: center; gap: 30px; }
 .about-photo { text-align: center; padding: 10px; }
 .about-copy { padding: 10px; }
-.about-highlight { font-family: "Latin Modern Roman", "Computer Modern", serif; }
+.about-highlight { font-family: "Iowan Old Style BT", "Iowan Old Style", "CMU Serif", Georgia, serif; }
 #about img { max-width: 320px !important; border: 0 !important; border-radius: 4px !important; box-shadow: 0 6px 18px rgba(25,40,33,.12) !important; transform: none; }
 .experience-card { background-color: #fff !important; border-radius: 0; }
 .publications-card { background-color: #fff !important; border-radius: 0; }
