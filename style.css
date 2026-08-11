@@ -60,6 +60,15 @@ b, strong { font-weight: 700; }
 p, li { font-size: 17px; line-height: 1.72; }
 a { color: #477e68; text-decoration: none; transition: .2s ease; }
 a:hover { color: var(--coral-dark); }
+.hero-copy a.research-link-stt,
+.hero-copy a.research-link-stt:visited { color: #477e68; }
+.hero-copy a.research-link-stt:hover { color: #315b4a; }
+.hero-copy a.research-link-tts,
+.hero-copy a.research-link-tts:visited { color: #9b594e; }
+.hero-copy a.research-link-tts:hover { color: #783f37; }
+.hero-copy a.research-link-s2s,
+.hero-copy a.research-link-s2s:visited { color: #496f87; }
+.hero-copy a.research-link-s2s:hover { color: #31566f; }
 
 .page-shell { position: relative; z-index: 1; margin-top: 0 !important; padding: 28px 0 60px; }
 .w3-row-padding { padding: 0 24px !important; }
@@ -74,8 +83,8 @@ a:hover { color: var(--coral-dark); }
 .hero::before { content: none; }
 .hero-copy { position: relative; z-index: 2; width: 100%; }
 .hero h1 { margin: 0; font-family: "Patrick Hand", "Comic Sans MS", cursive; font-size: 36px; line-height: 1.1; letter-spacing: .015em; color: #26372f; text-shadow: 0 2px 2px rgba(24,39,31,.16); filter: none; }
-.hero-role { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; margin: 18px 0 20px; color: #33483e; font-family: "Patrick Hand", "Comic Sans MS", cursive; font-size: 20px; font-weight: 400; line-height: 1.35; letter-spacing: .018em; text-shadow: 0 1px 1px rgba(24,39,31,.1); filter: none; }
-.hero-email { margin: 0 0 18px; color: #52675d; font-family: "Patrick Hand", "Comic Sans MS", cursive; font-size: 14px; }
+.hero-role { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; margin: 18px 0 20px; color: #33483e; font-family: "Iowan Old Style BT", "Iowan Old Style"; font-size: 20px; font-weight: 400; line-height: 1.35; letter-spacing: .018em; text-shadow: 0 1px 1px rgba(24,39,31,.1); filter: none; }
+.hero-email { margin: 0 0 18px; color: #52675d; font-family: "Iowan Old Style BT", "Iowan Old Style", "CMU Serif", Georgia, serif; font-size: 14px; }
 .hero-email a { display: inline-block; color: #314f41; font-family: inherit; font-weight: 400; transform: rotate(180deg); }
 .hero-email a:hover { color: var(--coral-dark); }
 .hero-links { display: flex; flex-wrap: wrap; gap: 14px; }
